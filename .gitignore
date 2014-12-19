@@ -1,0 +1,31 @@
+log/*
+.project
+tmp/*
+tmp/**/*
+.tmp*
+.bundle/*
+vendor/bundle/*
+bin/*
+vendor/cache/*
+
+## Sensivite data
+
+# Database settings.
+config/database.yml
+config/config.yml
+config/deploy.rb
+# Filesystem settings for AWS S3.
+config/s3.yml
+
+# Configuration of smtp mail service.
+config/initializers/mail.rb
+# Configuration of social integration.
+config/initializers/omniauth.rb
+config/initializers/session_store.rb
+
+# Make fake data (Optional).
+db/seeds.rb
+
+# FalaPoa.
+lib/falapoa/config.yml
+lib/falapoa/consumer.rb
