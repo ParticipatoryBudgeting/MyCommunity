@@ -1,73 +1,5 @@
-<div id="mdlBudget" class="modalBox">
-    <a class="close-button" href="javascript:;" onclick="$.closePopupLayer();">close</a>
-    <div class="ctm">
-    <div class="mdlPin"><!-- --></div>
-    <h2>Uzupełnij</h2> 
-    <div class="ctl"><!-- --></div><div class="ctr"><!-- --></div></div>
-    <div class="cml">
-        <div class="cmr">
-            <div class="cmm">
-                <div class="mdlIn escrever">
-                    <h3>To jest twoja przestrzeń, współpracuj!</h3>
-                    <p>Pomoc przekształcić nasze miasto. Zarejestruj się i podziel się miejscami.</p>
-                
-                    <fieldset id="newCauseForm" class="mb15">
-                    
-                        <label for="name">Nazwa</label>
-                        <input id="name" name="name" type="text" style="width:463px;float:left;" maxlength="80" />
-                        <span class="ctdor"><strong id="titleLimit">80</strong></span>
+<%= render :partial => "form" %>
 
-                        <div style="clear: both;" />
-
-                        <label for="type">Typ</label>
-                        <input id="type" name="type" type="text" style="width:463px;float:left;" maxlength="80" />
-                        <span class="ctdor"><strong id="titleLimit">80</strong></span>
-
-                        <div style="clear: both;" />
-
-                        <label for="from">Od</label>
-                        <input id="from" name="from" type="text" style="width:463px;float:left;" maxlength="80" />
-                        <span class="ctdor"><strong id="titleLimit">80</strong></span>
-
-                        <div style="clear: both;" />
-
-                        <label for="to">Do</label>
-                        <input id="to" name="to" type="text" style="width:463px;float:left;" maxlength="80" />
-                        <span class="ctdor"><strong id="titleLimit">80</strong></span>
-
-                        <div style="clear: both;" />
-
-                        <label for="value">Kwota</label>
-                        <input id="value" name="value" type="text" style="width:463px;float:left;" maxlength="80" />
-                        <span class="ctdor"><strong id="titleLimit">80</strong></span>
-
-                        <div style="clear: both;" />
-
-                        <label for="participants_count">Liczba uczestników</label>
-                        <input id="participants_count" name="participants_count" type="text" style="width:463px;float:left;" maxlength="80" />
-                        <span class="ctdor"><strong id="titleLimit">80</strong></span>
-
-                        <div style="clear: both;" />
-
-                      <span class="break"><!-- --></span>
-                      
-                      <div class="mt15">
-                          <input id="termos" class="fl" name="termos" type="checkbox" value="yes" checked="checked" />
-                          <label for="termos" class="label-checkbox">Przeczytałem i akceptuje <a href="javascript:;" onclick="openModal('termos_de_uso');">regulamin.</a></label>
-                      </div>
-                      <span class="break"><!-- --></span>
-                    </fieldset>
-                
-                    <div class="boxBottom">
-                        <a href="javascript:;" class="btn fl postar">Utwórz</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="cbm"><div class="cbl"><!-- --></div><div class="cbr"><!-- --></div></div>
-    <div class="pntDwn"><!-- --></div>
-</div>
 <script type="text/javascript">
   $('.boxBottom .postar').bind('click', function() {
   	var error = false;
@@ -90,8 +22,7 @@
        	data: data,
        	dataType: 'json',
        	success: function(result) {
-     			if (result.success) {
-       			// data.url = result.data.url;                  
+     			if (result.success) {                
            	$.closePopupLayer();
 
      			}

@@ -3,7 +3,7 @@
 <% unless @users2.empty? %><span class="break"><a href= "/reports/users.csv">(Eksport do Excela)</a></span><% end %>				
 				
 <div align="right">
-  <%= will_paginate @users, :previous_label => "&laquo; Poprzednia", :next_label => "Następna &raquo;" %>
+  <%= will_paginate @users, :prev_label => "Poprzednia", :next_label => "Następna" %>
 </div>  				
 <table class="table-list" id="table-users">
 	<tr>
@@ -31,5 +31,5 @@
 	<% end %>					
 </table>
 <div align="right">
-  <%= will_paginate @users, :previous_label => "&laquo; Poprzednia", :next_label => "Następna &raquo;" %>
+  <%= will_paginate @users, :prev_label => "Poprzednia", :next_label => "Następna" %>
 </div>        

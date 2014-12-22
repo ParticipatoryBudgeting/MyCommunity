@@ -147,12 +147,12 @@
 
 #mdlSearch #first-dotted-line{ margin-top: 36px; }
 
-.next_page {width: 20px; height: 25px;  line-height: 25px;}
-.prev_page{width: 20px; height: 25px; line-height: 25px;}
-span.prev_page {background-image:url(../images/seta_esq_unsel.png); display:inline-block; }
-a.prev_page {background-image:url(../images/seta_esq_sel.png); display:inline-block; }
-span.next_page {background-image:url(../images/seta_dir_unsel.png); display:inline-block;}
-a.next_page {background-image:url(../images/seta_dir_sel.png); display:inline-block; }
+/*.next_page {width: 20px; height: 25px;  line-height: 25px;}
+.prev_page{width: 20px; height: 25px; line-height: 25px;}*/
+span.prev_page {background-image:url(../images/seta_esq_unsel.png); background-repeat: no-repeat; display:inline-block; height:27px; line-height: 27px; padding-left: 27px;}
+a.prev_page {background-image:url(../images/seta_esq_sel.png);background-repeat: no-repeat; display:inline-block; height:27px; line-height: 27px; padding-left: 27px;}
+span.next_page {background-image:url(../images/seta_dir_unsel.png); background-repeat: no-repeat; background-position: right 0; display:inline-block; height:27px; line-height: 27px; padding-right: 27px;}
+a.next_page {background-image:url(../images/seta_dir_sel.png); background-repeat: no-repeat; background-position: right 0; display:inline-block; height:27px; line-height: 27px; padding-right: 27px;}
 
 .pagination{ font-size:15px;}
 /*mdlCausa*/

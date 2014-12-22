@@ -1,5 +1,5 @@
 <div align="right">
-	<%= will_paginate @budgets, :previous_label => "&laquo; Poprzednia", :next_label => "Następna &raquo;" %>
+    <%= will_paginate @budgets, :prev_label => "Poprzednia", :next_label => "Następna" %>
 </div>	
 <table class="table-list" id="table-causes">
 	<tr>
@@ -14,13 +14,13 @@
 	</tr>
 	<% @budgets.each do |budget| %>
 		<tr id="budget-<%= budget.id %>">
-			<td><%=h budget.name %></td>							
-			<td><%=h budget.type %></td>							
-			<td><%=h budget.from %></td>							
-			<td><%=h budget.to %></td>							
-			<td><%=h budget.participants_count %></td>							
-			<td><%=h budget.value %></td>							
-			<td><%=h budget.author %></td>																							
+			<td class="name"><%=h budget.name %></td>							
+			<td class="type"><%=h budget.type %></td>							
+			<td class="from"><%=h budget.from %></td>							
+			<td class="to"><%=h budget.to %></td>							
+			<td class="participants_count"><%=h budget.participants_count %></td>							
+			<td class="value"><%=h budget.value %></td>							
+			<td class="author"><%=h budget.author %></td>																							
 			<td>
 				<a href="javascript:;" id="createBudgetButton" onclick="editBudget(<%= budget.id %>)" class="button button-normal"><span>Edytuj</span></a>
 																				
@@ -32,5 +32,5 @@
 
 <br />
 <div align="right">
-	<%= will_paginate @budgets, :previous_label => "&laquo; Poprzednia", :next_label => "Następna &raquo;" %>
+    <%= will_paginate @budgets, :prev_label => "Poprzednia", :next_label => "Następna" %>
 </div>

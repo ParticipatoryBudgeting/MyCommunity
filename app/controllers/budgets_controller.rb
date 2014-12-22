@@ -15,8 +15,8 @@ class BudgetsController < ApplicationController
   end
 
   def new
-    @user = session[:user]
-
+    @budget = Budget.new
+    @action = "Utwórz"
     respond_to do |format|
       format.html
     end
@@ -30,11 +30,16 @@ class BudgetsController < ApplicationController
 
   def update
     @budget = Budget.find params[:budget][:id]
-    @budget.update_attributes params[:budget]  
+    @budget.update_attributes params[:budget].except(:id)
+    @result = { :status => :ok, :success => true, :budget => @budget }
+    respond_to do |format|
+      format.json { render :json => @result.to_json }
+    end  
   end
 
   def show
     @budget = Budget.find params[:id]
+    @action = "Utwórz"
     @user = session[:user]
   end
 
