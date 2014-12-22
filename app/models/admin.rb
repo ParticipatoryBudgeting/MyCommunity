@@ -29,6 +29,30 @@ class Admin < ActiveRecord::Base
     end
     causes
   end
+
+  def self.get_budgets (where)
+    budgets = Budget.find(:all, :select => ['budgets.*', 'users.name as author'].join(','), 
+      :joins => :user, :conditions => where, :order => "created_at")
+
+    unless budgets.empty?
+      decoder = HTMLEntities.new
+      
+      budgets.map! {|b|
+      #   # cause.abstract = decoder.decode(cause.abstract)
+
+      #   # cause.abstract.gsub!(/<[^<>]*>/, "")
+      #   # cause.abstract.gsub!(/\,/, "")
+        
+          [b.id, b.name, b.type, b.from, b.to, b.participants_count, b.value, b.author]
+      }
+
+      budgets = Ruport::Data::Table.new :data => budgets,
+        :column_names => %w[budget_id name type from to participants_count value author]
+
+      budgets.save_as("public/reports/budgets.csv")
+    end
+    budgets
+  end
   
   def self.get_rejected_causes(where)
     causes = Cause.report_table_by_sql("

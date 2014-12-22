@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
 
   before_filter :authorize, :except => [:index, :login]
-  helper_method :current_user, :cause_sort_column, :sort_direction, :user_sort_column
+  helper_method :current_user, :cause_sort_column, :budget_sort_column, :sort_direction, :user_sort_column
   
   def index
     if session[:user_id]
@@ -27,6 +27,17 @@ class AdminController < ApplicationController
     redirect_to :action => :index
   end
   
+  def show_budgets
+    params[:category] = "0" if params[:category].blank?
+    where = '(budgets.id > 0)'
+    where << " and (budgets.user_id like '%#{params[:user_id]}%')" unless params[:user_id].blank?
+    where << " and (budgets.name like '%#{params[:name]}%')" unless params[:name].blank?
+    where << " and (budgets.type like '%#{params[:type]}%')" unless params[:type].blank?
+    @budgets2 = Admin.get_budgets(where)
+    @budgets = Budget.paginate :all, :conditions => where, :page => params[:page], :per_page => 10, :order => "#{cause_sort_column} #{sort_direction}"
+    # @categories = [Category.new(:id => 0, :name => 'Todos')] + Category.find(:all)
+  end
+
   def show_causes
     params[:category] = "0" if params[:category].blank?
     where = '(causes.id > 0) and (causes.submited = 1)'
@@ -102,6 +113,10 @@ class AdminController < ApplicationController
   
   def cause_sort_column
     %w[categories.name  title abstract local district author created_at views likes].include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def budget_sort_column
+    %w[created_at name type from to participants_count value user_id].include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def user_sort_column

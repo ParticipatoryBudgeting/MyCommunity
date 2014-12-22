@@ -1,0 +1,36 @@
+<div align="right">
+	<%= will_paginate @budgets, :previous_label => "&laquo; Poprzednia", :next_label => "Następna &raquo;" %>
+</div>	
+<table class="table-list" id="table-causes">
+	<tr>
+		<th style="width:100px;"><%= budget_sortable 'name', "Nazwa" %></th>
+		<th style="width:100px;"><%= budget_sortable 'type', "Typ" %></th>
+		<th style="width:100px;"><%= budget_sortable 'from', "Od" %></th>
+		<th style="width:100px;"><%= budget_sortable 'to', "Do" %></th>
+		<th style="width:100px;"><%= budget_sortable 'participants_count', "Liczba uczestników" %></th>
+		<th style="width:100px;"><%= budget_sortable 'value', "Kwota" %></th>
+		<th style="width:100px;"><%= budget_sortable 'author', "Autor" %></th>
+		<th style="width:90px;">Akcje</th>
+	</tr>
+	<% @budgets.each do |budget| %>
+		<tr id="budget-<%= budget.id %>">
+			<td><%=h budget.name %></td>							
+			<td><%=h budget.type %></td>							
+			<td><%=h budget.from %></td>							
+			<td><%=h budget.to %></td>							
+			<td><%=h budget.participants_count %></td>							
+			<td><%=h budget.value %></td>							
+			<td><%=h budget.author %></td>																							
+			<td>
+				<a href="javascript:;" id="createBudgetButton" onclick="editBudget(<%= budget.id %>)" class="button button-normal"><span>Edytuj</span></a>
+																				
+			</td>						
+		</tr>
+	
+	<% end %>					
+</table>
+
+<br />
+<div align="right">
+	<%= will_paginate @budgets, :previous_label => "&laquo; Poprzednia", :next_label => "Następna &raquo;" %>
+</div>

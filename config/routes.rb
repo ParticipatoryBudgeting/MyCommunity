@@ -36,7 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   map.create_budget '/budgets/create', :controller => 'budgets', :action => 'create'
   map.edit_budget '/budgets/edit/:id', :controller => 'budgets', :action => 'edit'
   map.update_budget '/budgets/update/:id', :controller => 'budgets', :action => 'update'
-
+  map.budget '/budgets/:id', :controller => 'budgets', :action => 'show'
 
   # map.resources 'cause'
   
@@ -50,6 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   map.send_volunteer_form '/send_volunteer_form', :controller => 'application', :action => 'send_volunteer_form'
   
   #admin
+  map.show_budgets '/admin/budgets', :controller => 'admin', :action => 'show_budgets'
   map.show_causes '/admin/causes', :controller => 'admin', :action => 'show_causes'
   map.show_users_list '/admin/users', :controller => 'admin', :action => 'show_users_list'
   map.show_rejected_causes '/admin/rejected_causes', :controller =>'admin', :action => 'show_rejected_causes'

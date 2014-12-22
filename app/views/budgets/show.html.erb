@@ -14,52 +14,46 @@
                     <fieldset id="newCauseForm" class="mb15">
                     
                         <label for="name">Nazwa</label>
-                        <input id="name" name="name" type="text" style="width:463px;float:left;" maxlength="80" />
+                        <input id="name" name="name" type="text" style="width:463px;float:left;" maxlength="80" value="<%= @budget.name %>"/>
                         <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
                         <div style="clear: both;" />
 
                         <label for="type">Typ</label>
-                        <input id="type" name="type" type="text" style="width:463px;float:left;" maxlength="80" />
+                        <input id="type" name="type" type="text" style="width:463px;float:left;" maxlength="80" value="<%= @budget.type %>" />
                         <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
                         <div style="clear: both;" />
 
                         <label for="from">Od</label>
-                        <input id="from" name="from" type="text" style="width:463px;float:left;" maxlength="80" />
+                        <input id="from" name="from" type="text" style="width:463px;float:left;" maxlength="80" value="<%= @budget.from %>" />
                         <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
                         <div style="clear: both;" />
 
                         <label for="to">Do</label>
-                        <input id="to" name="to" type="text" style="width:463px;float:left;" maxlength="80" />
+                        <input id="to" name="to" type="text" style="width:463px;float:left;" maxlength="80" value="<%= @budget.to %>" />
                         <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
                         <div style="clear: both;" />
 
                         <label for="value">Kwota</label>
-                        <input id="value" name="value" type="text" style="width:463px;float:left;" maxlength="80" />
+                        <input id="value" name="value" type="text" style="width:463px;float:left;" maxlength="80" value="<%= @budget.value %>" />
                         <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
                         <div style="clear: both;" />
 
                         <label for="participants_count">Liczba uczestników</label>
-                        <input id="participants_count" name="participants_count" type="text" style="width:463px;float:left;" maxlength="80" />
+                        <input id="participants_count" name="participants_count" type="text" style="width:463px;float:left;" maxlength="80" value="<%= @budget.participants_count %>" />
                         <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
                         <div style="clear: both;" />
 
                       <span class="break"><!-- --></span>
-                      
-                      <div class="mt15">
-                          <input id="termos" class="fl" name="termos" type="checkbox" value="yes" checked="checked" />
-                          <label for="termos" class="label-checkbox">Przeczytałem i akceptuje <a href="javascript:;" onclick="openModal('termos_de_uso');">regulamin.</a></label>
-                      </div>
-                      <span class="break"><!-- --></span>
                     </fieldset>
                 
                     <div class="boxBottom">
-                        <a href="javascript:;" class="btn fl postar">Utwórz</a>
+                        <a href="javascript:;" class="btn fl postar">Aktualizuj</a>
                     </div>
                 </div>
             </div>
@@ -76,6 +70,7 @@
     if (!error) {
     	var data = {
         	budget: {
+        		id: "<%= @budget.id %>",
 		        name: $('#newCauseForm input[name=name]').val(),
 		        type: $('#newCauseForm input[name=type]').val(),
 		        from: $('#newCauseForm input[name=from]').val(),
@@ -86,7 +81,7 @@
       	};
         
      	$.ajax({
-       	url: '<%= create_budget_path %>',
+       	url: '<%= update_budget_path %>',
        	data: data,
        	dataType: 'json',
        	success: function(result) {

@@ -4,7 +4,8 @@
 			<a href="javascript:;" title=""></a>
 		</h1>
 		<% if current_user -%>
-		<ul id="navigation">			
+		<ul id="navigation">
+			<li><%= link_to 'Budżety', show_budgets_path %></li>			
 			<li><%= link_to 'Projekty', show_causes_path %></li>
 			<% if current_user.level > 1 -%>
 			<li><%= link_to 'Odrzucone projekty', show_rejected_causes_path %></li>

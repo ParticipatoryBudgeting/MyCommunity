@@ -674,6 +674,20 @@ var Marker = Class.extend({
 			return null;
 		});
 	},
+
+	getLatLng: function(location) {
+		//geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': location}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				if (results.length > 0) {
+
+					return (results[0]);
+				}
+			}
+			
+			return null;
+		});
+	},
 	
 	getMarker: function() {
 		return this.marker;
