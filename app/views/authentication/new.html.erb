@@ -10,7 +10,7 @@
           <div id="loginBox">
             <fieldset class="mb15">
               <h3>Masz już konto?</h3>
-              <input id="usernameLogin" type="text" style="width:154px; padding:8px 10px; float:left;" value="Nazwa użytkownika" class="tc-lightgray" onfocus="$(this).removeClass('error'); if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Nazwa użytkownika'; this.className = 'tc-lightgray';}" />
+              <input id="usernameLogin" type="text" style="width:154px; padding:8px 10px; float:left;" value="Wpisz nazwę użytkownika" class="tc-lightgray" onfocus="$(this).removeClass('error'); if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Wpisz nazwę użytkownika'; this.className = 'tc-lightgray';}" />
               <a href="javascript:;" class="btn-entrar">Zaloguj</a>
               <span class="break"><!-- --></span>
               <span class="tc-red ts11" id="feedbackUsername"></span>
@@ -20,7 +20,7 @@
 
             <fieldset>
               <h3>Zarejestruj się</h3>
-              <input id="usernameRegistration" type="text" style="width:154px; padding:8px 10px; float:left;" onkeyup="checkUsernameAvailability()" value="Nazwa użytkownika" class="tc-lightgray" onfocus="$(this).removeClass('error'); if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Nazwa użytkownika'; this.className = 'tc-lightgray';}" />
+              <input id="usernameRegistration" type="text" style="width:154px; padding:8px 10px; float:left;" onkeyup="checkUsernameAvailability()" value="Wpisz nazwę użytkownika" class="tc-lightgray" onfocus="$(this).removeClass('error'); if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Wpisz nazwę użytkownika'; this.className = 'tc-lightgray';}" />
               <a href="javascript:;" class="btn-registrar">Zarejestruj</a>
               <span class="break"><!-- --></span>
               <span class="tc-gray ts11" id="availableUsername"></span>
@@ -36,9 +36,9 @@
           </div>
           
           <div id="twitterEmailBox" style="display:none;">
-              <h3>Usuário twitter</h3>
-              <h3>Informe seu e-mail</h3>
-              <input id="twitterEmail" type="text" style="width:154px; padding:8px 10px; float:left;" value="Digite seu email" class="tc-lightgray" onfocus="$(this).removeClass('error'); if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Digite seu usuário'; this.className = 'tc-lightgray';}" />
+              <h3>Użytkownik Twittera</h3>
+              <h3>Adres e-mail</h3>
+              <input id="twitterEmail" type="text" style="width:154px; padding:8px 10px; float:left;" value="Wpisz swój adres e-mail" class="tc-lightgray" onfocus="$(this).removeClass('error'); if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Wpisz swój adres e-mail'; this.className = 'tc-lightgray';}" />
               <a href="javascript:;" class="btn-entrar"></a>
               <span class="break"><!-- --></span>
               <span class="tc-red ts11" id="feedbackEmail"></span>
@@ -74,7 +74,7 @@
 	$('#loginBox .btn-registrar').bind('click', function() {
 		var usernameField = $('#usernameRegistration');
 		var responseField = $('#availableUsername');
-		var message = 'Defina seu nome de usuário';
+		var message = 'Wpisz nazwę użytkownika';
 
 		if (usernameField.val() == '' || usernameField.val() == message) {
 			usernameField.addClass('error');
@@ -97,7 +97,7 @@
 			    GA.track('/site/cadastro/escolhe_rede');
 		    } else {
 		      responseField.removeClass('tc-gray').removeClass('tc-green').addClass('tc-red');
-          responseField.html('Usuário já cadastrado');
+          responseField.html('Użytkownik zarejestowany');
 		    }
       } 
     });
@@ -117,13 +117,13 @@
 			usernameField.val(message);
 
 			responseField.addClass('tc-red').removeClass('tc-green').removeClass('tc-gray');
-			responseField.html('Campo obrigatório.');
+			responseField.html('Pole wymagane.');
 
 			return;
 		}
 		
 		responseField.addClass('tc-gray').removeClass('tc-green').removeClass('tc-red');
-		responseField.html('Verificando usuário...');
+		responseField.html('Weryfikacja użytkownika...');
 		
 		var params = {
       username: usernameField.val()
@@ -134,7 +134,7 @@
 			data: params,
 			dataType: 'json',
       success: function(data) {
-				var redirectingMessage = 'Aguarde, você será redirecionado.';
+				var redirectingMessage = 'Poczekaj, zostaniesz przekierowany.';
 				if (data.twitter) {
      //      responseField.addClass('tc-error').removeClass('tc-green').removeClass('tc-gray');
 					// responseField.html('O login via Twitter está temporariamente desabilitado.');
@@ -156,7 +156,7 @@
   $('#twitterEmailBox .btn-entrar').bind('click', function() {
 		var responseField = $('#feedbackEmail');
     var twitterEmail = $('#twitterEmail');
-    var message = 'Digite seu email';
+    var message = 'Wpisz swój adres e-mail';
     
     if (twitterEmail.val() == '' || twitterEmail.val() == message) {
       twitterEmail.addClass('error');
@@ -178,17 +178,17 @@
       success: function(data) {
 				waitingResponse = false;
         if (data.success) {
-          var redirectingMessage = 'Aguarde, você será redirecionado.';
+          var redirectingMessage = 'Poczekaj, zostaniesz przekierowany.';
           responseField.html(redirectingMessage);
           GA.trackRedirect('/site/cadastro/connect/twitter/email_valido', '/');
         } else {
           responseField.removeClass('tc-gray').removeClass('tc-green').addClass('tc-red');
-          responseField.html('E-mail inválido');
+          responseField.html('Nieprawidłowy e-mail');
         }
       } 
     });
     waitingResponse = true;
-    responseField.html("Aguarde");
+    responseField.html("Prosze czekać");
   
 	});
 	

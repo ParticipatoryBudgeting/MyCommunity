@@ -28,14 +28,12 @@ class AdminController < ApplicationController
   end
   
   def show_budgets
-    params[:category] = "0" if params[:category].blank?
     where = '(budgets.id > 0)'
     where << " and (budgets.user_id like '%#{params[:user_id]}%')" unless params[:user_id].blank?
     where << " and (budgets.name like '%#{params[:name]}%')" unless params[:name].blank?
     where << " and (budgets.type like '%#{params[:type]}%')" unless params[:type].blank?
     @budgets2 = Admin.get_budgets(where)
-    @budgets = Budget.paginate :all, :conditions => where, :page => params[:page], :per_page => 10, :order => "#{cause_sort_column} #{sort_direction}"
-    # @categories = [Category.new(:id => 0, :name => 'Todos')] + Category.find(:all)
+    @budgets = Budget.paginate :all, :conditions => where, :page => params[:page], :per_page => 10, :order => "`#{budget_sort_column}` #{sort_direction}"
   end
 
   def show_causes

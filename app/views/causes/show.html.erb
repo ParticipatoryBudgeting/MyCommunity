@@ -1,13 +1,13 @@
 <% require 'open-uri' %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xmlns:fb="http://ogp.me/ns/fb#">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl-PL" xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
 		<title><%= @cause.title %>- <%= @cause.category.name %>| portoalegre.cc</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 		<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
 		<meta name="distribution" content="global" />
-		<meta name="language" content="pt-br" />
+		<meta name="language" content="pl-PL" />
 		<meta name="robots" content="follow, all" />
 		<meta name="description" content="<%= @cause.title %> - <%= @cause.category.name %>" />
 		<meta name="keywords" content="PortoAlegre.cc, Porto Alegre, poa, rs, rio grande do sul, Unisinos, <%= @cause.title %>, <%= @cause.category.name %>" />
@@ -71,7 +71,7 @@
 			var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
 			if (d.getElementById(id)) {return;}
 			js = d.createElement('script'); js.id = id; js.async = true;
-			js.src = "//connect.facebook.net/en_US/all.js";
+			js.src = "//connect.facebook.net/pl_PL/all.js";
 			ref.parentNode.insertBefore(js, ref);
 		}(document));
 	</script>
@@ -249,7 +249,7 @@
 								<div class="right-tab">
 									<span class="title-bar tit-oferecimento">OFERTA</span>
 									<div class="right-tab-item-content mt10 mb10">
-										<a href="http://www.unisinos.br" target="_blank">Unisinos Porto Alegre</a>
+										<a href="http://www.budzetpartycypacyjny.pl" target="_blank">Budżet Partycypacyjny</a>
 									</div>
 									<span class="title-bar tit-quemapoiaacausa">PARTNERZY</span>
 									<div class="right-tab-item-content">
@@ -259,7 +259,7 @@
 													Portoalegre.cc
 												</div>
 												<%# show_cause_url(@cause.category, @cause.title, @cause.id) %>
-												<iframe src="http://www.facebook.com/plugins/like.php?href=<%= @cause.absolute_url %>&amp;layout=standard&amp;show_faces=true&amp;width=180&amp;action=like&amp;font&amp;colorscheme=light&amp;height=80&amp;locale=pt_BR" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:180px; height:110px; margin-top:10px;" allowTransparency="true"></iframe>
+												<iframe src="http://www.facebook.com/plugins/like.php?href=<%= @cause.absolute_url %>&amp;layout=standard&amp;show_faces=true&amp;width=180&amp;action=like&amp;font&amp;colorscheme=light&amp;height=80&amp;locale=pl_PL" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:180px; height:110px; margin-top:10px;" allowTransparency="true"></iframe>
 												</div>
 												</div>
 												<span class="w180 dotted-line"><!-- --></span>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141219162752) do
+ActiveRecord::Schema.define(:version => 20141223141157) do
 
   create_table "budgets", :force => true do |t|
     t.string   "name"
@@ -31,15 +31,15 @@ ActiveRecord::Schema.define(:version => 20141219162752) do
   end
 
   create_table "causes", :force => true do |t|
-    t.string   "author",                                                               :null => false
-    t.string   "title",                                                                :null => false
-    t.text     "abstract",                                                             :null => false
-    t.decimal  "latitude",          :precision => 20, :scale => 17,                    :null => false
-    t.decimal  "longitude",         :precision => 20, :scale => 17,                    :null => false
-    t.string   "local",                                                                :null => false
-    t.string   "district",                                                             :null => false
-    t.boolean  "is_rejected",                                       :default => false, :null => false
-    t.integer  "views",                                             :default => 0
+    t.string   "author",                                                                 :null => false
+    t.string   "title",                                                                  :null => false
+    t.text     "abstract",                                                               :null => false
+    t.decimal  "latitude",            :precision => 20, :scale => 17,                    :null => false
+    t.decimal  "longitude",           :precision => 20, :scale => 17,                    :null => false
+    t.text     "local",                                                                  :null => false
+    t.string   "district",                                                               :null => false
+    t.boolean  "is_rejected",                                         :default => false, :null => false
+    t.integer  "views",                                               :default => 0
     t.integer  "category_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -47,12 +47,16 @@ ActiveRecord::Schema.define(:version => 20141219162752) do
     t.string   "email"
     t.string   "phone_no"
     t.string   "cell_phone_no"
-    t.integer  "submited",                                          :default => 0
-    t.integer  "likes",                                             :default => 0
+    t.integer  "submited",                                            :default => 0
+    t.integer  "likes",                                               :default => 0
     t.datetime "last_likes_update"
-    t.string   "protocol",                                          :default => "-1"
+    t.string   "protocol",                                            :default => "-1"
     t.string   "city"
     t.integer  "budget_id"
+    t.string   "total_cost"
+    t.text     "upkeep_cost"
+    t.string   "area"
+    t.integer  "location_precission"
   end
 
   create_table "rich_contents", :force => true do |t|
