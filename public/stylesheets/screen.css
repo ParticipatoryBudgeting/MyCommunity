@@ -105,23 +105,18 @@ img {border:none; display:block;}
 
 /* Footer */
 #footer .nav {}
-#footer .nav li {float:left;margin:0 6px;}
-#footer .nav li a {display:block;background:url(/images/nav_menu.png) 0 0 no-repeat;height:43px;text-indent:-99999px;}
+#footer .nav li {float:left;margin:0 20px;}
+#footer .nav li a {display:block;height:43px; color: #9EBCCC; text-decoration: none; font-weight: bold; line-height: 44px;}
 #footer .nav li.share a {background:none; height:auto; text-indent:0;}
 #footer .nav li.share .compartilhe {width:68px; height:43px; margin-left:7px; display:block; float:left; background-image:url('../img/nav-footer.gif'); background-repeat:no-repeat; background-position:-7px 0; text-indent:-9999px; overflow:hidden;}
 #footer .nav li.share .pipe {width:1px; height:14px; margin:7px 7px 0 12px; display:block; float:left; background-image:url('../img/nav-footer.gif'); background-repeat:no-repeat; background-position:-83px -8px; text-indent:-9999px; overflow:hidden;}
-#footer .nav li.itm01 a {background-position: 0px 16px; width:87px; margin-left: 22px;}
-#footer .nav li.itm02 a {background-position:-101px 16px;width:98px;}
-#footer .nav li.itm03 a {background-position:-212px 16px;width:69px;}
-#footer .nav li.itm04 a {background-position:-296px 16px;width:118px;}
-#footer .nav li.itm05 a {background-position:-428px 16px;width:83px;}
-#footer .nav li.itm06 a {background-position:-524px 16px;width:27px;}
+
 #footer .nav li.social_network {margin-top:13px;}
 #footer .nav .addthis_toolbox {margin:6px 0 0 6px !important; float:left;}
 #footer .nav li a.facebook_share {display:block;background:none 0 0 no-repeat;height:43px; text-indent:0}
 
 /* Apoios */
-#footer .apoios li {float:left;margin-top:10px;}
+#footer .apoios li {float:left;margin-top:0;}
 #footer .apoios li a {display:block;background:url(/images/apoios.png) 0 0 no-repeat;height:50px;text-indent:-99999px;}
 #footer .apoios li.share a {background:none; height:auto; text-indent:0;}
 #footer .apoios li.share .compartilhe {width:68px; height:43px; margin-left:7px; display:block; float:left; background-image:url('../img/nav-footer.gif'); background-repeat:no-repeat; background-position:-7px 0; text-indent:-9999px; overflow:hidden;}
@@ -324,4 +319,12 @@ a.button {cursor:pointer;}
 .jspVerticalBar {width:6px !important; background:none !important;}
 .jspTrack {background:none !important;}
 
- #left .content #crieCausa.fake-last {border-bottom:none;}
+#left .content #crieCausa.fake-last {border-bottom:none;}
+
+.apoios h4 {
+	margin-left:26px;
+	color:#0E1C24;
+	border-bottom:1px dotted #0E1C24;
+	margin-bottom:10px;
+	padding-bottom:10px;
+ }
