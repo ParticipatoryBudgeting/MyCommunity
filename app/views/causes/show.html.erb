@@ -59,7 +59,7 @@
 	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
-				appId : '211527138864379',
+				appId : '777568638980959',
 				status : true,
 				cookie : true,
 				xfbml : true
@@ -259,35 +259,40 @@
 													Portoalegre.cc
 												</div>
 												<%# show_cause_url(@cause.category, @cause.title, @cause.id) %>
+												<!--
 												<iframe src="http://www.facebook.com/plugins/like.php?href=<%= @cause.absolute_url %>&amp;layout=standard&amp;show_faces=true&amp;width=180&amp;action=like&amp;font&amp;colorscheme=light&amp;height=80&amp;locale=pl_PL" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:180px; height:110px; margin-top:10px;" allowTransparency="true"></iframe>
+												-->
 												</div>
 												</div>
 												<span class="w180 dotted-line"><!-- --></span>
 												</div>
-												<% if !@cause.related_causes.empty? %> <span class="title-bar tit-vejatambem">VEJA TAMBÉM</span>
-												<div class="right-tab-item-content">
-												Outras causas parecidas
-												<ul class="link-list">
-												<% @cause.related_causes.each do |cause| %>
-												<li>
-												<%= link_to cause.title, show_cause_path(cause.category.name.urlize, cause.title.urlize, cause) %>
-												</li>
+
+												<% if !@cause.related_causes.empty? %> 
+													<span class="title-bar tit-vejatambem">ZOBACZ PODOBNE</span>
+													<div class="right-tab-item-content">
+														<ul class="link-list">
+															<% @cause.related_causes.each do |cause| %>
+															<li>
+																<%= link_to cause.title, show_cause_path(cause.category.name.urlize, cause.title.urlize, cause) %>
+															</li>
+															<% end %>
+														</ul>
+														<span class="w180 dotted-line"><!-- --></span>
+													</div>
 												<% end %>
-												</ul>
-												<span class="w180 dotted-line"><!-- --></span>
-												</div>
+
+												<% if !@cause.same_neighborhood_causes.empty? %> 
+													<span class="title-bar tit-maisnestebairro">PODOBNE W OKOLICY</span>
+													<div class="right-tab-item-content">
+														<ul class="link-list">
+															<% @cause.same_neighborhood_causes.each do |cause| %>
+															<li>
+																<%= link_to cause.title, show_cause_path(cause.category.name.urlize, cause.title.urlize, cause) %>
+															</li>
+															<% end %>
+														</ul>
+													</div>
 												<% end %>
-												<% if !@cause.same_neighborhood_causes.empty? %> <span class="title-bar tit-maisnestebairro">PODOBNE W OKOLICY</span>
-												<div class="right-tab-item-content">
-												<ul class="link-list">
-												<% @cause.same_neighborhood_causes.each do |cause| %>
-												<li>
-												<%= link_to cause.title, show_cause_path(cause.category.name.urlize, cause.title.urlize, cause) %>
-												</li>
-												<% end %>
-												</ul>
-											</div>
-										<% end %>
 									</div>
 								<span class="break"><!-- --></span>
 								</div>

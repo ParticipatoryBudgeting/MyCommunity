@@ -141,8 +141,8 @@ img {border:none; display:block;}
 #left #logo {background:url(../img/logo.png) 0 0 no-repeat;display:block;width:146px;height:146px;position:absolute;top:-4px;right:-35px;text-indent:-99999px;}
 #left #boxLeft {width:289px; background:url(../img/bg-left.png) 0 0 repeat-y; }
 #left #boxLeft .content {position:absolute;top:60px;width:191px;margin:0 0 0 28px;}
-	#left h2 {font-size:28px;width:129px;margin-bottom:5px;background:url(../img/por-que-o-porjeto.gif) no-repeat;height:69px;text-indent:-99999px;}
-	#left .tit-explore {width:180px;margin-bottom:15px;background:url(../img/tit_exploreacidade.gif) no-repeat;}
+	#left h2 {font-size:28px; width:129px ;margin-bottom:5px; background-color:transparent; height:69px; color: #7dbd00;}
+	#left .tit-explore {width:180px; margin-bottom:15px; background-color:transparent;}
 
 	.barGreen {height:16px;display:block;background:url(../img/bar-left.gif) no-repeat;margin:0 0 0 -28px;padding:4px 0 0 28px;color:#7dbd00;margin-bottom:1px}
 	
