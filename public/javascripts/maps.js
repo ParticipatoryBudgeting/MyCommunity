@@ -339,7 +339,7 @@ var Map = Class.extend({
 				}
 				
 				_this.createCauseButton.removeClass('clicked');
-				_this.createCauseButton.text("DODAJ MIEJSCE");
+				_this.createCauseButton.text("DODAJ PROJEKT");
 				$.cookie('waitingToAddMarker', null);
 				
  				var local = '';

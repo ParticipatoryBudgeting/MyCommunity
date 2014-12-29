@@ -41,6 +41,19 @@ class Cause < ActiveRecord::Base
     :conditions => ["is_rejected = 0 and submited = 1 and ( title like :text or author like :text or abstract like :text or local like :text or district like :text) #{filter_category}",{:text => text}],
     :order => "updated_at DESC")
   end
+
+  def self.search_by_city_and_budget_name(phrase, category)
+    phrase = "%#{phrase}%"
+    filter_category = category.blank? ? "" : "and category_id=#{category}"
+    self.find(:all, 
+      :joins => :budget,
+      :conditions => ["is_rejected = 0 and 
+        submited = 1 and
+        (city like :phrase or budgets.name like :phrase)
+        #{filter_category}",
+      {:phrase => phrase}],
+    :order => "updated_at DESC")
+  end
   
   def related_causes
     Cause.find(:all,

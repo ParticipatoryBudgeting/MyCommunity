@@ -3,8 +3,6 @@ class BudgetsController < ApplicationController
   end
 
   def create
-    require 'pry'
-    binding.pry
     @budget = Budget.new params[:budget]
     @budget.user_id = session[:user].id
     @budget.save
