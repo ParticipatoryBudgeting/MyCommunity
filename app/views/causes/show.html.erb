@@ -174,10 +174,10 @@
 											<span class="userinfo-name"><%= @cause.user.name %></span>
 											<span class="userinfo-local"><%= @cause.user.location %></span>
 										</div>
-										<span class="break"><!-- --></span>
-										<span class="dotted-line"><!-- --></span>
-										<span class="button button-share"><span>SHARE</span></span>
-										<!-- AddThis Button BEGIN -->
+										<span class="break"></span>
+
+										<span class="dotted-line"></span>
+										<span class="button button-share"><span>UDOSTĘPNIJ</span></span>
 										<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 											<a class="addthis_button_facebook"></a>
 											<a class="addthis_button_twitter"></a>
@@ -191,11 +191,16 @@
 											};
 										</script>
 										<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4d889daf1a5fa592"></script>
-										<!-- AddThis Button END --><span class="dotted-line"><!-- --></span>
-										<span class="button button-tags"><span>TAGI</span></span>
+										<!-- AddThis Button END -->
+										<!--
+										<span class="dotted-line"></span>
+										<span class="button button-tags">
+											<span>TAGI</span>
+										</span>
 										<p>
 											<%= @cause.tag_list %>
 										</p>
+										-->
 									</div>
 									<div class="center-tab" id="class_abstract_div">
 									<% if (session[:user] && (@cause.user ==  session[:user] || session[:user].level == 2)) %>
@@ -246,11 +251,15 @@
 									</script>									
 									<div class="fb-comments" data-href="<%= request.url %>" data-num-posts="30"></div>
 								</div>
+
 								<div class="right-tab">
 									<span class="title-bar tit-oferecimento">OFERTA</span>
 									<div class="right-tab-item-content mt10 mb10">
 										<a href="http://www.budzetpartycypacyjny.pl" target="_blank">Budżet Partycypacyjny</a>
+										<span class="w180 dotted-line"></span>
 									</div>
+
+									<!--
 									<span class="title-bar tit-quemapoiaacausa">PARTNERZY</span>
 									<div class="right-tab-item-content">
 										<div class="quemapoiaacausa-box">
@@ -259,13 +268,11 @@
 													Portoalegre.cc
 												</div>
 												<%# show_cause_url(@cause.category, @cause.title, @cause.id) %>
-												<!--
-												<iframe src="http://www.facebook.com/plugins/like.php?href=<%= @cause.absolute_url %>&amp;layout=standard&amp;show_faces=true&amp;width=180&amp;action=like&amp;font&amp;colorscheme=light&amp;height=80&amp;locale=pl_PL" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:180px; height:110px; margin-top:10px;" allowTransparency="true"></iframe>
-												-->
-												</div>
-												</div>
-												<span class="w180 dotted-line"><!-- --></span>
-												</div>
+											</div>
+										</div>
+										<span class="w180 dotted-line"></span>
+									</div>
+									-->
 
 												<% if !@cause.related_causes.empty? %> 
 													<span class="title-bar tit-vejatambem">ZOBACZ PODOBNE</span>
