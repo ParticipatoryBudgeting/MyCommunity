@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "acts_as_reportable", "1.1.1"
 gem "aws-sdk",            "1.3.4"
-gem "capistrano",         "2.5.19"
+gem "capistrano"
 gem "capistrano-ext",     "1.2.1"
 gem "chronic",            "0.6.5"
 gem "mysql",              "2.7"
@@ -28,10 +28,12 @@ gem "json",               "1.6.3"
 gem "htmlentities", 			"4.3.1"
 gem "whenever",           :require => false
 gem 'puma'
-gem 'capistrano-puma',    :require => false
 
 group :development do
   gem 'pry', "0.9.12"
+  gem 'capistrano-puma',    :require => false
+  gem 'capistrano-rvm',     :require => false
+  gem 'capistrano-rails',   :require => false
 end
 
 source :gemcutter

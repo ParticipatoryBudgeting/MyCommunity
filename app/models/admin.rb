@@ -2,7 +2,6 @@ require "ruport"
 require "ruport/util"
 require "extend_string"
 require "rest-client"
-include Spawn
 
 class Admin < ActiveRecord::Base
   
