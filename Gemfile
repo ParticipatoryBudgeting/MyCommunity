@@ -27,6 +27,8 @@ gem "will_paginate",      "2.3.16"
 gem "json",               "1.6.3"
 gem "htmlentities", 			"4.3.1"
 gem "whenever",           :require => false
+gem 'puma'
+gem 'capistrano-puma',    :require => false
 
 group :development do
   gem 'pry', "0.9.12"
