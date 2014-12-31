@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     @collect_email = session['collect_email'] if session['collect_email']
     session['error'] = nil
     @categories = Category.all :order => "name asc"
+    @locations = Cause.all(:group => 'city, district').group_by { |cause| cause.city }
   end
   
   def sobre_o_projeto

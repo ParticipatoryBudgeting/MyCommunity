@@ -185,10 +185,9 @@
 					$('#comboDistricts').toggleClass('hidden');
 				});
 				
-				$('#comboDistricts a').bind('click', function() {
+				$('#comboDistricts a.f_city').bind('click', function() {
 					var value = $(this).text();
 					var parent = $(this).parents('.combo-content').parent();
-		//			parent.find('span').html(value);
 					parent.find('.combo-content').addClass('hidden');
 					parent.find('.combo-content a').attr('class', '');
 					$(this).addClass('selected');
@@ -196,6 +195,19 @@
 					$("#bairroButton").css("font-weight", "");
 					$("#bairroButton").parent().css("background-color", "#FFFFFF");
 					map.search_city(value);
+				});
+
+				$('#comboDistricts a.f_district').bind('click', function() {
+					var value = $(this).text();
+					var parent = $(this).parents('.combo-content').parent();
+					var city = $(this).parent().parent().prev().text();
+					parent.parent().find('.combo-content').addClass('hidden');
+					parent.parent().find('.combo-content a').attr('class', '');
+					$(this).addClass('selected');
+					$('#top input[name=busca]').val('');
+					$("#bairroButton").css("font-weight", "");
+					$("#bairroButton").parent().css("background-color", "#FFFFFF");
+					map.search_district(value, city);
 				});
 			});	
 		</script>

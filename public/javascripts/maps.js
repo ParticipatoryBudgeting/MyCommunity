@@ -621,6 +621,49 @@ var Map = Class.extend({
 				this.zoom(10);
 			}
 		}
+	},
+
+	search_district: function(strSearch, city) {
+		if (strSearch && strSearch != '') {
+			if (typeof(strSearch) == 'string') {
+				var geocoder = new google.maps.Geocoder();
+				var _this = this;
+				strSearch = strSearch + ', ' + city + ', Polska';
+
+				geocoder.geocode({'address': strSearch}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						console.log(results)
+						if (results.length > 0) {
+							var local = results[0].formatted_address;
+							var district, city, state;
+
+							for (var i = 0; i < results[0].address_components.length; i++) {
+								if (results[0].address_components[i].types[0] == 'sublocality') {
+									district = results[0].address_components[i]['short_name'];
+								} else if (results[0].address_components[i].types[0] == 'locality') {
+									city = results[0].address_components[i]['short_name'];
+								} else if (results[0].address_components[i].types[0] == 'administrative_area_level_1') {
+									state = results[0].address_components[i]['short_name'];
+								}
+							}
+						}
+					}
+
+					$.cookie("map.lat", results[0].geometry.location.lat());
+					$.cookie("map.lng", results[0].geometry.location.lng());
+
+					_this.map.panTo(results[0].geometry.location);
+					_this.zoom(15);
+				});
+			} else {
+				var position = new google.maps.LatLng(strSearch[0], strSearch[1]);
+
+				this.map.panTo(position);
+				$.cookie("map.lat", strSearch[0]);
+				$.cookie("map.lng", strSearch[1]);
+				this.zoom(15);
+			}
+		}
 	}
 });
 

@@ -14,7 +14,7 @@
   </div>
   <%= image_tag 'top/separador.png' %>
   <div id="bairros">
-    <a href="#" id="bairroButton">Miasta</a>
+    <a href="#" id="bairroButton">Lokalizacje</a>
   </div>
   <%= image_tag 'top/separador.png' %>
   <div id="busca">
@@ -43,15 +43,22 @@
 <% end -%>
 
 <div id="comboDistricts" class="combo-content hidden">
-	<div class="bgr">
-		<div class="scroll-pane">
-			<ul class="comboLst">
-        <li><a href="javascript:;">Kraków</a></li>
-        <li><a href="javascript:;">Łódź</a></li>
-        <li><a href="javascript:;">Płock</a></li>
-				<li><a href="javascript:;">Warszawa</a></li>
-        <li class="last"><a href="javascript:;">Toruń</a></li>
-			</ul>
-		</div>
-	</div>
+  <div class="bgr">
+    <div class="scroll-pane">
+      <ul class="comboLst">
+
+        <% @locations.each do |city, causes| %>
+          <li>
+            <a class="f_city" href="javascript:;"><%= city %></a>
+            <% causes.each do |cause| %>
+              <li><a class="f_district" href="javascript:;"><%= cause.district %></a></li>
+            <% end %>
+          </li>
+        <% end %>
+
+      </ul>
+    </div>
+  </div>
 </div>
+
+
