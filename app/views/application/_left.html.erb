@@ -16,8 +16,16 @@
       
       setTimeout("cicloImagens()", 3 * 1000);
   }
+
+  function filter_by_budget() {
+    var budget_id = $("#budget_budget_id").val();
+    map.budgetize(budget_id);
+  }
+
   jQuery(document).ready(function() {
-  cicloImagens();
+    cicloImagens();
+    $("#budget_budget_id").select2();
+    $("#budget_budget_id").bind("change", filter_by_budget);
   });
 </script>
 <div id="left">
@@ -43,7 +51,10 @@
 			</ul>
 			<span class="break"><!--  --></span>
 			
-			<a class="logo-unisinos" href="http://www.unisinos.br/" onclick="GA.trackEvent('banners', 'clique', 'unisinos');" target="_blank">
+      <div>
+        <%= select('budget', 'budget_id', options_for_select(@budgets.map { |b| [b.name, b.id] }), {:include_blank => 'Wszystkie'}, {:style => 'width:100%'}) %>
+      </div>
+
         <!--
         <img id='left_banner0' src="/images/eu_curto.png" style='display: none;'></img>
         <img id='left_banner1' src="/images/parceiros_voluntarios.png" style='display: none;'></img>

@@ -71,18 +71,23 @@ class Cause < ActiveRecord::Base
     :limit => 3)
   end
   
-  def self.find_causes_by_latitude_and_longitude(map_position, cats)
+  def self.find_causes_by_latitude_and_longitude(map_position, cats, budget)
+    causes = self.where("is_rejected = 0 and submited = 1")
+    causes = causes.where(["latitude between ? and ? and longitude between ? and ?", map_position[:latB], map_position[:latA], map_position[:lngB], map_position[:lngA]])
+
     if cats
-      self.find(:all, :include => :category,
-        :select => "id, title, category_id, latitude, longitude, views, updated_at", 
-        :conditions => ["is_rejected = 0 and submited = 1 and latitude between #{map_position[:latB]} and #{map_position[:latA]} and longitude between #{map_position[:lngB]} and #{map_position[:lngA]} and category_id not in (?)", cats],
-        :order => "views DESC, updated_at DESC")
-    else
-      self.find(:all, :include => :category,
-        :select => "id, title, category_id, latitude, longitude, views, updated_at", 
-        :conditions => ["is_rejected = 0 and submited = 1 and latitude between #{map_position[:latB]} and #{map_position[:latA]} and longitude between #{map_position[:lngB]} and #{map_position[:lngA]}"],
-        :order => "views DESC, updated_at DESC")
+      causes = causes.where(["category_id not in (?)", cats])
     end
+
+    if not budget.empty?
+      causes = causes.where(["budget_id = ?", budget])
+    end
+
+    causes.find(:all,
+        :select => "id, title, category_id, latitude, longitude, views, updated_at",
+        :include => :category,
+        :order => "views DESC, updated_at DESC"
+    )
   end
   
   def url

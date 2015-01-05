@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     session['error'] = nil
     @categories = Category.all :order => "name asc"
     @locations = Cause.all(:group => 'city, district').group_by { |cause| cause.city }
+    @budgets = Budget.all
   end
   
   def sobre_o_projeto

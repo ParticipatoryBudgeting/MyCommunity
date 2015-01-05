@@ -405,7 +405,8 @@ var Map = Class.extend({
 						bottomRightX: _this.map.getBounds().getSouthWest().lng(),
 						currentZoom: _this.map.getZoom() - MIN_ZOOM,
 						maxZoom: MAX_ZOOM-MIN_ZOOM,
-						cats: categories.items()
+						cats: categories.items(),
+						budget: $("#budget_budget_id").val()
 					};
 					_this.removeAllMarkers();				
 					_this.loadData(data);					
@@ -512,7 +513,28 @@ var Map = Class.extend({
 					bottomRightX: _this.map.getBounds().getSouthWest().lng(),
 					currentZoom: _this.map.getZoom() - MIN_ZOOM,
 					maxZoom: MAX_ZOOM-MIN_ZOOM,
-					cats: categories
+					cats: categories,
+					budget: $("#budget_budget_id").val()
+				};
+				_this.removeAllMarkers();
+				_this.loadData(data);
+		},500);
+	},
+
+	budgetize: function(budget) {
+		var _this = this;
+		clearTimeout(_this.requestTimer);
+		var categories = new cookieList("categories");
+		this.requestTimer = setTimeout(function(){
+			var data = {
+					topLeftY: _this.map.getBounds().getNorthEast().lat(),
+					topLeftX: _this.map.getBounds().getNorthEast().lng(),
+					bottomRightY: _this.map.getBounds().getSouthWest().lat(),
+					bottomRightX: _this.map.getBounds().getSouthWest().lng(),
+					currentZoom: _this.map.getZoom() - MIN_ZOOM,
+					maxZoom: MAX_ZOOM-MIN_ZOOM,
+					budget: budget,
+					cats: categories.items()
 				};
 				_this.removeAllMarkers();
 				_this.loadData(data);
