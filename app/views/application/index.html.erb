@@ -169,12 +169,10 @@
 					if (list.has(value)) {
 						$(this).find('div').css('background-position','0px 0');
 						list.remove(value);
-						console.log('szukam kategorii: ' + list.items());
 						map.categorize(list.items());
 					} else {
                         $(this).find('div').css('background-position','-40px 0'); 
 						list.add(value);
-						console.log('szukam kategorii: ' + list.items());
 						map.categorize(list.items());
 					}
 				});
