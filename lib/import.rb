@@ -9,17 +9,51 @@ module Import
 	API_KEY = "AIzaSyCQNeAF-rK3NqPG0gFYQPiZAI50bMl2rLE"
 	BACKUP_DIR = "./db/backup/"
 
+	@hash = {  #default format, probably only for debugging, not used yet
+		"lp" => 1,
+		"country" => 2,
+		"city" => 3,
+		"district" => 4,
+		"area" => 5,
+		"title" => 6,
+		"description" => 7,
+		"local" => 8,
+		"total_cost" => 9,
+		"upkeep_cost" => 10,
+		"is_rejected" => 11,
+		"full_description" => 12,
+		"justification" => 13,
+		"category" => 14,
+		"target_group" => 15,
+		"status" => 16,
+		"budget_id" => 17,
+		"votes_count" => 18,
+		"project_id" => 19
+	}
+
+	def self.read_header row
+		require 'pry'
+		binding.pry
+		@hash = row.each_with_index.map {|c,i| {c => i+1 }}.inject(:merge)
+		if [@hash["lp"], @hash["country"], @hash["city"], @hash["district"], @hash["area"], @hash["title"], @hash["description"], @hash["local"], @hash["total_cost"], @hash["budget_id"], @hash["project_id"]].any? {|c| c.nil?}
+			dont_parse
+		end
+	end
+
+	def self.dont_parse
+		throw "Brak którejś z wymaganych kolumn"
+	end
+
 	def self.start filename=nil
 		@filename = "./db/Warszawa_2014-01-01_2014-12-31.csv"
 		filedata = @filename.split("/").last.split(".")[0]
 		@city, @from, @to = filedata.split("_") 
 		init unless @is_inited
 		@csv = CSV.read @filename
+		read_header @csv[0]
 		@size = @csv.size - 3
-		# update_row(@csv[3], 0)
-		# @csv[765..-1].each_with_index {|row, i| create_from_row(row, i)}
 		# @csv[3..-1].each_with_index {|row, i| update_row(row, i)}
-		@csv[3..-1].each_with_index {|row, i| create_from_row(row, i)}
+		# @csv[3..-1].each_with_index {|row, i| create_from_row(row, i)}
 	end
 
 	def self.save_to_file body, filename
