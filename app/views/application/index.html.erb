@@ -202,7 +202,8 @@
 				$('#comboDistricts a.f_district').bind('click', function() {
 					var value = $(this).text();
 					var parent = $(this).parents('.combo-content').parent();
-					var city = $(this).parent().parent().prev().text();
+					var city = $(this).parent().prev().find('a').text();
+
 					parent.parent().find('.combo-content').addClass('hidden');
 					parent.parent().find('.combo-content a').attr('class', '');
 					$(this).addClass('selected');

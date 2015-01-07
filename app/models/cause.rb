@@ -16,7 +16,6 @@ class Cause < ActiveRecord::Base
   validates_presence_of :local
   validates_presence_of :latitude
   validates_presence_of :longitude
-  validates_presence_of :district
   validates_presence_of :abstract
 
   named_scope :by_city, lambda {|city| {:conditions => {:city => city}, :order => "updated_at DESC" } }

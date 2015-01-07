@@ -51,7 +51,9 @@
           <li>
             <a class="f_city" href="javascript:;"><%= city %></a>
             <% causes.each do |cause| %>
-              <li><a class="f_district" href="javascript:;"><%= cause.district %></a></li>
+              <% unless cause.district.empty? %>
+                <li><a class="f_district" href="javascript:;"><%= cause.district %></a></li>
+              <% end %>
             <% end %>
           </li>
         <% end %>

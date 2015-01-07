@@ -344,15 +344,19 @@ var Map = Class.extend({
 				
  				var local = '';
  				var district = '';
+ 				var state = '';
+ 				var city = '';
 				var geocoder = new google.maps.Geocoder();
 				geocoder.geocode({ 'latLng': ev.latLng}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
 						if (results.length > 0) {
 							var local = results[0].formatted_address;
-							var district = null, city, state;
 
 							for (var i = 0; i < results[0].address_components.length; i++) {
-								if (results[0].address_components[i].types[0] == 'sublocality') {
+								if ((results[0].address_components[i].types[0] == 'sublocality' || 
+									results[0].address_components[i].types[0] == 'sublocality_level_1') &&
+									results[0].address_components[i]['short_name'] != null
+									) {
 									district = results[0].address_components[i]['short_name'];
 								} else if (results[0].address_components[i].types[0] == 'locality') {
 									city = results[0].address_components[i]['short_name'];
@@ -654,7 +658,6 @@ var Map = Class.extend({
 
 				geocoder.geocode({'address': strSearch}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
-						console.log(results)
 						if (results.length > 0) {
 							var local = results[0].formatted_address;
 							var district, city, state;
