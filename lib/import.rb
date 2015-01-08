@@ -3,57 +3,78 @@ require "uri"
 require 'json'
 require 'csv'
 require 'fileutils'
+require 'pry'
 
 module Import
 	SITE = "https://maps.googleapis.com/"
 	API_KEY = "AIzaSyCQNeAF-rK3NqPG0gFYQPiZAI50bMl2rLE"
 	BACKUP_DIR = "./db/backup/"
 
-	@hash = {  #default format, probably only for debugging, not used yet
-		"lp" => 1,
-		"country" => 2,
-		"city" => 3,
-		"district" => 4,
-		"area" => 5,
-		"title" => 6,
-		"description" => 7,
-		"local" => 8,
-		"total_cost" => 9,
-		"upkeep_cost" => 10,
-		"is_rejected" => 11,
-		"full_description" => 12,
-		"justification" => 13,
-		"category" => 14,
-		"target_group" => 15,
-		"status" => 16,
-		"budget_id" => 17,
-		"votes_count" => 18,
-		"project_id" => 19
+	FIELDS = {
+		"lp" => {:required => true},
+		"country" => {:required => true},
+		"city" => {:required => true},
+		"district" => {:required => true},
+		"area" => {:required => true},
+		"title" => {:required => true},
+		"description" => {:required => true},
+		"local" => {:required => true},
+		"total_cost" => {:required => true},
+		"upkeep_cost" => {:required => false},
+		"is_rejected" => {:required => false},
+		"full_description" => {:required => false},
+		"justification" => {:required => false},
+		"category" => {:required => false},
+		"target_group" => {:required => false},
+		"status" => {:required => false},
+		"budget_id" => {:required => true},
+		"votes_count" => {:required => false},
+		"project_id" => {:required => false},
 	}
 
-	def self.read_header row
-		require 'pry'
-		binding.pry
-		@hash = row.each_with_index.map {|c,i| {c => i+1 }}.inject(:merge)
-		if [@hash["lp"], @hash["country"], @hash["city"], @hash["district"], @hash["area"], @hash["title"], @hash["description"], @hash["local"], @hash["total_cost"], @hash["budget_id"], @hash["project_id"]].any? {|c| c.nil?}
-			dont_parse
+	def self.validate_header(file)
+		if not valid_header?(@csv)
+			missing_fields = get_missing_fields(@csv)
+			throw "Brak wymaganych pól: #{missing_fields}"
 		end
 	end
 
-	def self.dont_parse
-		throw "Brak którejś z wymaganych kolumn"
+	def self.valid_header?(rows)
+		header = get_header(rows)
+		FIELDS.select { |_,v| v[:required] }.all? { |k,_| header.include?(k) }
 	end
 
-	def self.start filename=nil
-		@filename = "./db/Warszawa_2014-01-01_2014-12-31.csv"
-		filedata = @filename.split("/").last.split(".")[0]
-		@city, @from, @to = filedata.split("_") 
+	def self.map_fields(rows)
+		header = get_header(rows)
+		Hash[ header.each_with_index.map { |field, index| [field, index] if FIELDS.has_key?(field) } ]
+	end
+
+	def self.get_file_data(filename)
+		filedata = filename.split("/").last.split(".")[0]
+		filedata.split("_")
+	end
+
+	def self.get_missing_fields(rows)
+		header = get_header(rows)
+		FIELDS.select { |_,v| v[:required] }.find_all { |k,_| not header.include?(k) }
+	end
+
+	def self.get_header(rows)
+		rows[0].map(&:downcase)
+	end
+
+	def self.start(filename)
+		@filename = "./db/" + filename
+		@city, @from, @to = get_file_data(@filename)
 		init unless @is_inited
 		@csv = CSV.read @filename
-		read_header @csv[0]
+
+		validate_header(@csv)
+		@fields = map_fields(@csv)
+
 		@size = @csv.size - 3
 		# @csv[3..-1].each_with_index {|row, i| update_row(row, i)}
-		# @csv[3..-1].each_with_index {|row, i| create_from_row(row, i)}
+		@csv[6..-1].each_with_index {|row, i| create_from_row(row, i)}
 	end
 
 	def self.save_to_file body, filename
@@ -96,9 +117,21 @@ module Import
 		end
 	end
 
+	def self.get_row(row, name)
+		row[@fields[name]]
+	end
+
 	def self.create_from_row row, i=0
-		return unless row[9] || row[11]
-		@district, @title, @local = row[3], row[5], row[7]
+		#return unless row[9] || row[11]
+		@district, @title, @local = get_row(row,'district'), get_row(row,'title'), get_row(row,'local')
+		if not @local.nil? and @local.include?(',')
+			@local = @local.split(',')[0]
+		end
+
+		if @district.nil?
+			@district = ''
+		end
+
 		@id = 0
 		@are = ''
 		p [i, @size].join("/") +  " - #{@title}"
@@ -128,10 +161,10 @@ module Import
 			:district => @district, 
 			:title => @title,
 			:local => @local, 
-			:abstract => row[6],
-			:total_cost => row[8],
+			:abstract => get_row(row,'description'),
+			:total_cost => get_row(row,'total_cost'),
 			:upkeep_cost => "0 zł", 
-			:is_rejected => row[18]=="Accepted",
+			:is_rejected => false,
 			:budget_id => @budget.id,
 			:latitude => lat,
 			:longitude => lng,
