@@ -316,8 +316,10 @@ a.button {cursor:pointer;}
 
 /* scroll */
 /*.scroll-pane {-webkit-transform-style:preserve-3d;}*/
-.jspVerticalBar {width:6px !important; background:none !important;}
+.jspVerticalBar {width:8px !important; background:none !important;}
+/*
 .jspTrack {background:none !important;}
+*/
 
 #left .content #crieCausa.fake-last {border-bottom:none;}
 

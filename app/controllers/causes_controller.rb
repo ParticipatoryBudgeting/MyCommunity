@@ -24,6 +24,7 @@ class CausesController < ApplicationController
   
   def show
     @cause = Cause.find(params[:id])
+    @locations = Cause.all(:group => 'city, district').group_by { |cause| cause.city }
     @cause.update_attribute(:views, @cause.views += 1)
     # @falapoa = @cause.get_falapoa_data unless @cause.protocol == '-1'
     respond_to do |format|
