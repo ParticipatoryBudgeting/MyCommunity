@@ -30,6 +30,7 @@
           <div id="registrationBox2" style="display:none;">
             <p style="text-align:center;">Wybierz jedną z usług:</p>
             <ul id="boxRedes">
+              <li class="twitter"><%= link_to 'Twitter account', '/auth/twitter' %></li>
               <li class="facebook"><%= link_to 'Facebook account', '/auth/facebook' %></li>
               <li class="google last"><%= link_to 'Google Account', '/auth/google' %></li>
             </ul>
@@ -39,7 +40,7 @@
               <h3>Użytkownik Twittera</h3>
               <h3>Adres e-mail</h3>
               <input id="twitterEmail" type="text" style="width:154px; padding:8px 10px; float:left;" value="Wpisz swój adres e-mail" class="tc-lightgray" onfocus="$(this).removeClass('error'); if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Wpisz swój adres e-mail'; this.className = 'tc-lightgray';}" />
-              <a href="javascript:;" class="btn-entrar"></a>
+              <a href="javascript:;" class="btn-entrar">Potwierdź</a>
               <span class="break"><!-- --></span>
               <span class="tc-red ts11" id="feedbackEmail"></span>
           </div>
