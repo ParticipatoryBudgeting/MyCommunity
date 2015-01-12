@@ -129,6 +129,7 @@ img {border:none; display:block;}
 #left #bgLogo {background:url(../img/bg-left-top.png) 0 0 no-repeat;width:289px;height:150px;}
 #left h1 {margin:0; padding:0;text-indent:-99999px;}
 #left #logo {background:url(../img/logo.png) 0 0 no-repeat;display:block;width:146px;height:146px;position:absolute;top:-4px;right:-35px;text-indent:-99999px;}
+#left #logo img {width: 83px;margin-top: 33px;margin-left: 26px;}
 #left #boxLeft {width:289px; background:url(../img/bg-left.png) 0 0 repeat-y; }
 #left #boxLeft .content {position:absolute;top:60px;width:191px;margin:0 0 0 28px;}
 	#left h2 {font-size:28px; width:129px ;margin-bottom:5px; background-color:transparent; height:69px; color: #7dbd00;}
