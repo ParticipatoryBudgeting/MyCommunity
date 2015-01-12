@@ -61,6 +61,7 @@ ActionController::Routing::Routes.draw do |map|
   map.admin_index '/admin/', :controller => 'admin', :action => 'index'
   map.admin_login '/admin/login', :controller => 'admin', :action => 'login', :via => :post
   map.admin_logout '/admin/logout', :controller => 'admin', :action => 'logout'
+  map.show_categories '/admin/categories', :controller => 'admin', :action => 'show_categories_list'
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

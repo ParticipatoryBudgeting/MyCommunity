@@ -93,6 +93,10 @@ class AdminController < ApplicationController
     @cause.update_attributes :likes => response["shares"].nil? ? 0 : response["shares"], :last_likes_update => Time.now
     redirect_to request.referer
   end
+
+  def show_categories_list
+    @categories = Category.paginate(:all,:page => params[:page], :per_page => 10, :order => "#{category_sort_column} #{sort_direction}")
+  end
   
   private  
   def current_user
@@ -119,6 +123,10 @@ class AdminController < ApplicationController
 
   def user_sort_column
     %w[username  name last_sign_in location twitter_user_id google_email facebook_id].include?(params[:sort]) ? params[:sort] : "last_sign_in"
+  end
+
+  def category_sort_column
+    %w[name].include?(params[:sort]) ? params[:sort] : "updated_at"
   end
   
   def sort_direction

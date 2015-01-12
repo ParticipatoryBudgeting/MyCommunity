@@ -9,6 +9,7 @@ body {margin:0; font-family:"Calibri","Lucida Unicode",Arial,Verdana,sans-serif;
 
 #logo {margin:0; padding:0;}
 #logo a {width:130px; height:135px; display:block; text-indent:-9999px; background:url('../img/logo.png') no-repeat;}
+#logo img { width:100px;}
 
 #navigation {position:absolute; bottom:-12px; right:0; list-style:none;}
 #navigation li {margin:0; padding:0; float:left; font-size:14px; font-weight:bold; border:1px solid;}
