@@ -35,7 +35,7 @@ img {border:none; display:block;}
 #left {width:289px; top:0; left:0; position:absolute; z-index:2; height: 850px;}
 #footer {width:100%; margin 0; height:163px; padding: 0px; bottom:0; position:absolute;}
 #nav_menu {width:100%; height:43px; position:relative; background-color: #225464; z-index:999;}
-#partners{width:100%; height:100px; position:relative; background-color: #23485b; z-index:999;padding-top: 20px}
+#partners{width:100%; height:100px; position:relative; background-color: #DFDFDF; z-index:999;padding-top: 20px}
 
 @media only screen and (max-device-width: 1024px) {
 	#popupLayerScreenLocker {width:1024px !important;}
@@ -117,16 +117,11 @@ img {border:none; display:block;}
 
 /* Apoios */
 #footer .apoios li {float:left;margin-top:0;}
-#footer .apoios li a {display:block;background:url(/images/apoios.png) 0 0 no-repeat;height:50px;text-indent:-99999px;}
+#footer .apoios li a {background-image:none; height:50px;text-indent:-99999px;}
 #footer .apoios li.share a {background:none; height:auto; text-indent:0;}
 #footer .apoios li.share .compartilhe {width:68px; height:43px; margin-left:7px; display:block; float:left; background-image:url('../img/nav-footer.gif'); background-repeat:no-repeat; background-position:-7px 0; text-indent:-9999px; overflow:hidden;}
 #footer .apoios li.share .pipe {width:1px; height:14px; margin:7px 7px 0 12px; display:block; float:left; background-image:url('../img/nav-footer.gif'); background-repeat:no-repeat; background-position:-83px -8px; text-indent:-9999px; overflow:hidden;}
-#footer .apoios li.itm01 a {background-position: 0px 0px; width:113px;margin-left:28px;}
-#footer .apoios li.itm02 a {background-position:-160px 0px;width:115px;margin-left:35px;}
-#footer .apoios li.itm03 a {background-position:-325px 0px;width:70px;margin-left:44px;}
-#footer .apoios li.itm04 a {background-position:-445px 0px;width:68px;margin-left:53px;}
-#footer .apoios li.itm05 a {background-position:-558px 0px;width:103px;margin-left:33px;}
-#footer .apoios li.itm06 a {background-position:-715px 0px;width:143px;margin-left:40px;}
+
 
 #footer #partners img {margin-left: 28px;}
 
