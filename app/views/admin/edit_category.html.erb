@@ -1,12 +1,20 @@
 <h1>Edycja Kategorii</h1>
 
-<% form_for(@category, :url => update_category_path(@category)) do |f| %>
+<% form_for(@category, :url => update_category_path(@category), :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
+
+  <p>
+    <%= f.label :marker %><br />
+    <%= image_tag(@category.marker_url) if @category.marker? %>
+    <%= f.file_field :marker %>
+    <%= f.hidden_field :marker_cache %>
+  </p>
+
   <p>
     <%= f.submit "Zmień" %>
   </p>

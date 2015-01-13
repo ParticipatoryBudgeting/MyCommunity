@@ -814,7 +814,7 @@ var CauseMarker = Marker.extend({
 	},
 	
 	getIconProperties: function() {
-		return '/img/pin_' + this.data.category_id + '.png';
+		return this.data.category_marker;
 	}
 });
 

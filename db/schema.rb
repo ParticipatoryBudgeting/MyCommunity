@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150109094206) do
+ActiveRecord::Schema.define(:version => 20150113163036) do
 
   create_table "budgets", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20150109094206) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "marker"
   end
 
   create_table "causes", :force => true do |t|

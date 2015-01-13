@@ -28,6 +28,7 @@ gem "json",               "1.6.3"
 gem "htmlentities", 			"4.3.1"
 gem "whenever",           :require => false
 gem 'puma'
+gem 'carrierwave', :git => 'https://github.com/carrierwaveuploader/carrierwave.git', :branch => '0.4-stable'
 
 group :development do
   gem 'pry', "0.9.12"

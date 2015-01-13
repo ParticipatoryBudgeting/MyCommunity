@@ -48,6 +48,7 @@ class CausesController < ApplicationController
     @causes.each do |cause|
       cause['category_name'] = cause.category.name
       cause['url'] = cause.url
+      cause['category_marker'] = cause.category.marker.url
       @res << cause
     end
     render :json => @res.to_json
