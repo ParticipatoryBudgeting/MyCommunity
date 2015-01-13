@@ -102,7 +102,7 @@
 .mdlIn .boxBottom .boxTF {width:159px;height:20px;margin-top:10px;}
 .mdlIn .boxBottom .postar {width:113px;height:37px;background-color: #7dbd00; color: #FFF; text-indent: 0; text-align:center; font-weight:bold; line-height: 38px;}
 .mdlIn .boxBottom .finalizar {width:113px;height:37px;background:url(../img/btn-finalizar.png) no-repeat;}
-.mdlIn .boxBottom .enviar {width:113px; height:37px; background:url(../img/btn-enviar.png) no-repeat;}
+.mdlIn .boxBottom .enviar {width:113px; height:37px; background-color: #7dbd00; color: #fff; text-indent: 0; font-weight: bold; line-height: 40px; text-align: center;}
 
 .mdlIn .boxTags {border-top:1px dotted #7DBB00;padding:15px 0 5px;}
 .mdlIn .boxTags span {display:block;width:430px;margin-left:10px;}
