@@ -127,6 +127,21 @@ class AdminController < ApplicationController
       render :action => "new"
     end
   end
+
+  def edit_cause
+    @cause = Cause.find params[:id]
+  end
+
+  def update_cause
+   @cause = Cause.find(params[:id])
+
+    if @cause.update_attributes(params[:cause])
+      flash[:notice] = 'Projekt został zaktualizowany.'
+      redirect_to show_causes_url
+    else
+      render :action => "edit_cause"
+    end
+  end
   
   private  
   def current_user
@@ -137,14 +152,14 @@ class AdminController < ApplicationController
     if session[:user_id]
         true
     else
-      flash[:message] = "Brak uprawnień do zasobu."  
+      flash[:error] = "Brak uprawnień do zasobu."  
       redirect_to :action => :index
       false  
     end 
   end
   
   def cause_sort_column
-    %w[categories.name  title abstract local district author created_at views likes].include?(params[:sort]) ? params[:sort] : "created_at"
+    %w[categories.name  title abstract local district author created_at views likes updated_at created_at].include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def budget_sort_column

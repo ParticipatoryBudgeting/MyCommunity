@@ -99,3 +99,6 @@ div.actions li a:hover {background:#111;}
 
 #UserAdminLoginForm .text input,
 #UserAdminLoginForm .password input {width:200px !important;}
+
+.flash.notice {color: #31708f;background-color: #d9edf7;border-color: #bce8f1;}
+.flash.error {color: #a94442;background-color: #f2dede;border-color: #ebccd1;}

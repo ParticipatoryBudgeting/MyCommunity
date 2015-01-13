@@ -22,11 +22,11 @@
 	</head>
 	<body>
 	<div id="div_pagina">
-		<%= render :partial => 'admin_header' %>	
+		<%= render :partial => 'admin_header' %>			
 		<div id="container">
-			<% if flash[:message] -%>
-				<div id="authMessage" class="message"><%= flash[:message] %></div>
-			<% end -%>
+			<% flash.each do |key, value| %>
+				<%= content_tag :div, value, :class => "flash #{key}" %>
+			<% end %>
 			<%= yield %>
 		</div> 	
 	</div> 

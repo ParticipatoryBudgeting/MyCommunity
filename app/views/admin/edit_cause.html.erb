@@ -1,0 +1,81 @@
+<h1>Edycja Projektu</h1>
+
+<% form_for(@cause, :url => update_cause_path(@cause)) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label 'Tytuł' %><br />
+    <%= f.text_area :title, {:cols => 80, :rows => 5} %>
+  </p>
+
+  <p>
+    <%= f.label 'Opis' %><br />
+    <%= f.text_area :abstract, {:cols => 80, :rows => 8} %>
+  </p>
+
+  <p>
+    <%= f.label 'Szerokość' %><br />
+    <%= f.text_field :latitude %>
+  </p>
+
+  <p>
+    <%= f.label 'Długość' %><br />
+    <%= f.text_field :longitude %>
+  </p>
+
+  <p>
+    <%= f.label 'Adres' %><br />
+    <%= f.text_area :local, {:cols => 80, :rows => 3} %>
+  </p>
+
+  <p>
+    <%= f.label 'Dzielnica' %><br />
+    <%= f.text_field :district %>
+  </p>  
+
+  <p>
+    <%= f.label 'Odrzucony' %><br />
+    <%= f.check_box :is_rejected %>
+  </p> 
+
+  <p>
+    <%= f.label 'Wyświetleń' %><br />
+    <%= f.text_field :views %>
+  </p>
+
+  <p>
+    <%= f.label 'Miasto' %><br />
+    <%= f.text_field :city %>
+  </p>
+
+  <p>
+    <%= f.label 'Koszt całkowity' %><br />
+    <%= f.text_field :total_cost %>
+  </p>
+
+  <p>
+    <%= f.label 'Koszt' %><br />
+    <%= f.text_field :upkeep_cost %>
+  </p>
+
+  <p>
+    <%= f.label 'Kategoria' %><br />
+    <%= f.select :category_id, Category.all.map { |c| [c.name, c.id]} %>
+  </p>
+
+  <p>
+    <%= f.label 'Budżet' %><br />
+    <%= f.select :budget_id, Budget.all.map { |c| [c.name, c.id]} %>
+  </p>
+
+  <p>
+    <%= f.label 'Użytkownik' %><br />
+    <%= f.select :user_id, User.all.map { |c| [c.name, c.id]} %>
+  </p>  
+
+  <p>
+    <%= f.submit "Zmień" %>
+  </p>
+<% end %>
+
+<%= link_to 'Powrót', show_causes_path %>

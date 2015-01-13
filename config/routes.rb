@@ -69,6 +69,8 @@ ActionController::Routing::Routes.draw do |map|
   map.new_category '/admin/category/new', :controller => 'admin', :action => 'new_category'
   map.create_category '/admin/category/create', :controller => 'admin', :action => 'create_category', :conditions => { :method => :post }
 
+  map.edit_cause '/admin/cause/edit/:id', :controller => 'admin', :action => 'edit_cause'
+  map.update_cause '/admin/cause/update/:id', :controller => 'admin', :action => 'update_cause', :conditions => { :method => :put }
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

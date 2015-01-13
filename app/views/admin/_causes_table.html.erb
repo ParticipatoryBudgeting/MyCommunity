@@ -25,7 +25,7 @@
 			<td><%=h cause.city %></td>
 			<td><%=h cause.local %></td>
 			<td><%=h cause.district %></td>							
-			<td><%=h cause.created_at %></td>
+			<td><%=h cause.updated_at %></td>
 			<td><%=h cause.views %></td>
 			<td><%=h cause.likes %></td>		
 			<td><%=h cause.protocol %>																							
@@ -39,6 +39,7 @@
 						<%= link_to "<span>Odrzuć</span>", "/admin/reject_cause/#{cause.id}", :class => "button button-normal" %>
 					<% end -%>
 					<%= link_to "<span>Aktualizuje polubienia</span>", "/admin/update_cause_likes/#{cause.id}", :class => "button button-normal" %>
+					<%= link_to "<span>Edycja</span>", edit_cause_path(cause), :class => "button button-normal" %>
 				<% end -%>																			
 			</td>						
 		</tr>
