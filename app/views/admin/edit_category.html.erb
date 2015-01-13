@@ -1,0 +1,15 @@
+<h1>Edycja Kategorii</h1>
+
+<% form_for(@category, :url => update_category_path(@category)) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit "Zmień" %>
+  </p>
+<% end %>
+
+<%= link_to 'Powrót', show_categories_path %>

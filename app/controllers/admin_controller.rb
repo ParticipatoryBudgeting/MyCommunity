@@ -97,6 +97,36 @@ class AdminController < ApplicationController
   def show_categories_list
     @categories = Category.paginate(:all,:page => params[:page], :per_page => 10, :order => "#{category_sort_column} #{sort_direction}")
   end
+
+  def edit_category
+    @category = Category.find(params[:id])
+  end
+
+  def update_category
+   @category = Category.find(params[:id])
+
+    if @category.update_attributes(params[:category])
+      flash[:notice] = 'Kategoria została zaktualizowana.'
+      redirect_to show_categories_url
+    else
+      render :action => "edit_category"
+    end
+  end
+
+  def new_category
+    @category = Category.new
+  end
+
+  def create_category
+    @category = Category.new(params[:category])
+
+    if @category.save
+      flash[:notice] = 'Kategoria została utworzona.'
+      redirect_to show_categories_url
+    else
+      render :action => "new"
+    end
+  end
   
   private  
   def current_user
@@ -107,7 +137,7 @@ class AdminController < ApplicationController
     if session[:user_id]
         true
     else
-      flash[:message] = "Você não tem autorização para acessar este local."  
+      flash[:message] = "Brak uprawnień do zasobu."  
       redirect_to :action => :index
       false  
     end 

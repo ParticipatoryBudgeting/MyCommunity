@@ -1,0 +1,30 @@
+<h2>Kategorie (<%=h @categories.total_entries %>)</h2>
+
+<%= link_to 'Utwórz kategorie', new_category_path %>
+
+<div align="right">
+  <%= will_paginate @categories, :prev_label => "Poprzednia", :next_label => "Następna" %>
+</div>
+<table class="table-list" id="table-users">
+	<tr>
+		<th style="width:50px;"></th>
+		<th style="width:100px;"><%= user_sortable 'name', "Nazwa" %></th>
+		<th style="width:100px;"><%= user_sortable 'created_at', "Data utworzenia" %></th>
+		<th style="width:100px;">Akcje</th>
+	</tr>
+	<% @categories.each do |category| %>
+					
+		<tr id="user-<%= category.id %>">
+			<td><%=h category.id %></td>
+			<td><%=h category.name %></td>
+			<td><%=h category.created_at %></td>
+			<td>
+				<%= link_to 'Edycja', edit_category_path(category) %>
+			</td>
+		</tr>
+	
+	<% end %>
+</table>
+<div align="right">
+  <%= will_paginate @categories, :prev_label => "Poprzednia", :next_label => "Następna" %>
+</div>

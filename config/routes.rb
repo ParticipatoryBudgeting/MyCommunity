@@ -59,9 +59,16 @@ ActionController::Routing::Routes.draw do |map|
   map.reject_cause '/admin/reject_cause', :controller => 'admin', :action => 'reject_cause'
   map.update_cause_likes '/admin/update_cause_likes', :controller => 'admin', :action => 'update_cause_likes'
   map.admin_index '/admin/', :controller => 'admin', :action => 'index'
+
   map.admin_login '/admin/login', :controller => 'admin', :action => 'login', :via => :post
   map.admin_logout '/admin/logout', :controller => 'admin', :action => 'logout'
+
   map.show_categories '/admin/categories', :controller => 'admin', :action => 'show_categories_list'
+  map.edit_category '/admin/category/edit/:id', :controller => 'admin', :action => 'edit_category'
+  map.update_category '/admin/category/update/:id', :controller => 'admin', :action => 'update_category', :conditions => { :method => :put }
+  map.new_category '/admin/category/new', :controller => 'admin', :action => 'new_category'
+  map.create_category '/admin/category/create', :controller => 'admin', :action => 'create_category', :conditions => { :method => :post }
+
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
