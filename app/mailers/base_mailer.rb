@@ -12,6 +12,11 @@ class BaseMailer < ActionMailer::Base
   def defaults
     from ActionMailer::Base.smtp_settings[:user_name]
     sent_on Time.now
+    content_type "text/html"
+  end
+
+  def default_recipient
+    'filip.matuszewski@gmail.com'
   end
   
 end

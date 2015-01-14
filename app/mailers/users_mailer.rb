@@ -2,7 +2,7 @@ class UsersMailer < BaseMailer
   
   def registro(user)
     defaults
-    subject "Seja bem vindo ao portoalegre.cc"
+    subject "Witamy na community.societybuilder.pl"
     content_type "text/html"
     recipients user.email
     body :user => user

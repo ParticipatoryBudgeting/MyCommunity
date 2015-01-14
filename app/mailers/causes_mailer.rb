@@ -2,11 +2,11 @@ class CausesMailer < BaseMailer
   
   def send_comment_notification(cause)
     defaults
-    subject "PortoAlegre.cc - notificação de comentário em causa"
+    subject "Projekt został skomentowany"
     if cause.email.nil?
-      recipients ['contato@portoalegre.cc']
+      recipients [default_recipient]
     else
-      recipients [cause.email,'contato@portoalegre.cc']
+      recipients [cause.email, default_recipient]
     end
     body :cause => cause
   end
