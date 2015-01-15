@@ -54,6 +54,19 @@ class Cause < ActiveRecord::Base
     :order => "updated_at DESC")
   end
   
+  def self.search_ext(phrase, category)
+    phrase = "%#{phrase}%"
+    filter_category = category.blank? ? "" : "and category_id=#{category}"
+    self.find(:all,
+      :joins => :budget,
+      :conditions => ["is_rejected = 0 and
+        submited = 1 and
+        (title like :phrase or author like :phrase or abstract like :phrase or local like :phrase or district like :phrase or city like :phrase or budgets.name like :phrase)
+        #{filter_category}",
+      {:phrase => phrase}],
+    :order => "updated_at DESC")
+  end
+
   def related_causes
     Cause.find(:all,
     :select => "id, title, category_id", 

@@ -15,7 +15,7 @@ class CausesController < ApplicationController
     cookies[:category] = nil unless params[:page]
     params[:page] = 1 if params[:first_page]
     @categories = Category.find(:all, :order => 'name ASC')  
-    @causes = Cause.search_by_city_and_budget_name(params[:search], cookies[:category]).paginate :page => params[:page], :per_page => 3
+    @causes = Cause.search_ext(params[:search], cookies[:category]).paginate :page => params[:page], :per_page => 3
     respond_to do |format|
       format.html
       format.js { render :pagination }

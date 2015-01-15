@@ -34,6 +34,7 @@ function initialize() {
 
 var Map = Class.extend({
 	init: function() {
+		this.lastQueryResult = null;
 		this.requestTimer = null;
 		this.markersList = {};
 		this.createMap();
@@ -73,7 +74,11 @@ var Map = Class.extend({
 			data: data,
 			dataType: 'json',
 			success: function(result) {
-				_this.populateMap(result);
+				if (! _this.resultQueryEquals(result, _this.lastQueryResult)) {
+					_this.removeAllMarkers();
+					_this.populateMap(result);
+				}
+				_this.lastQueryResult = result;
 			},
 			complete: function() {
 				_this.hide_preloader();
@@ -81,6 +86,21 @@ var Map = Class.extend({
 		})
 	},
 	
+	resultQueryEquals: function(a, b) {
+	    if (!a || !b)
+	        return false;
+
+	    if (a.length != b.length)
+	        return false;
+
+	    for (var i = 0, l=this.length; i < l; i++) {
+	        if (a[i] != b[i]) { 
+	            return false;   
+	        }           
+	    }
+	    return true;
+	},
+
 	populateMap: function(result) {
 	//	this.removeAllMarkers();
 		for (var i = 0; i < result.length; i++) {
@@ -426,7 +446,6 @@ var Map = Class.extend({
 						cats: categories.items(),
 						budget: $("#budget_budget_id").val()
 					};
-					_this.removeAllMarkers();				
 					_this.loadData(data);					
 			},500); 
 		});
@@ -534,7 +553,6 @@ var Map = Class.extend({
 					cats: categories,
 					budget: $("#budget_budget_id").val()
 				};
-				_this.removeAllMarkers();
 				_this.loadData(data);
 		},500);
 	},
@@ -555,7 +573,6 @@ var Map = Class.extend({
 					cats: categories.items(),
 					component: 'budget_filter'
 				};
-				_this.removeAllMarkers();
 				_this.loadData(data);
 		},500);
 	},
