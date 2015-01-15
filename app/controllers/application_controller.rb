@@ -47,4 +47,10 @@ class ApplicationController < ActionController::Base
   def como_participar
   end
 
+  private
+
+  def budget_change_event
+    params.has_key? :component and params[:component] == 'budget_filter' and params.has_key? :budget
+  end
+
 end

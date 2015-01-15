@@ -53,16 +53,30 @@ var Map = Class.extend({
 	getMapContainerId: function() {
 		return 'maps';
 	},
+
+	show_preloader: function () {
+		if ($('#preloader').size() == 0) {
+			$container = $('<div id="preloader"><img src="/images/preloader.gif" /></div>');
+			$('body').append($container);
+		}
+	},
+
+	hide_preloader: function() {
+		$('#preloader').remove();
+	},
 	
 	loadData: function(data) {
 		var _this = this;
-		
+		_this.show_preloader();
 		$.ajax({
 			url: 'causes/visibles',
 			data: data,
 			dataType: 'json',
 			success: function(result) {
 				_this.populateMap(result);
+			},
+			complete: function() {
+				_this.hide_preloader();
 			}
 		})
 	},
@@ -538,7 +552,8 @@ var Map = Class.extend({
 					currentZoom: _this.map.getZoom() - MIN_ZOOM,
 					maxZoom: MAX_ZOOM-MIN_ZOOM,
 					budget: budget,
-					cats: categories.items()
+					cats: categories.items(),
+					component: 'budget_filter'
 				};
 				_this.removeAllMarkers();
 				_this.loadData(data);

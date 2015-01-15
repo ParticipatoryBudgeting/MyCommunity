@@ -34,8 +34,8 @@
 		<h1><a href="/" id="logo"><img src="/images/logo-sb.png" /></a></h1>
 	</div>
 	
-	<div id="boxLeft">
-		<div class="content">
+	<div id="boxLeft"
+>		<div class="content">
 			<h2>Informacje</h2>
 			<p>Oddajemy w wasze ręce stronę której celem jest popularyzacja wiedzy na temat nowatorskiego sposób wydatkowania pieniędzy publicznych w którym mieszkańcy decydują o tym jakie zadania powinny być zrealizowane w ich okolicy. Jeżeli chcesz uzyskać więcej informacji czytaj&nbsp;<a href="javascript:;" class="lnkSobreProjeto" onclick="openModal('sobre_o_projeto');">Dalej</a></p>
 
@@ -51,9 +51,10 @@
 			</ul>
 			<span class="break"><!--  --></span>
 			
-      <div>
-        <%= select('budget', 'budget_id', options_for_select(@budgets.map { |b| [b.name, b.id] }), {:include_blank => 'Wszystkie'}, {:style => 'width:100%'}) %>
-      </div>
+      <div class="budget-filter">
+        <span>BUDŻET</span>
+        <%= select('budget', 'budget_id', [["Wszystkie", ""]] + @budgets.map { |b| [b.name, b.id] }, {:selected => budget_filter}, {:style => 'width:100%'}) %>
+      </div> 
 
         <!--
         <img id='left_banner0' src="/images/eu_curto.png" style='display: none;'></img>

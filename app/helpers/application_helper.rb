@@ -42,5 +42,9 @@ module ApplicationHelper
   def snippet(thought) 
     wordcount = 10 
     thought.split[0..(wordcount-1)].join(" ") + (thought.split.size > wordcount ? "..." : "") 
+  end
+
+  def budget_filter
+    session[:budget_filter] || ""
   end 
 end
