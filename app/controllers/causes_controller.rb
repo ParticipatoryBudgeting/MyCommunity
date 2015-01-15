@@ -42,10 +42,24 @@ class CausesController < ApplicationController
     maxZoom = params['maxZoom']
     categories = params['cats']
 
-    session[:budget_filter] = params['budget'].to_i if budget_change_event
+    if budget_change_event
+      set_filter_budget params['budget']
+    end
+
+    if city_change_event
+      set_filter_city params['city']
+      set_filter_district ''
+    end
+
+    if district_change_event
+      set_filter_district params['district']
+      set_filter_city ''
+    end
+
+    reset_filter if reset_filter_event
 
     positions = {:latA =>params['topLeftY'], :latB =>params['bottomRightY'],:lngA =>params['topLeftX'],:lngB =>params['bottomRightX']}    	        	
-    @causes = Cause.find_causes_by_latitude_and_longitude(positions, categories, params['budget'])
+    @causes = Cause.find_causes_by_latitude_and_longitude(positions, categories, get_filter_budget, get_filter_city, get_filter_district)
     @res = Array.new
     @causes.each do |cause|
       cause['category_name'] = cause.category.name

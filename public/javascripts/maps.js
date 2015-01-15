@@ -66,7 +66,7 @@ var Map = Class.extend({
 		$('#preloader').remove();
 	},
 	
-	loadData: function(data) {
+	loadData: function(data, callback) {
 		var _this = this;
 		_this.show_preloader();
 		$.ajax({
@@ -74,7 +74,10 @@ var Map = Class.extend({
 			data: data,
 			dataType: 'json',
 			success: function(result) {
-				if (! _this.resultQueryEquals(result, _this.lastQueryResult)) {
+				if (callback && {}.toString.call(callback) === '[object Function]') {
+					callback();
+				}
+				else {
 					_this.removeAllMarkers();
 					_this.populateMap(result);
 				}
@@ -94,9 +97,9 @@ var Map = Class.extend({
 	        return false;
 
 	    for (var i = 0, l=this.length; i < l; i++) {
-	        if (a[i] != b[i]) { 
-	            return false;   
-	        }           
+	        if (a[i] != b[i]) {
+	            return false;
+	        }
 	    }
 	    return true;
 	},
@@ -639,6 +642,8 @@ var Map = Class.extend({
 	},
 
 	search_city: function(strSearch) {
+		var location;
+		var phrase = strSearch;
 		if (strSearch && strSearch != '') {
 			if (typeof(strSearch) == 'string') {
 				var geocoder = new google.maps.Geocoder();
@@ -667,8 +672,8 @@ var Map = Class.extend({
 					$.cookie("map.lat", results[0].geometry.location.lat());
 					$.cookie("map.lng", results[0].geometry.location.lng());
 
-					_this.map.panTo(results[0].geometry.location);
-					_this.zoom(13);
+					location = results[0].geometry.location;
+
 				});
 			} else {
 				var position = new google.maps.LatLng(strSearch[0], strSearch[1]);
@@ -678,16 +683,41 @@ var Map = Class.extend({
 				$.cookie("map.lng", strSearch[1]);
 				this.zoom(10);
 			}
+			var _this = this;
+			clearTimeout(_this.requestTimer);
+			var categories = new cookieList("categories");
+			this.requestTimer = setTimeout(function(){
+				var data = {
+						topLeftY: _this.map.getBounds().getNorthEast().lat(),
+						topLeftX: _this.map.getBounds().getNorthEast().lng(),
+						bottomRightY: _this.map.getBounds().getSouthWest().lat(),
+						bottomRightX: _this.map.getBounds().getSouthWest().lng(),
+						currentZoom: _this.map.getZoom() - MIN_ZOOM,
+						maxZoom: MAX_ZOOM-MIN_ZOOM,
+						budget: $("#budget_budget_id").val(),
+						cats: categories.items(),
+						city: phrase,
+						component: 'city_filter',
+					};
+					_this.loadData(data, function() {
+						console.log('callbaczek');
+						_this.zoom(13);
+						_this.map.panTo(location);
+					});
+			},500);
 		}
 	},
 
 	search_district: function(strSearch, city) {
+		var location;
+		var phrase = strSearch;
 		if (strSearch && strSearch != '') {
 			if (typeof(strSearch) == 'string') {
 				var geocoder = new google.maps.Geocoder();
 				var _this = this;
 				strSearch = strSearch + ', ' + city + ', Polska';
 
+				console.log(strSearch);
 				geocoder.geocode({'address': strSearch}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
 						if (results.length > 0) {
@@ -709,18 +739,57 @@ var Map = Class.extend({
 					$.cookie("map.lat", results[0].geometry.location.lat());
 					$.cookie("map.lng", results[0].geometry.location.lng());
 
-					_this.map.panTo(results[0].geometry.location);
-					_this.zoom(15);
+					location = results[0].geometry.location;
 				});
 			} else {
 				var position = new google.maps.LatLng(strSearch[0], strSearch[1]);
-
-				this.map.panTo(position);
 				$.cookie("map.lat", strSearch[0]);
 				$.cookie("map.lng", strSearch[1]);
-				this.zoom(15);
 			}
+			var _this = this;
+			clearTimeout(_this.requestTimer);
+			var categories = new cookieList("categories");
+			this.requestTimer = setTimeout(function(){
+				var data = {
+						topLeftY: _this.map.getBounds().getNorthEast().lat(),
+						topLeftX: _this.map.getBounds().getNorthEast().lng(),
+						bottomRightY: _this.map.getBounds().getSouthWest().lat(),
+						bottomRightX: _this.map.getBounds().getSouthWest().lng(),
+						currentZoom: _this.map.getZoom() - MIN_ZOOM,
+						maxZoom: MAX_ZOOM-MIN_ZOOM,
+						budget: $("#budget_budget_id").val(),
+						cats: categories.items(),
+						district: phrase,
+						component: 'district_filter',
+					};
+					_this.loadData(data, function() {
+						console.log('callbaczek222');
+						_this.zoom(15);
+						_this.map.panTo(location);
+					});
+			},500);
 		}
+	},
+
+	reset_filter: function() {
+		console.log('run');
+		var _this = this;
+		clearTimeout(_this.requestTimer);
+		var categories = new cookieList("categories");
+		this.requestTimer = setTimeout(function(){
+			var data = {
+					topLeftY: _this.map.getBounds().getNorthEast().lat(),
+					topLeftX: _this.map.getBounds().getNorthEast().lng(),
+					bottomRightY: _this.map.getBounds().getSouthWest().lat(),
+					bottomRightX: _this.map.getBounds().getSouthWest().lng(),
+					currentZoom: _this.map.getZoom() - MIN_ZOOM,
+					maxZoom: MAX_ZOOM-MIN_ZOOM,
+					budget: $("#budget_budget_id").val(),
+					cats: categories.items(),
+					component: 'reset_filter',
+				};
+				_this.loadData(data);
+		},500);
 	}
 });
 

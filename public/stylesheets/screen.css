@@ -98,10 +98,15 @@ img {border:none; display:block;}
 #comboDistricts .comboLst {white-space:nowrap;}
 #comboDistricts .comboLst li {margin:0 0 5px 0;}
 #comboDistricts .comboLst li.last {margin-bottom:0;}
-#comboDistricts .comboLst li a {color:#000;font-size:12px;text-decoration:none;padding:3px 0 5px 15px;width:170px;display:block;overflow:hidden;white-space:nowrap;}
+#comboDistricts .comboLst li a {color:#000;font-size:12px;text-decoration:none;padding:3px 3px 5px 15px;width:170px;overflow:hidden;white-space:nowrap;}
 #comboDistricts .comboLst li a.selected,
 #comboDistricts .comboLst li a:hover {color:#7DBD00;background:url('/img/bar-left.gif') 0 0 no-repeat;}
 #comboDistricts .on {display:block;}
+#comboDistricts .f_district {display:none;}
+#comboDistricts .f_toggle {padding:3px; cursor:pointer; font-weight: bold;}
+#comboDistricts .comboLst li ul {margin-top:8px;}
+#comboDistricts .comboLst li ul li {margin-top:10px;}
+#filter_reset {font-weight: bold; margin-bottom:7px;}
 
 /* Footer */
 #footer .nav {}

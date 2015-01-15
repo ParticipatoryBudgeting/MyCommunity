@@ -117,7 +117,6 @@
 				$('#top .busca').bind('click', function() {
 					var value = $(this).prev().val();
 					map.search(value);
-					alert(value);
 				});
 				
 				$(window).resize(function() {
@@ -204,7 +203,7 @@
 				$('#comboDistricts a.f_district').bind('click', function() {
 					var value = $(this).text();
 					var parent = $(this).parents('.combo-content').parent();
-					var city = $(this).parent().prev().find('a').text();
+					var city = $(this).parent().parent().parent().find('.f_city').text();
 
 					parent.parent().find('.combo-content').addClass('hidden');
 					parent.parent().find('.combo-content a').removeClass('selected');
@@ -213,6 +212,15 @@
 					$("#bairroButton").css("font-weight", "");
 					$("#bairroButton").parent().css("background-color", "#FFFFFF");
 					map.search_district(value, city);
+				});
+
+				$('#comboDistricts span.f_toggle').bind('click', function() {
+					$(this).next().find('.f_district').toggle();
+					$('.scroll-pane').jScrollPane();
+				});
+
+				$('#filter_reset').bind('click', function() {
+					map.reset_filter();
 				});
 			});	
 		</script>

@@ -49,8 +49,54 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def filter_field_change_event(field)
+    params.has_key? :component and params[:component] == "#{field.to_s}_filter" and params.has_key? field
+  end
+
   def budget_change_event
-    params.has_key? :component and params[:component] == 'budget_filter' and params.has_key? :budget
+    filter_field_change_event(:budget)
+  end
+
+  def city_change_event
+    filter_field_change_event(:city)
+  end
+
+  def district_change_event
+    filter_field_change_event(:district)
+  end
+
+  def set_filter_budget(budget)
+    session[:budget_filter] = budget.to_i
+  end
+
+  def get_filter_budget
+    session[:budget_filter] or ""
+  end
+
+  def set_filter_city(city)
+    session[:city_filter] = city
+  end
+
+  def get_filter_city
+    session[:city_filter] or ""
+  end
+
+  def set_filter_district(district)
+    session[:district_filter] = district
+  end
+
+  def get_filter_district
+    session[:district_filter] or ""
+  end
+
+  def reset_filter
+    set_filter_budget 0
+    set_filter_city ''
+    set_filter_district ''
+  end
+
+  def reset_filter_event
+    params.has_key? :component and params[:component] == "reset_filter"
   end
 
 end

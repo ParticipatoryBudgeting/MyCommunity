@@ -47,14 +47,22 @@
     <div class="scroll-pane">
       <ul class="comboLst">
 
+        <li><a id="filter_reset" href="javascript:;">Resetuj</a></li>
+
         <% @locations.each do |city, causes| %>
           <li>
             <a class="f_city" href="javascript:;"><%= city %></a>
-            <% causes.each do |cause| %>
-              <% unless cause.district.empty? %>
-                <li><a class="f_district" href="javascript:;"><%= cause.district %></a></li>
-              <% end %>
+            <% if not causes.find { |c| c.district.empty? } %>
+            <span class="f_toggle" href="javascript:;">+</span>
             <% end %>
+
+            <ul>
+            <% causes.each do |cause| %>
+            <% unless cause.district.empty? %>
+            <li><a class="f_district" href="javascript:;"><%= cause.district %></a></li>
+            <% end %>
+            <% end %>
+            </ul>
           </li>
         <% end %>
 

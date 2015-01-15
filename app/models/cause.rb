@@ -83,7 +83,7 @@ class Cause < ActiveRecord::Base
     :limit => 3)
   end
   
-  def self.find_causes_by_latitude_and_longitude(map_position, cats, budget)
+  def self.find_causes_by_latitude_and_longitude(map_position, cats, budget, city, district)
     causes = self.where("is_rejected = 0 and submited = 1")
     causes = causes.where(["latitude between ? and ? and longitude between ? and ?", map_position[:latB], map_position[:latA], map_position[:lngB], map_position[:lngA]])
 
@@ -91,8 +91,16 @@ class Cause < ActiveRecord::Base
       causes = causes.where(["category_id not in (?)", cats])
     end
 
-    if not budget.empty?
+    if not budget == 0
       causes = causes.where(["budget_id = ?", budget])
+    end
+
+    if not city.empty?
+      causes = causes.where(["city LIKE ?", city])
+    end
+
+    if not district.empty?
+      causes = causes.where(["district LIKE ?", district])
     end
 
     causes.find(:all,
