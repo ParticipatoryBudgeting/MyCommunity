@@ -3,7 +3,6 @@
 <script type="text/javascript">
   $('.boxBottom .postar').bind('click', function() {
   	var error = false;
-
     	
     if (!error) {
     	var data = {
@@ -24,11 +23,21 @@
        	success: function(result) {
      			if (result.success) {                
            	$.closePopupLayer();
-
+            location.reload();
      			}
        	} 
      	});
     }
   });
+
+  var translations = {
+    previousMonth : 'Poprzedni',
+    nextMonth     : 'Następny',
+    months        : ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],
+    weekdays      : ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'],
+    weekdaysShort : ['Nie','Pon','Wto','Śro','Czw','Pią','Sob']
+}
+  var from_picker = new Pikaday({ field: document.getElementById('from'), i18n: translations });
+  var to_picker = new Pikaday({ field: document.getElementById('to'), i18n: translations });
 
 </script>
