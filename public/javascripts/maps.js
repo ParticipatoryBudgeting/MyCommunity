@@ -1018,9 +1018,9 @@ var openModal = function(name) {
 
 var createBudget = function(){
 	$.openPopupLayer({
-        name: 'mdlBudget',
-        width: 710,
-        url: 'budgets/new',
+		name: 'mdlBudget',
+		width: 710,
+		url: 'budgets/new',
 		// parameters: {
 		// 	lat: ev.latLng.lat(),
 		// 	lng: ev.latLng.lng(),

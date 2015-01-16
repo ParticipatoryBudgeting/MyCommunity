@@ -45,21 +45,21 @@
 
                         <div id="ft_add">
                           <div id="upload_image">
-                          	<label for="image_file">Do computador</label>
+                            <label for="image_file">Plik na dysku</label>
                           <div id="upload_button"></div>
                                       </div>
                           <div id="post_image">
-                          <label for="title">Imagem da web</label>
-                          <input id="image_url" name="image_url" type="text" style="width:305px;" maxlength="80" value="URL da imagem" /><br />
-                          <span>Se a URL estiver correta, a imagem será carregada abaixo</span>
+                          <label for="title">URL pliku w sieci</label>
+                          <input id="image_url" name="image_url" type="text" style="width:305px;" maxlength="80" value="Adres URL obrazu" /><br />
+                          <span>Jeśli adres jest prawidłowy, obraz zostanie załadowany poniżej</span>
                           </div>
                         </div>
 
                         <div id="vd_add">
-                          <label for="title">YouTube ou Vimeo</label>
-                          <input id="title" name="video_url" type="text" style="width:463px;float:left;" maxlength="80" value="URL do vídeo" />
+                          <label for="title">YouTube lub Vimeo</label>
+                          <input id="title" name="video_url" type="text" style="width:463px;float:left;" maxlength="80" value="Adres URL wideo" />
                           <div style="clear: both;" />
-                          <span>Se a URL estiver correta, o vídeo será carregado abaixo</span>
+                          <span>Jeśli adres jest prawidłowy, obraz zostanie załadowany poniżej</span>
                           <hr />
                         </div>
 
@@ -97,14 +97,14 @@
               <label>Kategoria</label>
               
               <a href="javascript:;" class="combo">
-                  <span><%= @categories.first.name %></span>                                
+                  <span></span>
               </a>
               
                             <div class="combo-content hidden">
                 			<div class="scroll-pane">
                                 <ul class="comboLst">
                                 <% @categories.each do |category| %>
-																    <li><a id="category_<%= category.id %>" class="<%= category.id == 10 ? 'selected' : '' %>" href="javascript:;"> <%= category.name %></a></li>
+																    <li><a id="category_<%= category.id %>" href="javascript:;"> <%= category.name %></a></li>
                                 <% end %>
                                 </ul>
                             </div>
@@ -120,7 +120,7 @@
               <label>Budżet</label>
               
               <a href="javascript:;" class="combo">
-                  <span><%= @budgets.first.name %></span>                                
+                  <span></span>                                
               </a>
               
                             <div class="combo-content hidden">
@@ -158,9 +158,9 @@
   	var error = false;
     var title = $('#newCauseForm input[name=title]');
     title.removeClass('error');
-    if ((title.val() == '')||(title.val() == 'Digite o título da causa')) {
+    if ((title.val() == '')||(title.val() == 'Wprowadź tytuł projektu.')) {
       $(title).addClass('error');
-      $(title).val('Digite o título da causa');
+      $(title).val('Wprowadź tytuł projektu.');
       $(title).focus(function() {
       	$(this).removeClass('error');
       	$(this).val('');
@@ -224,9 +224,10 @@
        	dataType: 'json',
        	success: function(result) {
      			if (result.success) {
-       			data.url = result.data.url;                  
+       			data.url = result.data.url;
            	$.closePopupLayer();
            	map.createMarker(data);
+            map.loadData();
             GA.track('/site/cadastro/nova_causa/concluido/' + $('#newCauseForm .categoria a.selected').text());
             // openFalapoaOptin(result.data.id);
      			}
@@ -547,7 +548,7 @@ CKEDITOR.on( 'dialogDefinition', function( ev )
     if (status==google.maps.StreetViewStatus.OK) {
       $("#stv_map").html("<img src='http://maps.googleapis.com/maps/api/streetview?size=485x300&location=<%= params[:lat] %>,<%= params[:lng] %>&heading=250&fov=90&pitch=-10&sensor=false'></img>");
     } else {
-      $("#stv_map").html("Street view não disponível<br /><br />");
+      $("#stv_map").html("Widok ulicy nie jest dostępny<br /><br />");
     }
   }
 

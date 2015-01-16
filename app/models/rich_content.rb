@@ -9,16 +9,15 @@ class RichContent < ActiveRecord::Base
   
   validates_attachment_content_type :photo, :content_type => %w( image/jpeg image/png image/gif image/pjpeg image/x-png )
   
-  has_attached_file :photo,:url  => "/rich_content/:id/:style/:basename.:extension",
-                  :path => "/public/rich_content/:id/:style/:basename.:extension",
-                  :storage => :s3, :s3_credentials => "#{::Rails.root.to_s}/config/s3.yml"
+  has_attached_file :photo,:url  => "rich_content/:id/:style/:basename.:extension",
+                  :path => "public/rich_content/:id/:style/:basename.:extension"
                 
   
   def youtube_or_vimeo
     if kind == 2
       unless /^.*((youtu.be\/)|(v\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/.match(url) ||
              /(http:\/\/)?(www\.)?vimeo.com\/(\d+)($|\/)/.match(url)
-        errors.add(:video, "URL incorreta")
+        errors.add(:video, "Nieprawidłowy URL")
       end
     end
     true
