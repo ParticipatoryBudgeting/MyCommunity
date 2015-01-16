@@ -91,7 +91,7 @@ class Cause < ActiveRecord::Base
       causes = causes.where(["category_id not in (?)", cats])
     end
 
-    if not budget == 0
+    if budget != 0 and budget != ""
       causes = causes.where(["budget_id = ?", budget])
     end
 
