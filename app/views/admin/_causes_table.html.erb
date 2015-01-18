@@ -34,12 +34,12 @@
 			
 				<% if current_user.level > 1 -%>
 					<% if cause.is_rejected %>
-						<%= link_to "<span data-step="6" data-intro="Zaakceptuj projekt.">Akceptuj</span>", "/admin/accept_cause/#{cause.id}", :class => "button button-normal" %>
+						<%= link_to '<span data-step="6" data-intro="Zaakceptuj projekt.">Akceptuj</span>', "/admin/accept_cause/#{cause.id}", :class => "button button-normal" %>
 					<% else -%>
-						<%= link_to "<span data-step="7" data-intro="Przenieś do projektów odrzuconych.">Odrzuć</span>", "/admin/reject_cause/#{cause.id}", :class => "button button-normal" %>
+						<%= link_to '<span data-step="7" data-intro="Przenieś do projektów odrzuconych.">Odrzuć</span>', "/admin/reject_cause/#{cause.id}", :class => "button button-normal" %>
 					<% end -%>
 					<%= link_to "<span>Aktualizuje polubienia</span>", "/admin/update_cause_likes/#{cause.id}", :class => "button button-normal" %>
-					<%= link_to "<span data-step="8" data-intro="Edytuj informacje na temat projektu.">Edycja</span>", edit_cause_path(cause), :class => "button button-normal" %>
+					<%= link_to '<span data-step="8" data-intro="Edytuj informacje na temat projektu.">Edycja</span>', edit_cause_path(cause), :class => "button button-normal" %>
 				<% end -%>																			
 			</td>						
 		</tr>

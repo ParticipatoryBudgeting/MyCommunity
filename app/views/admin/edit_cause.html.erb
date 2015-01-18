@@ -1,3 +1,32 @@
+<style>
+  #map-canvas {
+    height: 300px;
+    width: 650px;
+    margin: 0px;
+    padding: 0px
+  }
+</style>
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQep6HRmd4ZZmNQ0U4gFTxH9sdV5WtbHw">
+</script>
+<script type="text/javascript">
+  function initialize() {
+    var mapOptions = {
+      center: { lat: 51.500, lng: 19.000},
+      zoom: 6
+    };
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+
+    google.maps.event.addListener(map, 'click', function(event) {
+      $('#cause_latitude').val(event.latLng.lat());
+      $('#cause_longitude').val(event.latLng.lng());
+    });      
+  };
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
 <h1>Edycja Projektu</h1>
 
 <% form_for(@cause, :url => update_cause_path(@cause)) do |f| %>
@@ -12,6 +41,8 @@
     <%= f.label 'Opis' %><br />
     <%= f.text_area :abstract, {:cols => 80, :rows => 8} %>
   </p>
+
+  <div id="map-canvas"></div>
 
   <p>
     <%= f.label 'Szerokość' %><br />
