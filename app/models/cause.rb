@@ -110,6 +110,32 @@ class Cause < ActiveRecord::Base
     )
   end
   
+  def self.find_causes_by_params(cats, budget, city, district)
+    causes = self.where("is_rejected = 0 and submited = 1")
+
+    if cats
+      causes = causes.where(["category_id not in (?)", cats])
+    end
+
+    if budget != 0 and budget != ""
+      causes = causes.where(["budget_id = ?", budget])
+    end
+
+    if not city.empty?
+      causes = causes.where(["city LIKE ?", city])
+    end
+
+    if not district.empty?
+      causes = causes.where(["district LIKE ?", district])
+    end
+
+    causes.find(:all,
+        :select => "id, title, category_id, latitude, longitude, views, updated_at",
+        :include => :category,
+        :order => "views DESC, updated_at DESC"
+    )
+  end
+
   def url
     "/causas/#{category.name.to_slug}/#{title.to_slug}/#{id}"
   end

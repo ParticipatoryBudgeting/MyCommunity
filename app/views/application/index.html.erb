@@ -58,7 +58,8 @@
 			
 			var start = function(){
 				if (includeMap) {
-					map = new Map();					
+					map = new Map();
+					map.draw();
 				}
 				<% if params['q'].present? %>
 				$('#comboDistricts a').each(function(i) {

@@ -77,10 +77,8 @@ var Map = Class.extend({
 				if (callback && {}.toString.call(callback) === '[object Function]') {
 					callback();
 				}
-				else {
-					_this.removeAllMarkers();
-					_this.populateMap(result);
-				}
+				_this.removeAllMarkers();
+				_this.populateMap(result);
 				_this.lastQueryResult = result;
 			},
 			complete: function() {
@@ -432,9 +430,10 @@ var Map = Class.extend({
 		google.maps.event.addListener(this.map, 'zoom_changed', function(ev) {
 			$("#slider-vertical").slider({value:_this.map.getZoom()});
 			$.cookie("map.zoom", _this.map.getZoom());
-			_this.removeAllMarkers();
+			//_this.removeAllMarkers();
 		});
 		
+		/*
 		google.maps.event.addListener(this.map, 'bounds_changed', function(ev) {		
 			clearTimeout(_this.requestTimer);
 			var categories = new cookieList("categories");
@@ -452,6 +451,7 @@ var Map = Class.extend({
 					_this.loadData(data);					
 			},500); 
 		});
+		*/
 		
 		google.maps.event.addListener(this.map, 'dragend', function(ev) {
 			var geocoder = new google.maps.Geocoder();
@@ -700,9 +700,9 @@ var Map = Class.extend({
 						component: 'city_filter',
 					};
 					_this.loadData(data, function() {
-						console.log('callbaczek');
 						_this.zoom(13);
 						_this.map.panTo(location);
+
 					});
 			},500);
 		}
@@ -717,7 +717,6 @@ var Map = Class.extend({
 				var _this = this;
 				strSearch = strSearch + ', ' + city + ', Polska';
 
-				console.log(strSearch);
 				geocoder.geocode({'address': strSearch}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
 						if (results.length > 0) {
@@ -763,7 +762,6 @@ var Map = Class.extend({
 						component: 'district_filter',
 					};
 					_this.loadData(data, function() {
-						console.log('callbaczek222');
 						_this.zoom(15);
 						_this.map.panTo(location);
 					});
@@ -772,7 +770,6 @@ var Map = Class.extend({
 	},
 
 	reset_filter: function() {
-		console.log('run');
 		var _this = this;
 		clearTimeout(_this.requestTimer);
 		var categories = new cookieList("categories");
@@ -790,7 +787,26 @@ var Map = Class.extend({
 				};
 				_this.loadData(data);
 		},500);
-	}
+	},
+
+	draw: function() {
+		var _this = this;
+		clearTimeout(_this.requestTimer);
+		var categories = new cookieList("categories");
+		this.requestTimer = setTimeout(function(){
+			var data = {
+					topLeftY: _this.map.getBounds().getNorthEast().lat(),
+					topLeftX: _this.map.getBounds().getNorthEast().lng(),
+					bottomRightY: _this.map.getBounds().getSouthWest().lat(),
+					bottomRightX: _this.map.getBounds().getSouthWest().lng(),
+					currentZoom: _this.map.getZoom() - MIN_ZOOM,
+					maxZoom: MAX_ZOOM-MIN_ZOOM,
+					budget: $("#budget_budget_id").val(),
+					cats: categories.items(),
+				};
+				_this.loadData(data);
+		},500);
+	},
 });
 
 var SmallMap = Map.extend({
