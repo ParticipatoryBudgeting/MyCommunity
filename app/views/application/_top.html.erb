@@ -1,5 +1,5 @@
 <div id="new_top">
-  <div id="login">
+  <div id="login" data-step="2" data-intro="Możesz zalogować się aby dodawać komentarze i projekty." >
     <% if logged_user? -%>
       <%= user_image(current_user, 20, 20) %>
       <%= link_to image_tag('top/logout.png', :style => "padding-top: 8px"), logout_path %>
@@ -9,16 +9,20 @@
     <% end -%> 
   </div>
   <%= image_tag 'top/separador.png' %>
-  <div id="filtro">
+  <div id="filtro" data-step="3" data-intro="Możesz filtrować Projekty po kategorii." >
     <a href="#" id="filtroButton">Filtr</a>
   </div>
   <%= image_tag 'top/separador.png' %>
-  <div id="bairros">
+  <div id="bairros" data-step="4" data-intro="Ogranicz wyszukiwanie do danej dzielnicy" >
     <a href="#" id="bairroButton">Lokalizacje</a>
   </div>
   <%= image_tag 'top/separador.png' %>
-  <div id="busca">
+  <div id="busca" data-step="5" data-intro="Przeszukaj tytuły opisy i lokalizacje po wpisanym tekście" >
     <%= render :partial => 'application/search_box' %>
+  </div>
+  <%= image_tag 'top/separador.png' %>
+  <div id="busca">
+    <a href="#" id="help" onclick="javascript:introJs().start();">Pomoc</a>
   </div>
 </div>
 

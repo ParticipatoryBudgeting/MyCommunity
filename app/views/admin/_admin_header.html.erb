@@ -5,12 +5,13 @@
 		</h1>
 		<% if current_user -%>
 		<ul id="navigation">
-			<li><%= link_to 'Budżety', show_budgets_path %></li>			
-			<li><%= link_to 'Projekty', show_causes_path %></li>
+			<li>Pomoc</li>
+			<li data-step="1" data-intro="Zakładka tworzenia i edycji Budżetów."><%= link_to 'Budżety', show_budgets_path %></li>			
+			<li data-step="2" data-intro="Zakładka tworzenia i edycji Projektów"><%= link_to 'Projekty', show_causes_path %></li>
 			<% if current_user.level > 1 -%>
-			<li><%= link_to 'Odrzucone projekty', show_rejected_causes_path %></li>
-			<li><%= link_to 'Użytkownicy', show_users_list_path %></li>
-			<li><%= link_to 'Kategorie', show_categories_path %></li>
+			<li data-step="3" data-intro="Projekty odrzucone przez administratora."><%= link_to 'Odrzucone projekty', show_rejected_causes_path %></li>
+			<li data-step="4" data-intro="Lista użytkownikow aplikacji."><%= link_to 'Użytkownicy', show_users_list_path %></li>
+			<li data-step="5" data-intro="Lista wykorzystywanych w aplikacji kategorii projektów."><%= link_to 'Kategorie', show_categories_path %></li>
 			<% end -%>
 		</ul>
 		<div id="userInfo">
