@@ -142,6 +142,19 @@ class AdminController < ApplicationController
       render :action => "edit_cause"
     end
   end
+
+  def import_cause
+    uploaded_file = params[:cause][:file]
+
+    local_file = File.new('/tmp/' + uploaded_file.original_filename, "w")
+    local_file.write(uploaded_file.read)
+    local_file.close
+
+    result = Import.start(local_file.path)
+
+    flash[:notice] = 'Plik z projektami został zaimportowany'
+    redirect_to show_causes_url
+  end
   
   private  
   def current_user

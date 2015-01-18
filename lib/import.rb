@@ -10,71 +10,104 @@ module Import
 	API_KEY = "AIzaSyCQNeAF-rK3NqPG0gFYQPiZAI50bMl2rLE"
 	BACKUP_DIR = "./db/backup/"
 
+	# nazwy pól wraz z informacją czy dane pole jest wymagane
 	FIELDS = {
-		"lp" => {:required => true},
-		"country" => {:required => true},
-		"city" => {:required => true},
-		"district" => {:required => true},
-		"area" => {:required => true},
-		"title" => {:required => true},
-		"description" => {:required => true},
-		"local" => {:required => true},
-		"total_cost" => {:required => true},
-		"upkeep_cost" => {:required => false},
-		"is_rejected" => {:required => false},
-		"full_description" => {:required => false},
-		"justification" => {:required => false},
-		"category" => {:required => false},
-		"target_group" => {:required => false},
-		"status" => {:required => false},
-		"budget_id" => {:required => true},
-		"votes_count" => {:required => false},
-		"project_id" => {:required => false},
+		"lp" => true,
+		"country" => true,
+		"city" => true,
+		"district" => true,
+		"area" => true,
+		"title" => true,
+		"description" => true,
+		"local" => true,
+		"total_cost" => true,
+		"upkeep_cost" => false,
+		"is_rejected" => false,
+		"full_description" => false,
+		"justification" => false,
+		"category" => false,
+		"target_group" => false,
+		"status" => false,
+		"budget_id" => true,
+		"votes_count" => false,
+		"project_id" => false,
 	}
 
-	def self.validate_header(file)
-		if not valid_header?(@csv)
-			missing_fields = get_missing_fields(@csv)
-			throw "Brak wymaganych pól: #{missing_fields}"
+	def self.start(filename, start=1, stop=-1)
+		# pre parse actions
+		init
+
+		@filename = filename
+		@csv = CSV.read @filename
+
+		validate_file(@csv)
+		@fields = map_fields(@csv)
+
+		# parse budgets
+		budgets = []
+		each_row(@csv, start, stop) do |row, i|
+			budgets << get_field(row, 'budget_id') if field_set?(row, 'budget_id')
+		end
+		@budgets = budgets.uniq.reduce({}) do |mem, name|
+			puts "budżet: #{name}"
+			if budget = Budget.find_by_name(name)
+				puts 'budżet found'
+				mem.merge({name => budget})
+			else
+				if budget = Budget.create(:name => name)
+					puts 'budżet created'
+					mem.merge({name => budget})
+				else
+					puts 'budżet nil'
+					mem.merge({name => nil})
+				end
+			end
+		end
+
+		# parse categories
+		categories = []
+		each_row(@csv, start, stop) do |row, i|
+			categories << get_field(row, 'category') if field_set?(row, 'category')
+		end
+
+		@categories = categories.uniq.reduce({}) do |mem, name|
+			puts "kategoria: #{name}"
+			if category = Category.find_by_name(name)
+				puts 'category found'
+				mem.merge({name => category})
+			else
+				if category = Category.create(:name => name)
+					puts 'category created'
+					mem.merge({name => category})
+				else
+					puts 'category nil'
+					mem.merge({name => nil})
+				end
+			end
+		end
+
+		# parse projects
+		results = {:invalid_rows => []}
+		each_row(@csv, start, stop) do |row, i| 
+			row_result = create_from_row(row, i)
+			unless row_result
+				results[:invalid_rows] << i
+			end
+		end
+
+		# summary
+		puts "błędnych wierszy: #{results[:invalid_rows].size}"
+		puts "błędne wiersze: #{results[:invalid_rows].join(", ")}" if results[:invalid_rows].size > 0
+	end
+
+	def self.each_row(file, start, stop)
+		file[start..stop].each_with_index do |row, i|
+			yield row, i
 		end
 	end
 
-	def self.valid_header?(rows)
-		header = get_header(rows)
-		FIELDS.select { |_,v| v[:required] }.all? { |k,_| header.include?(k) }
-	end
-
-	def self.map_fields(rows)
-		header = get_header(rows)
-		Hash[ header.each_with_index.map { |field, index| [field, index] if FIELDS.has_key?(field) } ]
-	end
-
-	def self.get_file_data(filename)
-		filedata = filename.split("/").last.split(".")[0]
-		filedata.split("_")
-	end
-
-	def self.get_missing_fields(rows)
-		header = get_header(rows)
-		FIELDS.select { |_,v| v[:required] }.find_all { |k,_| not header.include?(k) }
-	end
-
-	def self.get_header(rows)
-		rows[0].map(&:downcase)
-	end
-
-	def self.start(filename)
-		@filename = "./db/" + filename
-		@city, @from, @to = get_file_data(@filename)
-		init unless @is_inited
-		@csv = CSV.read @filename
-
-		validate_header(@csv)
-		@fields = map_fields(@csv)
-
-		@size = @csv.size - 3
-		# @csv[3..-1].each_with_index {|row, i| update_row(row, i)}
-		@csv[6..-1].each_with_index {|row, i| create_from_row(row, i)}
+	def self.rows_num
+		@csv.size - 1
 	end
 
 	def self.save_to_file body, filename
@@ -117,63 +150,84 @@ module Import
 		end
 	end
 
-	def self.get_row(row, name)
-		row[@fields[name]]
+	def self.get_field(row, name, default=nil)
+		if field_exist? name
+			field_empty?(row, name) ? '' : row[@fields[name]]
+		else
+			default
+		end
 	end
 
-	def self.create_from_row row, i=0
-		#return unless row[9] || row[11]
-		@district, @title, @local = get_row(row,'district'), get_row(row,'title'), get_row(row,'local')
-		if not @local.nil? and @local.include?(',')
-			@local = @local.split(',')[0]
-		end
+  def self.field_set?(row, field)
+  	field = get_field(row, field)
+  	not field.nil? and not field.empty?
+  end
 
-		if @district.nil?
-			@district = ''
-		end
+	def self.field_exist?(name)
+		@fields.has_key?(name)
+	end
 
-		@id = 0
-		@are = ''
-		p [i, @size].join("/") +  " - #{@title}"
+	def self.field_empty?(row, name)
+		row[@fields[name]].nil?
+	end
 
-		# defaults
-		lat = 52.13
-		lng = 21.00
-		location_precission = "3"
+	def self.valid_row?(row)
+		return false unless field_set?(row, 'city')
+		return false unless field_set?(row, 'title')
+		return false unless field_set?(row, 'budget_id')
 
-		return if @local.nil?
+		return true
+	end
 
-		geo_result = get_location(@city + ", " + @local)
-		if geo_result.present? && @local.present?
-			location_precission = (geo_result["location_type"] == "ROOFTOP") ? "1" : "2"
+	def self.create_from_row(row, i=0)
+		# some fields are just needed
+		return false if not valid_row?(row)
+
+		# set default values for 'semi-required' fields ...
+		category = field_set?(row, 'category') ? get_category(get_field(row, 'category')) : ''
+		budget = {:id => nil}
+		cuntry = field_set?(row, 'country') ? get_field(row, 'country') : default_country
+		is_rejected = if field_set?(row, 'is_rejected')
+			!!get_field(row, 'is_rejected')
+		elsif field_set?(row, 'status')
+			get_field(row, 'status').downcase == 'accepted'
 		else
-			location_precission = "3"
-			geo_result = get_location(@city)
+			false
 		end
-		lat = geo_result["location"]["lat"]
-		lng = geo_result["location"]["lng"]
 
-		# TODO: create
-		category = Category.first
+		# set fields using external services
+		city = get_field(row, 'city')
+		local = get_field(row, 'local')
+		lat, lng, location_precission = get_geo_data(city, local)
+
+		@country = get_field(row, 'country')
+		@city = get_field(row, 'city')
+		@district = get_field(row, 'district')
+		@area = get_field(row, 'area')
+		@title = get_field(row, 'title')
+		@description = get_field(row, 'description')
+		@local = get_field(row, 'local')
+		@total_cost = get_field(row, 'total_cost')	
 
 		cause_hash = {
-			:city => @city, 
-			:district => @district, 
-			:title => @title,
-			:local => @local, 
-			:abstract => get_row(row,'description'),
-			:total_cost => get_row(row,'total_cost'),
-			:upkeep_cost => "0 zł", 
-			:is_rejected => false,
-			:budget_id => @budget.id,
+			:city => city, 
+			:district => get_field(row, 'district'), 
+			:title => get_field(row, 'title'),
+			:local => local, 
+			:abstract => get_field(row, 'description'),
+			:total_cost => get_field(row, 'total_cost'),
+			:upkeep_cost => get_field(row, 'upkeep_cost'), 
+			:is_rejected => is_rejected,
+			:budget_id => budget[:id],
 			:latitude => lat,
 			:longitude => lng,
 			:location_precission => location_precission,
-			:area => @area,
+			:area => get_field(row, 'area'),
 			:author => @user.name,
 			:submited => true,
 			:category => category,
-			:user => @user
+			:user => @user,
+			#:project_id => get_field(row, 'project_id'),
 		}
 		cause = Cause.create cause_hash
 		if not cause.valid?
@@ -186,20 +240,19 @@ module Import
 	def self.init
 		init_api_client
 		init_user
-		init_category
-		init_budget
 		@is_inited = true
 	end
 
 	def self.init_user
-		user = User.find_by_name "Stefan Batory"
-		user = User.create(:name => "Stefan Batory", :username => "Stefan Batory", :facebook_id => 1) if user.nil?
+		user = User.first
+		unless user
+			user = User.create(:name => "admin", :username => "Administrator", :facebook_id => 1)
+		end
 		@user = user
 	end
 
 	def self.get_location location
 		request = Net::HTTP::Get.new("/maps/api/geocode/json?address="+URI.encode(location)+"&key="+API_KEY)
-
 		response = @http.request(request)
 		save_to_file response.body, "project#{@id}_"
 		result = JSON.parse response.body
@@ -229,5 +282,70 @@ module Import
 			Category.create(:name => "Zwykła")
 		end
 		@category = category
+	end
+
+	def self.validate_file(file)
+		if not valid_header?(@csv)
+			missing_fields = get_missing_fields(@csv)
+			throw "Brak wymaganych pól: #{missing_fields}"
+		end
+	end
+
+	def self.valid_header?(rows)
+		header = get_header(rows)
+		FIELDS.select { |_,v| v }.all? { |k,_| header.include?(k) }
+	end
+
+	def self.map_fields(rows)
+		header = get_header(rows)
+		Hash[ header.each_with_index.map { |field, index| [field, index] if FIELDS.has_key?(field) } ]
+	end
+
+	def self.get_file_data(filename)
+		filedata = filename.split("/").last.split(".")[0]
+		filedata.split("_")
+	end
+
+	def self.get_missing_fields(rows)
+		header = get_header(rows)
+		FIELDS.select { |_,v| v }.find_all { |k,_| not header.include?(k) }
+	end
+
+	def self.get_header(rows)
+		rows[0].map(&:downcase)
+	end
+
+	def self.get_geo_data(city, local)
+		lat = 52.13
+		lng = 21.00
+		location_precission = "3"
+
+
+		geo_result = get_location(city + ", " + local)
+		if geo_result.present? && @local.present?
+			location_precission = (geo_result["location_type"] == "ROOFTOP") ? "1" : "2"
+		else
+			location_precission = "3"
+			geo_result = get_location(city)
+		end
+		lat = geo_result["location"]["lat"]
+		lng = geo_result["location"]["lng"]
+		[lat, lng, location_precission]
+	end
+
+	def self.default_category
+		@category
+	end
+
+	def self.default_country
+		'Polska'
+	end
+
+	def self.get_category(name)
+		if @categories.has_key? name and not @categories[name].nil?
+			@categories[name]
+		else
+			default_category
+		end
 	end
 end

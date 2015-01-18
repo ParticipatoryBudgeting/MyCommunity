@@ -11,6 +11,14 @@
 	<%= select_tag :category, options_from_collection_for_select(@categories, 'id', 'name', params[:category].to_i) %>
 	<%= submit_tag 'Filtruj' %>
 <% end %>
+
+<% form_for :cause, :url => import_cause_path, :html => {:multipart => true} do |f| %>
+  <%= label_tag "Import z CSV: " %>
+
+  <%= f.file_field :file %>
+  <%= f.submit "Upload" %>
+<% end %>
+
 <br/>
 
 <% unless @causes2.empty? %><span class="break"><a href= "/reports/causes.csv">(Eksport do Excela)</a></span><% end %>
