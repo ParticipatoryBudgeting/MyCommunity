@@ -43,13 +43,11 @@
 		<% if idx % 3 == 0 -%>
 		<ul class="comboLst">
 		<% end -%>
-        	<li>
-        		<% if cookies[:categories] && cookies[:categories].split(',').include?(category.id.to_s) -%>
-        			<a title="<%= category.name %>" href="javascript:;" alt="<%= category.id %>"><div id="img<%= category.id %>" style="background-position: -40px 0;"></div></a>
-        		<% else -%>
-        			<a title="<%= category.name %>" href="javascript:;" alt="<%= category.id %>"><div id="img<%= category.id %>"></div></a>
-        		<% end -%>
-        	</li>
+      <li>
+        <a title="<%= category.name %>" href="javascript:;" alt="<%= category.id %>">
+          <img src="<%= category.marker.url %>" style="width:30px;height:30px;margin: 1px;position: relative;float: left;"/>
+        </a>
+      </li>
 		<% if (idx + 1) % 3 == 0 -%>
 		</ul>
 		<% end -%>
