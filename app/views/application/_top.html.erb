@@ -1,4 +1,12 @@
 <div id="new_top">
+
+  <div id="intro_trigger">
+    <a href="#" id="help" onclick="javascript:introJs().setOptions({
+          nextLabel: 'Dalej', prevLabel: 'Wstecz', skipLabel: 'Przerwij', doneLabel: 'Zakończ'}).start();">Pomoc</a>
+  </div>
+
+  <%= image_tag 'top/separador.png' %>
+
   <div id="login" data-step="2" data-intro="Możesz zalogować się aby dodawać komentarze i projekty." >
     <% if logged_user? -%>
       <%= user_image(current_user, 20, 20) %>
@@ -8,22 +16,25 @@
       <a href="javascript:;" id="loginButton" class="lnkEscrever"><%= image_tag('top/key_trans.png', :style => "padding-top: 4px") %> Logowanie</a>
     <% end -%> 
   </div>
+
   <%= image_tag 'top/separador.png' %>
+
   <div id="filtro" data-step="3" data-intro="Możesz filtrować Projekty po kategorii." >
     <a href="#" id="filtroButton">Filtr</a>
   </div>
+
   <%= image_tag 'top/separador.png' %>
+
   <div id="bairros" data-step="4" data-intro="Ogranicz wyszukiwanie do danej dzielnicy" >
     <a href="#" id="bairroButton">Lokalizacje</a>
   </div>
+
   <%= image_tag 'top/separador.png' %>
+
   <div id="busca" data-step="5" data-intro="Przeszukaj tytuły opisy i lokalizacje po wpisanym tekście" >
     <%= render :partial => 'application/search_box' %>
   </div>
-  <%= image_tag 'top/separador.png' %>
-  <div id="busca">
-    <a href="#" id="help" onclick="javascript:introJs().start();">Pomoc</a>
-  </div>
+
 </div>
 
 <% if @categories %>

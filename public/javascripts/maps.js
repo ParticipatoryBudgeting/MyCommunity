@@ -857,6 +857,7 @@ var SmallMap = Map.extend({
 	}
 });
 
+var markerCounter = 1;
 var Marker = Class.extend({
 	init: function(position, data, parent, attachToMap) {
 		this.position = position;
@@ -886,7 +887,7 @@ var Marker = Class.extend({
 			position: this.position,
 			map: attachToMap ? this.parent.getMap() : null,
 			icon: markerImage,
-			zIndex: 5,
+			zIndex: markerCounter++,
 			title: data.category_name + ' / ' + data.title
 		});
 	},

@@ -63,6 +63,7 @@ img {border:none; display:block;}
 #new_top #login {height:30px;float:right;margin:0px;padding:13px 10px 0px 10px; background-color: #FFF; font-weight: bold; }
 #new_top #login a { font-weight: bold; }
 #new_top #login:hover {background-color: #edf5f7;}
+#new_top #intro_trigger {height:30px;float:right;margin:0px;padding:13px 10px 0px 10px; background-color: #FFF;}
 
 #top_categories {width:130px; top:43px; right:21px; position:absolute; z-index:999; background-color: #edf5f7; display: none;}
 #top_categories ul { padding-top: 2px; padding-bottom: 2px; padding-left: 2px; padding-right: 1px; }
