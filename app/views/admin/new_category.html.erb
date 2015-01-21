@@ -9,7 +9,8 @@
   </p>
 
   <p>
-    <%= f.label :marker %><br />
+    <%= f.label :marker %>
+    <span class="hint">Optymalny rozmiar grafiki to przedział od 16x16 do 32x32 (pixeli) w formacie PNG)</span><br />
     <%= image_tag(@category.marker_url) if @category.marker? %>
     <%= f.file_field :marker %>
     <%= f.hidden_field :marker_cache %>

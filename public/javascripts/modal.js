@@ -223,10 +223,10 @@ function sendForm(button, additionalData, validationMessages) {
 	var action = form.attr('action');
 	var inputs = form.find(':input[name]');
 	var messageBox = $('#feedbackMessage');
-	var messageSuccess = 'Formulário enviado com sucesso.';
-	var messageValidationError = 'Por favor preencha todos os campos.';
-	var messageWait = 'Por favor aguarde, o formulário está sendo enviado...';
-	var messageServerError = 'Erro no server.';
+	var messageSuccess = 'Formularz przesłany pomyślnie.';
+	var messageValidationError = 'Proszę wypełnić wszystkie pola.';
+	var messageWait = 'Proszę czekać, formularz jest wysyłany ...';
+	var messageServerError = 'Błąd serwera.';
 	
 	inputs.removeClass('error');
 	

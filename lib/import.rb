@@ -190,7 +190,7 @@ module Import
 		is_rejected = if field_set?(row, 'is_rejected')
 			!!get_field(row, 'is_rejected')
 		elsif field_set?(row, 'status')
-			get_field(row, 'status').downcase == 'accepted'
+			not get_field(row, 'status').downcase == 'accepted'
 		else
 			false
 		end
