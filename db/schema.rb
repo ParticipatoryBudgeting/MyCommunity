@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150113163036) do
+ActiveRecord::Schema.define(:version => 20150122144745) do
 
   create_table "budgets", :force => true do |t|
     t.string   "name"
@@ -17,10 +17,20 @@ ActiveRecord::Schema.define(:version => 20150113163036) do
     t.date     "from"
     t.date     "to"
     t.integer  "participants_count"
-    t.integer  "value",              :limit => 10, :precision => 10, :scale => 0
+    t.integer  "value",                 :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "edit_number"
+    t.string   "city"
+    t.string   "initiator"
+    t.text     "reason"
+    t.date     "creation_date"
+    t.string   "decision"
+    t.string   "evaluation"
+    t.text     "recomendation"
+    t.boolean  "locked"
+    t.date     "preparation_date"
   end
 
   create_table "categories", :force => true do |t|
@@ -32,15 +42,15 @@ ActiveRecord::Schema.define(:version => 20150113163036) do
   end
 
   create_table "causes", :force => true do |t|
-    t.string   "author",                                                                 :null => false
-    t.string   "title",                                                                  :null => false
-    t.text     "abstract",                                                               :null => false
-    t.decimal  "latitude",            :precision => 20, :scale => 17,                    :null => false
-    t.decimal  "longitude",           :precision => 20, :scale => 17,                    :null => false
-    t.text     "local",                                                                  :null => false
-    t.string   "district",                                                               :null => false
-    t.boolean  "is_rejected",                                         :default => false, :null => false
-    t.integer  "views",                                               :default => 0
+    t.string   "author",                                                                     :null => false
+    t.string   "title",                                                                      :null => false
+    t.text     "abstract",                                                                   :null => false
+    t.decimal  "latitude",                :precision => 20, :scale => 17,                    :null => false
+    t.decimal  "longitude",               :precision => 20, :scale => 17,                    :null => false
+    t.text     "local",                                                                      :null => false
+    t.string   "district",                                                                   :null => false
+    t.boolean  "is_rejected",                                             :default => false, :null => false
+    t.integer  "views",                                                   :default => 0
     t.integer  "category_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -48,16 +58,28 @@ ActiveRecord::Schema.define(:version => 20150113163036) do
     t.string   "email"
     t.string   "phone_no"
     t.string   "cell_phone_no"
-    t.integer  "submited",                                            :default => 0
-    t.integer  "likes",                                               :default => 0
+    t.integer  "submited",                                                :default => 0
+    t.integer  "likes",                                                   :default => 0
     t.datetime "last_likes_update"
-    t.string   "protocol",                                            :default => "-1"
+    t.string   "protocol",                                                :default => "-1"
     t.string   "city"
     t.integer  "budget_id"
     t.string   "total_cost"
     t.text     "upkeep_cost"
     t.string   "area"
     t.integer  "location_precission"
+    t.integer  "edit_number"
+    t.text     "full_description"
+    t.text     "substantiation"
+    t.string   "website_url"
+    t.string   "facebook_profile"
+    t.string   "youtube_url"
+    t.string   "originator_email"
+    t.integer  "preselection_vote_count"
+    t.integer  "vote_count"
+    t.string   "office"
+    t.string   "department"
+    t.text     "note"
   end
 
   create_table "rich_contents", :force => true do |t|
