@@ -46,7 +46,8 @@
 					category_id: <%= @cause.category_id %>,
 					latLng: [<%= @cause.latitude %>,<%= @cause.longitude %>],
 					local: '<%= @cause.local %>',
-					url: '/'
+					url: '/',
+					category_marker: '<%= @cause.category.marker.url %>'
 				}
 
 				var testMarker = new CauseMarker(data.latLng, data, map, true);
@@ -319,7 +320,7 @@
 		<script type="text/javascript">
 			var addthis_share = {
 				templates: {
-					twitter: '<%=h @cause.title %> #portoalegrecc http://www.portoalegre.cc<%= @cause.url %>'
+					twitter: '<%=h @cause.title.squish  %> #budzetpartycypacyjny http://mapa.budzetpartycypacyjny<%= @cause.url %>'
 				}
 			}
 		</script>
