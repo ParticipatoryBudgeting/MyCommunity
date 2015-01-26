@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(:version => 20150122144745) do
     t.date     "from"
     t.date     "to"
     t.integer  "participants_count"
-    t.integer  "value",                 :limit => 10, :precision => 10, :scale => 0
+    t.integer  "value",              :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20150122144745) do
     t.text     "upkeep_cost"
     t.string   "area"
     t.integer  "location_precission"
-    t.integer  "edit_number"
     t.text     "full_description"
     t.text     "substantiation"
     t.string   "website_url"

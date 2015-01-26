@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  helper_method :get_filter_budget
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
@@ -16,6 +17,7 @@ class ApplicationController < ActionController::Base
     session['error'] = nil
     @categories = Category.all :order => "name asc"
     @locations = Cause.all(:group => 'city, district').group_by { |cause| cause.city }
+    p @locations
     @budgets = Budget.all
   end
   

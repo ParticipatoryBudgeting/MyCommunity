@@ -63,7 +63,7 @@
         <li><a id="filter_reset" href="javascript:;">Resetuj</a></li>
 
         <% @locations.each do |city, causes| %>
-          <li>
+          <li data-city='<%= city %>'>
             <a class="f_city" href="javascript:;"><%= city %></a>
             <% if not causes.find { |c| c.district.empty? } %>
             <span class="f_toggle" href="javascript:;">+</span>

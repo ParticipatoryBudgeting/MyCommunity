@@ -495,6 +495,11 @@ var Map = Class.extend({
 		});
 		
 		this.createCauseButton.bind('click', function() {
+			var budget_id = $("#budget_budget_id").val();
+			var budget_locked = parseInt($("#budget_budget_id option[value='" + budget_id + "']").attr('data-locked'));
+			if (budget_locked)
+				return false;
+
 			$.cookie('waitingToAddMarker', 'true');
 
 			if (!lu) {
@@ -876,7 +881,7 @@ var Marker = Class.extend({
 		var markerImage;
 
 		var markerOptions = this.getIconProperties();
-		
+
 		if (typeof(markerOptions) == 'string') {
 			markerImage = markerOptions;
 		} else {
@@ -909,7 +914,7 @@ var Marker = Class.extend({
 	},
 	
 	getIconProperties: function() {
-		return 'img/pin-01.png';
+		return 'img/pin_1.png';
 	},
 	
 	onAttach: function() {

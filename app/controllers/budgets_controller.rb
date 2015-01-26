@@ -21,14 +21,16 @@ class BudgetsController < ApplicationController
   end
 
   def edit
+    @budget = Budget.find params[:id]
+    @action = "Edycja"
   end
 
   def destroy
   end
 
   def update
-    @budget = Budget.find params[:budget][:id]
-    @budget.update_attributes params[:budget].except(:id)
+    @budget = Budget.find params[:id]
+    @budget.update_attributes params[:budget]
     @result = { :status => :ok, :success => true, :budget => @budget }
     respond_to do |format|
       format.json { render :json => @result.to_json }

@@ -46,5 +46,58 @@ module ApplicationHelper
 
   def budget_filter
     session[:budget_filter] || ""
-  end 
+  end
+
+  def budgets_select(budgets, selected_budget_id)
+    disabled_ids = budgets.reduce([]) { |m, b| b.locked ? m << b.id : m }
+    selected_budget_id = '' if disabled_ids.include?(selected_budget_id)
+    highlight_blocked = lambda { |b| [(b.locked ? b.name + ' [Zablokowany]' : b.name), b.id] }
+    select :cause, :category_id, budgets.map(&highlight_blocked), :disabled => disabled_ids, :selected => selected_budget_id.to_i
+  end
+
+  def budgets_filter_select(budgets, selected)
+    empty_budget = Struct.new(:id, :name, :locked, :city)
+    budget = empty_budget.new('0', 'Wszystkie', false, '')
+    budgets.unshift(budget)
+    row_structure = lambda { |b| [b.name, b.id, {'data-locked' => b.locked ? 1 : 0, 'data-city' => b.city}] }
+    select('budget', 'budget_id', options_for_select(budgets.map(&row_structure), selected), {}, {:style => 'width:100%'})
+  end
+
+  def options_for_select(container, selected = nil)
+    return container if String === container
+    container = container.to_a if Hash === container
+    selected, disabled = extract_selected_and_disabled(selected)
+
+    options_for_select = container.inject([]) do |options, element|
+      html_attributes = option_html_attributes(element)
+      text, value = option_text_and_value(element)
+      selected_attribute = ' selected="selected"' if option_value_selected?(value, selected)
+      disabled_attribute = ' disabled="disabled"' if disabled && option_value_selected?(value, disabled)
+      options << %(<option value="#{html_escape(value.to_s)}"#{selected_attribute}#{disabled_attribute}#{html_attributes}>#{html_escape(text.to_s)}</option>)
+    end
+
+    options_for_select.join("\n").html_safe
+  end
+
+  def option_text_and_value(option)
+    # Options are [text, value] pairs or strings used for both.
+    case
+    when Array === option
+      option = option.reject { |e| Hash === e }
+      [option.first, option.last]
+    when !option.is_a?(String) && option.respond_to?(:first) && option.respond_to?(:last)
+      [option.first, option.last]
+    else
+      [option, option]
+    end
+  end
+
+  def option_html_attributes(element)
+    return "" unless Array === element
+    html_attributes = []
+    element.select { |e| Hash === e }.reduce({}, :merge).each do |k, v|
+      html_attributes << " #{k}=\"#{ERB::Util.html_escape(v.to_s)}\""
+    end
+    html_attributes.join
+  end
 end

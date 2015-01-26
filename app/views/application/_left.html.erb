@@ -17,18 +17,45 @@
       setTimeout("cicloImagens()", 3 * 1000);
   }
 
-  function filter_by_budget() {
+  function filter_by_budget_change() {
     var budget_id = $("#budget_budget_id").val();
+    var budget_locked = parseInt($("#budget_budget_id option[value='" + budget_id + "']").attr('data-locked'));
+    var budget_city = $("#budget_budget_id option[value='" + budget_id + "']").attr('data-city')
+    console.debug(budget_id);
+    console.debug(budget_locked);
+
+    // update projects
     map.budgetize(budget_id);
+
+    // update project creation button
+    var $addproject = $('#createCauseButton');
+    if (budget_locked) {
+      $addproject.addClass('locked');
+      $('#boxLeft .content').append("<div class='hint'>Tworzenie projektów dla wybranego budżetu zostało zablokowane.</div>")
+    }
+    else {
+      $addproject.removeClass('locked');
+      $('#boxLeft .hint').remove();
+    }
+
+    // update district filter
+    if (budget_city != '') {
+      $(".comboLst > li[data-city='" + budget_city + "']" ).show();
+      $(".comboLst > li[data-city!='" + budget_city + "']" ).hide();
+    }
+    else {
+      $(".comboLst > li").show();
+    }
+    $('.scroll-pane').jScrollPane();
   }
 
   jQuery(document).ready(function() {
     cicloImagens();
     $("#budget_budget_id").select2();
-    $("#budget_budget_id").bind("change", filter_by_budget);
+    $("#budget_budget_id").bind("change", filter_by_budget_change);
   });
-</script>
-<div id="left">
+</script
+><div id="left">
 
 	<div id="bgLogo">
 		<h1><a href="/" id="logo"><img src="/images/logo-sb.png" /></a></h1>
@@ -49,15 +76,9 @@
 			
       <div class="budget-filter" data-step="1" data-intro="Rozpocznij od wybrania interesującego Cię Budżetu." data-position='right'>
         <span>BUDŻET</span>
-        <%= select('budget', 'budget_id', [["Wszystkie", ""]] + @budgets.map { |b| [b.name, b.id] }, {:selected => budget_filter}, {:style => 'width:100%'}) %>
+        <%= budgets_filter_select(@budgets, budget_filter) %>
       </div> 
 
-        <!--
-        <img id='left_banner0' src="/images/eu_curto.png" style='display: none;'></img>
-        <img id='left_banner1' src="/images/parceiros_voluntarios.png" style='display: none;'></img>
-        <img id='left_banner2' src="/images/unisinos.png" style='display: none;'></img>
-        <img id='left_banner3' src="/images/pref_poa.png" style='display: none;'></img>
-        -->
       </a>        				
 		</div>
 	</div>
