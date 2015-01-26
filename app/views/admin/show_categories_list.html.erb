@@ -8,6 +8,7 @@
 <table class="table-list" id="table-users">
 	<tr>
 		<th style="width:50px;"></th>
+		<th style="width:50px;">Marker</th>
 		<th style="width:100px;"><%= user_sortable 'name', "Nazwa" %></th>
 		<th style="width:100px;"><%= user_sortable 'created_at', "Data utworzenia" %></th>
 		<th style="width:100px;">Akcje</th>
@@ -15,9 +16,16 @@
 	<% @categories.each do |category| %>
 					
 		<tr id="user-<%= category.id %>">
-			<td><%=h category.id %></td>
+			<td><%= category.id %></td>
+			<td>
+				<% if not category.marker.url.nil? %>
+					<%= image_tag(category.marker.url) %>
+				<% else %>
+					Brak grafiki
+				<% end %>
+			</td>
 			<td><%=h category.name %></td>
-			<td><%=h category.created_at %></td>
+			<td><%= category.created_at %></td>
 			<td>
 				<%= link_to 'Edycja', edit_category_path(category) %>
 			</td>

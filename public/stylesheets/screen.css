@@ -396,3 +396,24 @@ a.button {cursor:pointer;}
 	font-size: 13px;
 	margin: 10px 0;
 }
+
+#newCauseForm .category select, #newCauseForm .budget select {
+	background: #F9F9F9;
+	border: 1px solid #D5D5D5;
+	height: 31px;
+	padding: 5px 10px;
+	font-size: 11px;
+	color: #5F616E;
+	width:215px;
+}
+
+#left #crieCausa #createCauseButton.locked {
+	background-color: #ccc;
+}
+
+#boxLeft .hint {
+	margin-top:10px;
+	background-color:#eee;
+	color: #666;
+	padding: 8px;
+}

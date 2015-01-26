@@ -88,51 +88,29 @@
                           <textarea id="abstract" name="abstract"></textarea>
                         </div>
 
-                        <div class="local">    
+                        <div class="local">
                             <label for="local">Adres (kod pocztowy lub ulica)</label>
                             <input id="local" name="local" type="text" style="width:245px;" value="<%= params[:local] %>" />
                         </div>
                         
-                        <div class="categoria">
-              <label>Kategoria</label>
-              
-              <a href="javascript:;" class="combo">
-                  <span></span>
-              </a>
-              
-                            <div class="combo-content hidden">
-                			<div class="scroll-pane">
-                                <ul class="comboLst">
-                                <% @categories.each do |category| %>
-																    <li><a id="category_<%= category.id %>" href="javascript:;"> <%= category.name %></a></li>
-                                <% end %>
-                                </ul>
-                            </div>
+                        <div class="category">
+                          <label>Kategoria</label>
+                          <%= select :cause, :category_id, Category.all.map { |c| [c.name, c.id]} %>
                         </div>
-                        </div>
-            <span class="break"><!-- --></span>
-                        <div class="local">    
-                        
+
+                        <span class="break"><!-- --></span>
+
+                        <div class="local">
                         <label for="tags">Tagi</label>
                         <input id="tags" name="tags" type="text" style="width:245px;" class="tc-lightgray" value="Przykład: sport; zdrowie; biznes" onfocus="if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Przykład: sport; zdrowie; biznes'; this.className = 'tc-lightgray';}" />
                       </div>
-                        <div class="budget">
-              <label>Budżet</label>
-              
-              <a href="javascript:;" class="combo">
-                  <span></span>                                
-              </a>
-              
-                            <div class="combo-content hidden">
-                      <div class="scroll-pane">
-                                <ul class="comboLst">
-                                <% @budgets.each do |budget| %>
-                                    <li><a id="budget_<%= budget.id %>" class="<%= budget.id == @budgets.first.id ? 'selected' : '' %>" href="javascript:;"> <%= budget.name %></a></li>
-                                <% end %>
-                                </ul>
-                            </div>
-                        </div>
-                        </div>
+
+
+                      <div class="budget">
+                        <label>Budżet</label>
+                        <%= budgets_select(Budget.all, get_filter_budget) %>
+                      </div>
+
                       <span class="break"><!-- --></span>
                       
                       <div class="mt15">
