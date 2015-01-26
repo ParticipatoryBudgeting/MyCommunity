@@ -229,6 +229,7 @@ img {border:none; display:block;}
 .mb15 {margin-bottom:15px}
 .w180 {width:180px;}
 .w210 {width:210px; margin-top:5px;}
+.w220 {width:210px; margin-top:5px;}
 .w300 {width:300px;}
 .w500 {width:500px;}
 
@@ -395,4 +396,63 @@ a.button {cursor:pointer;}
 	color: white;
 	font-size: 13px;
 	margin: 10px 0;
+}
+
+#mdlCausa2.blue-container{
+	margin-bottom: 140px;
+}
+
+.cause_websites > a{
+	width: 32px;
+	height: 32px;
+	margin:0 2px;
+	display: inline-block;
+}
+
+.links_container{
+	display: inline-block;
+	margin: 20px 0 10px 0;
+}
+
+.links_container .addthis_toolbox{
+	float: left;
+}
+
+.cause_websites .www-fb{
+	background: url('/img/www-fb.png') no-repeat;
+}
+
+.cause_websites .www{
+	background: url('/img/www.png') no-repeat;
+}
+
+.cause_websites .www-yt{
+	background: url('/img/yt.png') no-repeat;
+}
+
+.cause_details{
+	margin-bottom: 10px;
+}
+
+.cause_details ul>li{
+	font-size: 16px;
+}
+
+.cause_details ul>li.label{
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.cause_abstract{
+	font-size: 15px;
+}
+
+.more-details {
+	font-size: 14px;
+	overflow: hidden;
+}
+
+.more-details .details_label{
+	font-weight: bold;
+	font-size: 18px;
 }

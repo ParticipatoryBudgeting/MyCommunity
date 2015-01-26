@@ -63,7 +63,21 @@
 #mdlCausa2 h2,
 #mdlCausa2 h2 {font-size:33px;color:#FFF;position:absolute;top:20px;left:75px;font-weight:normal;}
 #mdlCausa2 .cml {/*width:575px;*/ padding:0 0 0 60px;}
-#mdlCausa2 .boxAutor {position:absolute;top:80px;left:110px;width:497px}
+#mdlCausa2 .boxAutor{
+	/*width: 497px;
+	top: -70px;
+	left: 20px;*/
+	position: relative;
+	top: 0;
+	left: 20px;
+	/*float: left;*/
+}
+
+#mdlCausa2 .left-tab{
+	margin-top: -70px;
+}
+
+
 /* #mdlCausa2 .boxComentario {position:absolute;top:440px;width:510px} antiga */
 /* */
 .conteudo{float:left;}
@@ -107,10 +121,10 @@
 .mdlIn .boxTags {border-top:1px dotted #7DBB00;padding:15px 0 5px;}
 .mdlIn .boxTags span {display:block;width:430px;margin-left:10px;}
 
-.mdlIn .boxAutor {position:absolute;top:80px;left:106px;width:497px}
-.mdlIn .boxAutor .ttls {float:left;}
+.mdlIn .boxAutor {position:absolute;top:80px;left:106px;width:497px; overflow: hidden}
+.mdlIn .boxAutor .ttls {float:left; margin-bottom: 15px;}
 .mdlIn .boxAutor .ttls span {display:inline-block;color:#999;font-size:11px;margin-bottom:5px;}
-.mdlIn .boxAutor .ttls h3 {color:#F48F00;font-size:20px;position:relative;top:0;left:0;width:430px;}
+.mdlIn .boxAutor .ttls h3 {color:#F48F00;font-size:20px;position:relative;top:0;left:0;width:497px;}
 .mdlIn label {display:block; margin:5px 0 2px;color:#7DBD00;font-size:20px;}
 .mdlIn input[type=text] {background:#F9F9F9;border:1px solid #D5D5D5;height:19px;padding:5px 10px;font-size:11px;color:#5F616E;}
 .mdlIn textarea {background:#F9F9F9;border:1px solid #D5D5D5;padding:5px 10px;font-size:11px;color:#5F616E;}
@@ -264,6 +278,7 @@ div#post_image{
 }
 
 #principal_video img {
+	width: 100%;
 	margin-bottom: 5px;
 }
 
