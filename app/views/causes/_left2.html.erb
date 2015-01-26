@@ -28,14 +28,35 @@
   
   <div id="boxLeft">
     <div class="content">
-      <h2 class="tit-explore">POZYCJA</h2>
+      <h2 class="tit-explore">LOKALIZACJA</h2>
+      <div class="details">
+        <ul>
+        <li class="label">Miasto</li>
+        <li ><%= @cause.city %></li>
+        <li class="label">Dzielnica</li>
+        <li><%= @cause.district %></li>
+        <li class="label">Ulica</li>
+        <li><%= @cause.local %></li>
+        </ul>
+      </div>
       <div id="small_map" style="width:186px; height:168px;"></div>
 
       <div id="crieCausa" class="fake-last">
         <a href="/" class="btn-voltarparaomapa">POWRÓT DO MAPY</a>
       </div>
-      <ul id="redesSociais">
-      </ul>
+      <h2 class="tit-explore small">DANE KONTAKTOWE</h2>
+      <div class="details">
+        <ul>
+        <li class="label">Autor</li>
+        <li ><%= @cause.author %></li>
+        <li class="label">Email</li>
+        <li><%= @cause.email %></li>
+        <li class="label">Telefon</li>
+        <li><%= @cause.phone_no %></li>
+        <li class="label">Telefon komórkowy</li>
+        <li><%= @cause.cell_phone_no %></li>
+        </ul>
+      </div>
       <span class="break"><!--  --></span>
       
       <a class="logo-unisinos" href="http://www.unisinos.br/" onclick="GA.trackEvent('banners', 'clique', 'unisinos');" target="_blank">
