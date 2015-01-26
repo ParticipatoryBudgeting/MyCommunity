@@ -1,2 +1,52 @@
-<h1>Budgets#edit</h1>
-<p>Find me in app/views/budgets/edit.html.erb</p>
+<%= render :partial => "form" %>
+
+<script type="text/javascript">
+  $('.boxBottom .postar').bind('click', function() {
+  	var error = false;
+
+    if (!error) {
+    	var data = {
+        	budget: {
+		        name: $('#newCauseForm input[name=name]').val(),
+		        type: $('#newCauseForm input[name=type]').val(),
+		        from: $('#newCauseForm input[name=from]').val(),
+		        to: $('#newCauseForm input[name=to]').val(),
+		        value: $('#newCauseForm input[name=value]').val(),
+		        participants_count: $('#newCauseForm input[name=participants_count]').val(),
+            creation_date: $('#newCauseForm input[name=creation_date]').val(),
+            city: $('#newCauseForm input[name=city]').val(),
+            initiator: $('#newCauseForm input[name=initiator]').val(),
+            reason: $('#newCauseForm input[name=reason]').val(),
+            decision: $('#newCauseForm input[name=decision]').val(),
+            evaluation: $('#newCauseForm input[name=evaluation]').val(),
+            recomendation: $('#newCauseForm input[name=recomendation]').val(),
+            edit_number: $('#newCauseForm input[name=edit_number]').val()
+	      	}
+      	};
+
+     	$.ajax({
+       	url: '<%= update_budget_path + @budget.id.to_s %>',
+       	data: data,
+       	dataType: 'json',
+       	success: function(result) {
+     			if (result.success) {
+           	$.closePopupLayer();
+            location.reload();
+     			}
+       	} 
+     	});
+    }
+  });
+
+  var translations = {
+    previousMonth : 'Poprzedni',
+    nextMonth     : 'Następny',
+    months        : ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],
+    weekdays      : ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'],
+    weekdaysShort : ['Nie','Pon','Wto','Śro','Czw','Pią','Sob']
+}
+  var from_picker = new Pikaday({ field: document.getElementById('from'), i18n: translations });
+  var to_picker = new Pikaday({ field: document.getElementById('to'), i18n: translations });
+  var creation_date = new Pikaday({ field: document.getElementById('creation_date'), i18n: translations });
+
+</script>
