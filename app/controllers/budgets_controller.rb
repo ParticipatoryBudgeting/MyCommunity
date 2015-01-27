@@ -43,4 +43,11 @@ class BudgetsController < ApplicationController
     @user = session[:user]
   end
 
+  def api_index
+    budgets = Budget.all
+    respond_to do |format|
+      format.json { render :json => budgets.to_json }
+    end
+  end
+
 end

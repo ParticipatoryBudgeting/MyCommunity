@@ -73,8 +73,11 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_cause '/admin/cause/edit/:id', :controller => 'admin', :action => 'edit_cause'
   map.update_cause '/admin/cause/update/:id', :controller => 'admin', :action => 'update_cause', :conditions => { :method => :put }
   map.import_cause '/admin/import_cause', :controller => 'admin', :action => 'import_cause', :conditions => { :method => :post }
+
+  # api
+  map.api_budgets '/api/budgets', :controller => 'budgets', :action => 'api_index', :via => :get
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
-  
+
 end

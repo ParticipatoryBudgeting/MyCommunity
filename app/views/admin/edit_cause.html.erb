@@ -102,7 +102,57 @@
   <p>
     <%= f.label 'Użytkownik' %><br />
     <%= f.select :user_id, User.all.map { |c| [c.name, c.id]} %>
-  </p>  
+  </p>
+
+  <p>
+    <%= f.label 'Pełny opis' %><br />
+    <%= f.text_area :full_description %>
+  </p>
+
+  <p>
+    <%= f.label 'Uzasadnienie realizacji projektu' %><br />
+    <%= f.text_area :substantiation %>
+  </p>
+
+  <p>
+    <%= f.label 'Strona Zewnętrzna' %><br />
+    <%= f.text_field :website_url %>
+  </p>
+
+  <p>
+    <%= f.label 'Strona Facebook' %><br />
+    <%= f.text_field :facebook_profile %>
+  </p>
+
+  <p>
+    <%= f.label 'Link do filmu na You Tube' %><br />
+    <%= f.text_field :youtube_url %>
+  </p>
+
+  <p>
+    <%= f.label 'Email do projektodawcy' %><br />
+    <%= f.text_field :originator_email %>
+  </p>
+
+  <p>
+    <%= f.label 'Liczba głosów w preselekcji' %><br />
+    <%= f.text_field :preselection_vote_count %>
+  </p>
+
+  <p>
+    <%= f.label 'Urząd realizujący' %><br />
+    <%= f.text_field :office %>
+  </p>
+
+  <p>
+    <%= f.label 'Wydział realizujący' %><br />
+    <%= f.text_field :department %>
+  </p>
+
+  <p>
+    <%= f.label 'Uwagi miasta do projektu' %><br />
+    <%= f.text_area :note %>
+  </p>
 
   <p>
     <%= f.submit "Zmień" %>
