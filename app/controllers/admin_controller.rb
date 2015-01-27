@@ -38,14 +38,19 @@ class AdminController < ApplicationController
 
   def show_causes
     params[:category] = "0" if params[:category].blank?
+    params[:budget] = "0" if params[:budget].blank?
     where = '(causes.id > 0) and (causes.submited = 1)'
     where << " and (causes.author like '%#{params[:author]}%')" unless params[:author].blank? 
     where << " and (causes.title like '%#{params[:title]}%')" unless params[:title].blank?
     where << " and (causes.abstract like '%#{params[:abstract]}%')" unless params[:abstract].blank?
     where << " and (causes.category_id = '#{params[:category]}')" unless params[:category] == "0"
+    where << " and (causes.budget_id = '#{params[:budget]}')" unless params[:budget] == "0"
+    binding.pry
     @causes2 = Admin.get_causes(where)
     @causes = Cause.paginate :all, :conditions => where, :joins => :category, :page => params[:page], :per_page => 10, :order => "#{cause_sort_column} #{sort_direction}"
-    @categories = [Category.new(:id => 0, :name => 'Todos')] + Category.find(:all)
+    basic_object = Struct.new(nil, :name, :id).new('Wszystkie', 0)
+    @categories = [basic_object] + Category.find(:all)
+    @budgets = [basic_object] + Budget.find(:all)
   end
   
   def show_users_list

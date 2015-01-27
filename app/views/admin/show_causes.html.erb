@@ -9,6 +9,8 @@
 	<%= text_field_tag (:abstract, params[:abstract], :size => 18) %>
 	<%= label_tag "Kategoria" %>
 	<%= select_tag :category, options_from_collection_for_select(@categories, 'id', 'name', params[:category].to_i) %>
+	<%= label_tag "Budżet" %>
+	<%= select_tag :budget, options_from_collection_for_select(@budgets, 'id', 'name', params[:budget].to_i) %>
 	<%= submit_tag 'Filtruj' %>
 <% end %>
 
