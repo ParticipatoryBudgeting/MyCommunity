@@ -23,7 +23,7 @@
 			<td class="author"><%=h budget.author %></td>																							
 			<td>
 				<a href="javascript:;" id="createBudgetButton" onclick="editBudget(<%= budget.id %>)" class="button button-normal"><span>Edytuj</span></a>
-																				
+				<%= link_to "Usuń", admin_destroy_budget_path(budget), :method => :delete %>
 			</td>						
 		</tr>
 	

@@ -6,7 +6,6 @@ gem "capistrano"
 gem "capistrano-ext",     "1.2.1"
 gem "chronic",            "0.6.5"
 gem "mysql",              "2.7"
-gem 'newrelic_rpm'
 gem "nokogiri",					  "1.4.7"
 gem "omniauth",           "~>1.0"
 gem "omniauth-google-oauth2"

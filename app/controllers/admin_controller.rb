@@ -155,6 +155,18 @@ class AdminController < ApplicationController
     flash[:notice] = 'Plik z projektami został zaimportowany'
     redirect_to show_causes_url
   end
+
+  def destroy_budget
+    budget = Budget.find(params[:id])
+    causes_num = Cause.where(:budget_id => budget.id).size
+    if causes_num > 0
+      flash[:error] = 'Istnieją projekty przypisane do budżetu.'
+    else
+      budget.destroy
+      flash[:notice] = 'Budżet został pomyślnie usunięty'
+    end
+    redirect_to show_budgets_path
+  end
   
   private  
   def current_user

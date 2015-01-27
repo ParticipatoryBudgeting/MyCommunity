@@ -59,6 +59,7 @@ ActionController::Routing::Routes.draw do |map|
   map.reject_cause '/admin/reject_cause', :controller => 'admin', :action => 'reject_cause'
   map.update_cause_likes '/admin/update_cause_likes', :controller => 'admin', :action => 'update_cause_likes'
   map.admin_index '/admin/', :controller => 'admin', :action => 'index'
+  map.admin_destroy_budget '/admin/destroy_budget/:id', :controller => 'admin', :action => 'destroy_budget', :via => :delete
 
   map.admin_login '/admin/login', :controller => 'admin', :action => 'login', :via => :post
   map.admin_logout '/admin/logout', :controller => 'admin', :action => 'logout'
