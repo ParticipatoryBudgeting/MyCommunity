@@ -100,157 +100,179 @@
 					<div class="cmr">
 						<div class="cmm">
 							<div class="mdlIn causa" id="mdlInCausa">
+							<div class="left-tab">
 								<div class="boxAutor">
-									<div>
-										<strong>
-											<%= I18n.l(@cause.created_at.to_date, :format => :long) %><br/>
-											<%= "#{@cause.local.split(',')[0]}, #{@cause.local.split(',')[1]}" %>
-										</strong>
+										<div class="ttls">
+											<h3><%= @cause.id %>.<%= @cause.title %></h3>
+										</div>
 									</div>
-									<div class="ttls">
-										<h3><%= @cause.title %></h3>
-									</div>
-								</div>
-
-							<% if @cause.rich_contents.size > 0 -%>
-								<div class="rich_content_videos w500">
-								<div id="principal_video">
-								<% if @cause.rich_contents[0].video_type == "youtube" -%>
-                                	<iframe width="490" height="360" src="http://www.youtube.com/embed/<%= @cause.rich_contents.videos[0].video_id %>?wmode=transparent" frameborder="0" allowfullscreen></iframe>
-		                        <% elsif @cause.rich_contents[0].video_type == "vimeo" -%>
-		                            <iframe src="http://player.vimeo.com/video/<%= @cause.rich_contents.videos[0].video_id %>?title=0&amp;byline=0&amp;portrait=0" width="490" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-		                       <% elsif @cause.rich_contents[0].kind == 1 %>
-									<img src="<%= @cause.rich_contents[0].image_url%>" height="360" width="490" ></img>
-								<% end -%>
-		                        </div>
-								<div id="videos_s" style="display:block">
-									<%= hidden_field_tag 'qtd_videos_s', @cause.rich_contents.size %>
-			                       	<a id="vd_seta_esq" title="Navegar esquerda" href="javascript:;"><div class="setas_esq"></div></a>
-			                        <a id="vd_seta_dir" title="Navegar direita" href="javascript:;"><div class="setas_dir"></div></a>
-			                        <table>
-		                            	<tr>
-			        	                <% @cause.rich_contents.each_with_index do |rc, i| -%>
-				                            <% if rc.kind == 1%>
-																			<td>
-																				<a href="javascript:;">
-																					<img src="<%= rc.image_url %>" height="75" width="100" alt="image" value="<%= rc.image_url %>"></img>
-																				</a>
-																			</td>
-																		<% elsif rc.kind == 2%>
-																			<% if rc.video_type == "youtube" -%>
-					                        	    <td>
-					                        	    	<a href="javascript:;">
-					                        	    		<img src='http://img.youtube.com/vi/<%= rc.video_id %>/default.jpg' width="100" height="75" alt="youtube" value="<%= rc.video_id %>"></img>
-					                        	    	</a>
-					                        	    </td>
-					                            <% elsif rc.video_type == "vimeo" -%>
-					                                <td>
-					                                	<a href="javascript:;">
-					                                		<img src='<%= JSON.parse(open("http://vimeo.com/api/v2/video/#{rc.video_id}.json").read).first["thumbnail_small"] %>' width="100" height="75" alt="vimeo" value="<%= rc.video_id %>"></img>
-					                                	</a>
-					                                </td>
-					                            <% end -%>
-											<% end %>
-				                        <% end -%>
-				                        </tr>
-				                    </table>
-					            </div>
-								</div>
-						        <div id="videos_espaco_s" style="clear: both; margin-bottom:95px; display:block;"></div>
-						    <% else -%>
-						    <div class="rich_content_videos w500">
+								<% if @cause.rich_contents.size > 0 -%>
+									<div class="rich_content_videos w500">
 									<div id="principal_video">
-										<div id="stv_show">
-						    		</div>
-						    	</div>
-						    </div>
-						    <% end -%>
-
-						    <div class="conteudo">
-									<div class="fl w210">
-										<span class="button button-autor"><span>AUTOR</span></span>
-										<div id="warning"></div>
-										<%= user_image(@cause.user) %>
-										<div class="userinfo">
-											<span class="userinfo-name"><%= @cause.user.name %></span>
-											<span class="userinfo-local"><%= @cause.user.location %></span>
-										</div>
-										<span class="break"></span>
-
-										<span class="dotted-line"></span>
-										<span class="button button-share"><span>UDOSTĘPNIJ</span></span>
-										<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-											<a class="addthis_button_facebook"></a>
-											<a class="addthis_button_twitter"></a>
-											<a class="addthis_button_email"></a>
-											<a class="addthis_button_orkut"></a>
-											<a class="addthis_button_compact"></a>
-										</div>
-										<script type="text/javascript">
-											var addthis_config = {
-												"data_track_clickback" : true
-											};
-										</script>
-										<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4d889daf1a5fa592"></script>
-										<!-- AddThis Button END -->
-										<!--
-										<span class="dotted-line"></span>
-										<span class="button button-tags">
-											<span>TAGI</span>
-										</span>
-										<p>
-											<%= @cause.tag_list %>
-										</p>
-										-->
+									<% if @cause.rich_contents[0].video_type == "youtube" -%>
+	                                	<iframe width="490" height="360" src="http://www.youtube.com/embed/<%= @cause.rich_contents.videos[0].video_id %>?wmode=transparent" frameborder="0" allowfullscreen></iframe>
+			                        <% elsif @cause.rich_contents[0].video_type == "vimeo" -%>
+			                            <iframe src="http://player.vimeo.com/video/<%= @cause.rich_contents.videos[0].video_id %>?title=0&amp;byline=0&amp;portrait=0" width="490" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			                       <% elsif @cause.rich_contents[0].kind == 1 %>
+										<img src="<%= @cause.rich_contents[0].image_url%>" height="360" width="490" ></img>
+									<% end -%>
+			                        </div>
+									<div id="videos_s" style="display:block">
+										<%= hidden_field_tag 'qtd_videos_s', @cause.rich_contents.size %>
+				                       	<a id="vd_seta_esq" title="Navegar esquerda" href="javascript:;"><div class="setas_esq"></div></a>
+				                        <a id="vd_seta_dir" title="Navegar direita" href="javascript:;"><div class="setas_dir"></div></a>
+				                        <table>
+			                            	<tr>
+				        	                <% @cause.rich_contents.each_with_index do |rc, i| -%>
+					                            <% if rc.kind == 1%>
+																				<td>
+																					<a href="javascript:;">
+																						<img src="<%= rc.image_url %>" height="75" width="100" alt="image" value="<%= rc.image_url %>"></img>
+																					</a>
+																				</td>
+																			<% elsif rc.kind == 2%>
+																				<% if rc.video_type == "youtube" -%>
+						                        	    <td>
+						                        	    	<a href="javascript:;">
+						                        	    		<img src='http://img.youtube.com/vi/<%= rc.video_id %>/default.jpg' width="100" height="75" alt="youtube" value="<%= rc.video_id %>"></img>
+						                        	    	</a>
+						                        	    </td>
+						                            <% elsif rc.video_type == "vimeo" -%>
+						                                <td>
+						                                	<a href="javascript:;">
+						                                		<img src='<%= JSON.parse(open("http://vimeo.com/api/v2/video/#{rc.video_id}.json").read).first["thumbnail_small"] %>' width="100" height="75" alt="vimeo" value="<%= rc.video_id %>"></img>
+						                                	</a>
+						                                </td>
+						                            <% end -%>
+												<% end %>
+					                        <% end -%>
+					                        </tr>
+					                    </table>
+						            </div>
 									</div>
-									<div class="center-tab" id="class_abstract_div">
-									<% if (session[:user] && (@cause.user ==  session[:user] || session[:user].level == 2)) %>
-										<% if @cause.protocol == "-1" %>
-											<script>
-												jQuery(document).ready(function(){
-												  jQuery("#send_to_falapoa").click(function(){
-												    // openFalapoaOptin(<%= @cause.id %>);
-												  });
-												});
+							        <div id="videos_espaco_s" style="clear: both; margin-bottom:95px; display:block;"></div>
+							    <% else -%>
+							    <div class="rich_content_videos w500">
+										<div id="principal_video">
+											<div id="stv_show">
+							    		</div>
+							    	</div>
+							    </div>
+							    <% end -%>
+
+							    <div class="w500 links_container">
+							    	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+												<a class="addthis_button_facebook"></a>
+												<a class="addthis_button_twitter"></a>
+												<a class="addthis_button_email"></a>
+												<a class="addthis_button_orkut"></a>
+												<a class="addthis_button_compact"></a>
+											</div>
+											<div class="fr cause_websites">
+												<a href="<%= @cause.website_url %>" class="www">www</a>
+												<a href="<%= @cause.facebook_profile %>" class="www-fb">fb</a>
+												<a href="<%= @cause.youtube_url %>" class="www-yt">yt</a>
+											</div>
+							    </div>
+
+							    <div class="conteudo">
+										<div class="fl w220">
+											<div class="cause_details">
+								        <ul>
+									        <li class="label">Koszt realizacji</li>
+									        <li ><%= @cause.total_cost %></li>
+									        <li class="label">Koszt utrzymania</li>
+									        <li><%= @cause.upkeep_cost %></li>
+									        <li class="label">Liczba głosów w preselekcji</li>
+									        <li><%= @cause.preselection_vote_count %></li>
+									        <li class="label">Liczba głosów</li>
+									        <li><%= @cause.vote_count %></li>
+									        <li class="label">Urząd realizujący</li>
+									        <li><%= @cause.office %></li>
+									        <li class="label">Wydział realizujący</li>
+									        <li><%= @cause.department %></li>
+								        </ul>
+									     </div>
+
+											<script type="text/javascript">
+												var addthis_config = {
+													"data_track_clickback" : true
+												};
 											</script>
-											<a href='#' id='editar' >Edycja</a>
-											<!-- | <a href="#" id="send_to_falapoa" style="font-weight: bold">Enviar ao Fala Porto Alegre</a> -->
+											<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4d889daf1a5fa592"></script>
+											<!-- AddThis Button END -->
+											<!--
+											<span class="dotted-line"></span>
+											<span class="button button-tags">
+												<span>TAGI</span>
+											</span>
+											<p>
+												<%= @cause.tag_list %>
+											</p>
+											-->
+										</div>
+										<div class="center-tab" id="class_abstract_div">
+										<% if (session[:user] && (@cause.user ==  session[:user] || session[:user].level == 2)) %>
+											<% if @cause.protocol == "-1" %>
+												<script>
+													jQuery(document).ready(function(){
+													  jQuery("#send_to_falapoa").click(function(){
+													    // openFalapoaOptin(<%= @cause.id %>);
+													  });
+													});
+												</script>
+												<a href='#' id='editar' >Edycja</a>
+												<!-- | <a href="#" id="send_to_falapoa" style="font-weight: bold">Enviar ao Fala Porto Alegre</a> -->
+											<% end %>
 										<% end %>
-									<% end %>
-										<p>
-											<%= @cause.abstract %>
-										</p>
+											<p class="cause_abstract">
+												<%= @cause.abstract %>
+											</p>
+										</div>
 									</div>
-								</div>
-								<% if @falapoa %>									
-									<%#= render :partial => 'falapoa' %>
-								<% end %>
-								<div class="boxComentario">
-									<div id="fb-root"></div>
-									<script>
-										window.fbAsyncInit = function() {
-											FB.init({
-												appId : '895835653762209',
-												status : true,
-												cookie : true,
-												xfbml : true
-											});
+									<div class="w500 more-details">
+										<span class="w500 dotted-line"></span>
+										<div class="details_label">Pełny opis</div>
+										<p><%= @cause.full_description %></p>
+										<span class="w500 dotted-line"></span>
+										<div class="details_label">Uwagi miasta do projektu</div>
+										<p><%= @cause.note %></p>
+										<span class="w500 dotted-line"></span>
+										<div class="details_label">Uwagi mieszkańców</div>
+										<p><%= @cause.substantiation %></p>
+										<span class="w500 dotted-line"></span>
+										<div class="details_label">Udostępnij</div>
+									</div>
+									<% if @falapoa %>									
+										<%#= render :partial => 'falapoa' %>
+									<% end %>
+									<div class="boxComentario">
+										<div id="fb-root"></div>
+										<script>
+											window.fbAsyncInit = function() {
+												FB.init({
+													appId : '895835653762209',
+													status : true,
+													cookie : true,
+													xfbml : true
+												});
 
-											FB.Event.subscribe('xfbml.render', function(response) {
-												setTimeout("adjustSize()", 1000);
-											});
-										};
+												FB.Event.subscribe('xfbml.render', function(response) {
+													setTimeout("adjustSize()", 1000);
+												});
+											};
 
-										// Load the SDK Asynchronously
-										(function(d){
-											var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-											if (d.getElementById(id)) {return;}
-											js = d.createElement('script'); js.id = id; js.async = true;
-											js.src = "//connect.facebook.net/en_US/all.js";
-											ref.parentNode.insertBefore(js, ref);
-										}(document));
-									</script>									
-									<div class="fb-comments" data-href="<%= request.url %>" data-num-posts="30"></div>
+											// Load the SDK Asynchronously
+											(function(d){
+												var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+												if (d.getElementById(id)) {return;}
+												js = d.createElement('script'); js.id = id; js.async = true;
+												js.src = "//connect.facebook.net/en_US/all.js";
+												ref.parentNode.insertBefore(js, ref);
+											}(document));
+										</script>									
+										<div class="fb-comments" data-href="<%= request.url %>" data-num-posts="30"></div>
+									</div>
 								</div>
 
 								<div class="right-tab">
@@ -504,7 +526,7 @@ $(document).ready(function() {
 <script type="text/javascript">
 	var adjustSize = function() {
 		$(window).resize();
-		$("#inner").height($(".fb_iframe_widget").height() + $("#class_abstract_div").height() + 1200);
+		// $("#inner").height($(".fb_iframe_widget").height() + $("#class_abstract_div").height() + 1200);
 	}
 
 	var processSVData = function(data, status) {
