@@ -38,7 +38,7 @@
   <div id="inner">
     <div id="maps">
       <div class="link-screenlocker" onclick="goToMap()"></div>
-      <div id="mdlCausa2" class="blue-container">
+      <div id="mdlCausa2" class="blue-container budget-view">
       <div class="header">
         <a href="/" class="close-button">close</a>
       </div>
@@ -47,7 +47,7 @@
           <div class="mdlPin">
             <!-- -->
           </div>
-          <h2>test</h2>
+          <!-- <h2>test</h2> -->
           <div class="ctl">
             <!-- -->
           </div>
@@ -60,13 +60,75 @@
             <div class="cmm">
               <div class="mdlIn causa" id="mdlInCausa">
                 <div class="left-tab">
-                
+                  <div class="boxAutor">
+                    <div class="ttls">
+                      <h3><%= @budget.type %> - <%= @budget.name %></h3>
+                    </div>
+                  </div>
+                  <div class="fl w220 details">
+                    <span>Data utworzenia: <strong><%= @budget.creation_date %></strong></span>
+                    <span>Data rozpoczęcia: <strong><%= @budget.from %></strong></span>
+                    <span>Data zakończenia: <strong><%= @budget.to %></strong> </span>
+                  </div>
+                  <div class="center-tab details">
+                    Kwota budżetu<br />
+                    <span class="cost"><%= @budget.value %></span>
+                  </div>
+                  <div class="w500 details two-columns">
+                    <div class="w250 fl">
+                      <strong>liczba osób biorących udział</strong> <br />
+                      <%= @budget.participants_count %>
+                     </div>
+                    <div class="w250 fl">
+                      <strong>liczba zgłoszonych projektów</strong> <br />
+                      0
+                    </div>
+                  </div>
+
+                  <span class="w500 dotted-line"></span>
+                  <div class="w500">
+                    <span class="label">Z jakim wyprzedzeniem zaczęto wprowadzanie budżetu</span>
+                    <p>0</p>
+                  </div>
+
+                  <span class="w500 dotted-line"></span>
+                  <div class="w500">
+                    <span class="label">W jaki sposób mieszkańcy podejmowali decyzję?</span>
+                    <p><%= @budget.decision %></p>
+                  </div>
+
+                  <span class="w500 dotted-line"></span>
+                  <div class="w500">
+                    <span class="label">W jaki sposób przeprowadzono ewaluację projektu?</span>
+                    <p><%= @budget.evaluation %></p>
+                  </div>
+
+                  <span class="w500 dotted-line"></span>
+                  <div class="w500">
+                    <span class="label">Kto był inicjatorem wprowadzenia?</span>
+                    <p><%= @budget.initiator %></p>
+                  </div>
+
+                  <span class="w500 dotted-line"></span>
+                  <div class="w500">
+                    <span class="label">Dlaczego zdecydowano się na wprowadzenie?</span>
+                    <p><%= @budget.reason %></p>
+                  </div>
+
+                  <span class="w500 dotted-line"></span>
+                  <div class="w500">
+                    <span class="label">Rekomendacja wprowadzenia budżetu partycypacyjnego</span>
+                    <p><%= @budget.recomendation %></p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="footer">
+          <!--  -->
+        </div>
     </div>
     <%= render :partial => '/application/top' %>
     <%= render :partial => 'left2', :cause => @cause%>
