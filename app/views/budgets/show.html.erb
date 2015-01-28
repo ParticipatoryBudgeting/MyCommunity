@@ -1,47 +1,77 @@
-<%= render :partial => "form" %>
+<% require 'open-uri' %>
 
-<script type="text/javascript">
-  $('.boxBottom .postar').bind('click', function() {
-  	var error = false;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl-PL" xmlns:fb="http://ogp.me/ns/fb#">
+  <head>
+    <title><%= @budget.name %> | mapy.budżet-partycypacyjny.pl</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+    <meta name="distribution" content="global" />
+    <meta name="language" content="pl-PL" />
+    <meta name="robots" content="follow, all" />
+    <meta name="description" content="<%= @budget.name %>" />
+    <meta name="keywords" content="" />
+    <meta property="og:title" content="<%= @budget.name %>" />
+    <meta property="og:image" content="<%= root_url %>img/logo.png" />
+    <meta property="og:site_name" content="mapy.budzet-partycypacyjny.pl" />
+    <meta property="fb:admins" content="100002180867119" />
+    <link rel="author" href="" title="" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <%= stylesheet_link_tag('modal') %>
+    <%= stylesheet_link_tag('jquery.jscrollpane') %>
+    <%= stylesheet_link_tag('screen') %> <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <%= javascript_include_tag('jquery-1.4.2.min') %>
+    <%= javascript_include_tag('jquery.mousewheel') %>
+    <%= javascript_include_tag('mwheelIntent') %>
+    <%= javascript_include_tag('jquery.jscrollpane.min') %>
+    <%= javascript_include_tag('jsii-1.0.0') %>
+    <%= javascript_include_tag('jquery.jmpopups-0.5.1') %>
+    <%= javascript_include_tag('jquery.twitter') %>
+    <%= javascript_include_tag('jquery-ui-1.8.11.custom.min') %>
+    <%= javascript_include_tag('jquery.cookie.js') %>
+    <%= javascript_include_tag('modal') %>
+    <%= javascript_include_tag('maps') %>
+    <%= javascript_include_tag "ckeditor/ckeditor.js"%>
 
-    	
-    if (!error) {
-    	var data = {
-        	budget: {
-        		id: "<%= @budget.id %>",
-		        name: $('#newCauseForm input[name=name]').val(),
-		        type: $('#newCauseForm input[name=type]').val(),
-		        from: $('#newCauseForm input[name=from]').val(),
-		        to: $('#newCauseForm input[name=to]').val(),
-		        value: $('#newCauseForm input[name=value]').val(),
-		        participants_count: $('#newCauseForm input[name=participants_count]').val()
-	      	}
-      	};
-        
-     	$.ajax({
-       	url: '<%= update_budget_path %>',
-       	data: data,
-       	dataType: 'json',
-       	success: function(result) {
-     			if (result.success) {
-            var budget = result.budget.budget;
-            updateRow(budget);   
-           	$.closePopupLayer();
+</head>
+<body class="internal">
+  <div id="inner">
+    <div id="maps">
+      <div class="link-screenlocker" onclick="goToMap()"></div>
+      <div id="mdlCausa2" class="blue-container">
+      <div class="header">
+        <a href="/" class="close-button">close</a>
+      </div>
+      <div class="content">
+        <div class="ctm">
+          <div class="mdlPin">
+            <!-- -->
+          </div>
+          <h2>test</h2>
+          <div class="ctl">
+            <!-- -->
+          </div>
+          <div class="ctr">
+            <!-- -->
+          </div>
+        </div>
+        <div class="cml">
+          <div class="cmr">
+            <div class="cmm">
+              <div class="mdlIn causa" id="mdlInCausa">
+                <div class="left-tab">
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render :partial => '/application/top' %>
+    <%= render :partial => 'left2', :cause => @cause%>
+    <%= render :partial => '/application/footer' %> <span class="break"><!--  --></span>
+    </div>
 
-     			}
-       	} 
-     	});
-    }
-  });
-
-  var updateRow = function(row){
-    var budget = $("#budget-"+row.id);
-    budget.find(".name").text(row.name);
-    budget.find(".type").text(row.type);
-    budget.find(".from").text(row.from);
-    budget.find(".to").text(row.to);
-    budget.find(".participants_count").text(row.participants_count);
-    budget.find(".value").text(row.value);
-  }
-
-</script>
+  </body>
+</html>

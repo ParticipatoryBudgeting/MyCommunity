@@ -39,6 +39,7 @@ class BudgetsController < ApplicationController
 
   def show
     @budget = Budget.find params[:id]
+    @locations = Cause.all(:group => 'city, district').group_by { |cause| cause.city }
     @action = "Utwórz"
     @user = session[:user]
   end
