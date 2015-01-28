@@ -224,6 +224,18 @@
 				$('#filter_reset').bind('click', function() {
 					map.reset_filter();
 				});
+
+				$('#top_categories a').bind('click', function() {
+					$(this).toggleClass('selected');
+				});
+
+				$('#top_categories a').each(function(index) {
+					var id = $(this).attr('data-id');
+					var categories = cookieList('categories');
+					if (categories.has(id)) {
+						$(this).addClass('selected');
+					}
+				});
 			});	
 		</script>
 		<%= javascript_include_tag "intro.js" %>

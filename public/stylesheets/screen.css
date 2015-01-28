@@ -477,3 +477,11 @@ a.button {cursor:pointer;}
 	color: #666;
 	padding: 8px;
 }
+
+#top_categories li a.selected {
+	color: rgba(35, 72, 91, 0.46);
+}
+
+#top_categories li a {
+	color: #23485B;
+}
