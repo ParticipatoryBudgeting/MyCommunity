@@ -68,16 +68,16 @@
 				<a href="javascript:;" id="createCauseButton" class="lnkEscrever">DODAJ PROJEKT</a>
 			</div>
 
-			<ul id="redesSociais">
-			</ul>
+			<ul id="redesSociais"></ul>
 			<span class="break"><!--  --></span>
 			
       <div class="budget-filter" data-step="1" data-intro="Rozpocznij od wybrania interesującego Cię Budżetu." data-position='right'>
         <span>BUDŻET</span>
         <%= budgets_filter_select(@budgets, budget_filter) %>
-      </div> 
+      </div>
 
-      </a>        				
+      <span class="break"><!--  --></span>
+      <a href="/reports/causes.csv" id="project_export">Eksport projektów do Excela</a>
 		</div>
 	</div>
 
