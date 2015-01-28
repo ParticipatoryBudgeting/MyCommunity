@@ -46,6 +46,10 @@
 
                         <div style="clear: both;" />
 
+                        <label for="locked">Zablokowany</label>
+                        <%= check_box :budget, :locked, {:checked => @budget.locked} %>
+                        <div style="clear: both;" />
+
                         <label for="city">Miasto</label>
                         <input id="city" name="city" type="text" style="width:463px;float:left;" maxlength="80" value="<%= @budget.city %>" />
 
