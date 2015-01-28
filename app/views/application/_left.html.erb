@@ -1,5 +1,5 @@
  <script type="text/javascript">
-  links = new Array("http://www.eucurtoeucuido.com.br/","http://www.parceirosvoluntarios.org.br/","http://www.unisinos.br/", "http://www.portoalegre.rs.gov.br/");
+  links = [];
   
   imagemAtual = 0;
   numImagens = links.length;
@@ -21,8 +21,6 @@
     var budget_id = $("#budget_budget_id").val();
     var budget_locked = parseInt($("#budget_budget_id option[value='" + budget_id + "']").attr('data-locked'));
     var budget_city = $("#budget_budget_id option[value='" + budget_id + "']").attr('data-city')
-    console.debug(budget_id);
-    console.debug(budget_locked);
 
     // update projects
     map.budgetize(budget_id);

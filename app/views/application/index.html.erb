@@ -59,6 +59,7 @@
 			var start = function(){
 				if (includeMap) {
 					map = new Map();
+					filter_by_budget_change();
 					map.draw();
 				}
 				<% if params['q'].present? %>
