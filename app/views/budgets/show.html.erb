@@ -82,14 +82,14 @@
                      </div>
                     <div class="w250 fl">
                       <strong>Liczba zgłoszonych projektów</strong> <br />
-                      10000
+                      <span><%= @budget.causes.count %></span>
                     </div>
                   </div>
 
                   <span class="w500 dotted-line"></span>
                   <div class="w500">
                     <span class="label">Z jakim wyprzedzeniem zaczęto wprowadzanie budżetu</span>
-                    <p>0</p>
+                    <p><%= display_pre_days(@budget) %></p>
                   </div>
 
                   <span class="w500 dotted-line"></span>
