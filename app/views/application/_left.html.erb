@@ -45,6 +45,12 @@
       $(".comboLst > li").show();
     }
     $('.scroll-pane').jScrollPane();
+
+    // update project info and links
+    $('#budget_details').remove();
+    if (budget_id > 0)
+      $('#boxLeft .content').append("<a id='budget_details' href='/budgets/" + budget_id + "'>Informacje o budżecie</a>");
+
   }
 
   jQuery(document).ready(function() {

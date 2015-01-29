@@ -499,3 +499,16 @@ a#project_export{
 	text-align:center;
 	margin-top:5px;
 }
+
+a#budget_details {
+	padding: 5px 0 5px 0;
+	background-color: #C7E1FF;
+	color: #3795FF;
+	font-size: 12px;
+	font-weight: normal;
+	display: inline-block;
+	width: 100%;
+	margin-right: 5px;
+	text-align: center;
+	margin-top: 5px;
+}
