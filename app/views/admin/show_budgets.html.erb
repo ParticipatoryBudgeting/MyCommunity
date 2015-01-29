@@ -25,7 +25,7 @@ var editBudget = function(id){
 	$.openPopupLayer({
 		name: 'mdlBudget',
 		width: 710,
-		url: '/budgets/show/'+id,
+		url: '/budgets/edit/'+id,
 		success: function() {
 			$('#newCauseForm input[name=name]').focus();
 			$("#left").height("1500px");
