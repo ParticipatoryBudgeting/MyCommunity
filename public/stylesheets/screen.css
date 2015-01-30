@@ -512,3 +512,21 @@ a#budget_details {
 	text-align: center;
 	margin-top: 5px;
 }
+
+ul#side_causes {
+	margin-top:30px;
+}
+
+ul#side_causes li {
+	list-style-type: disc;
+	margin-top: 5px;
+}
+
+ul#side_causes li a {
+	font-weight: normal;
+	color:#000;
+}
+
+ul#side_causes li a:hover {
+	color: #7dbd00;
+}

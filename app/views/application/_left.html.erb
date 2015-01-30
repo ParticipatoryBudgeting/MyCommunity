@@ -38,8 +38,8 @@
 
     // update district filter
     if (budget_city != '') {
-      $(".comboLst > li[data-city='" + budget_city + "']" ).show();
-      $(".comboLst > li[data-city!='" + budget_city + "']" ).hide();
+      $("#comboDistricts .comboLst > li[data-city='" + budget_city + "']" ).show();
+      $("#comboDistricts .comboLst > li[data-city!='" + budget_city + "']" ).hide();
     }
     else {
       $(".comboLst > li").show();
