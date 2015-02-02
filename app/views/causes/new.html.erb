@@ -9,116 +9,180 @@
     <div class="cml">
         <div class="cmr">
             <div class="cmm">
-                <div class="mdlIn escrever">
+                <div class="mdlIn escrever" id="tabs">
                     <h3>To jest twoja przestrzeń, współpracuj!</h3>
                     <p>Pomoc przekształcić nasze miasto. Zarejestruj się i podziel się miejscami.</p>
-                
-                    <fieldset id="newCauseForm" class="mb15">
-                        <input name="id" type="hidden" value="<%= @cause.id %>"/>
 
-                        <!--
-                        <label for="author">Autor</label>
-                        <input id="author" name="author" type="text" style="width:300px;" value="<%= @user.name %>"/>
-												
-												<label for="author">Email</label>
-                        <input id="author" name="email" type="text" style="width:300px;" value="<%= @user.email %>"/>
-												
-												<label for="author">Telefone (opcional)</label>
-                        <input id="author" name="phone_no" type="text" style="width:300px;" value=""/>
-												
-												<label for="author">Telefone celular(opcional)</label>
-                        <input id="author" name="cell_phone_no" type="text" style="width:300px;" value=""/>
-                        -->
-                    
-                        <label for="title">Tytuł</label>
-                        <input id="title" name="title" type="text" style="width:463px;float:left;" maxlength="80" />
-                        <span class="ctdor"><strong id="titleLimit">80</strong></span>
+                    <ul class="tabs-container">
+                      <li id="show-tabs-1">Projekt</li>
+                      <li id="show-tabs-2">Administracja</li>
+                    </ul>
 
-                        <div style="clear: both;" />
-                        <label for="title">Zdjęcie, film lub mapa</label>
-                        <div id="imgs">
-                          <a id="ft" alt="false" title="Inserir fotos" href="javascript:;"><div id="img_foto" /></a>
-                          <a id="vd" alt="false" title="Inserir vídeos" href="javascript:;"><div id="img_video" /></a>
-                          <a id="mp" alt="false" title="Inserir mapas" href="javascript:;"><div id="img_mapa" /></a>
-                        </div>
-                        <div style="clear: both;" />
+                    <div id="tabs-1">
+                      <fieldset id="newCauseForm" class="mb15">
+                          <input name="id" type="hidden" value="<%= @cause.id %>"/>
 
-                        <div id="ft_add">
-                          <div id="upload_image">
-                            <label for="image_file">Plik na dysku</label>
-                          <div id="upload_button"></div>
-                                      </div>
-                          <div id="post_image">
-                          <label for="title">URL pliku w sieci</label>
-                          <input id="image_url" name="image_url" type="text" style="width:305px;" maxlength="80" value="Adres URL obrazu" /><br />
-                          <span>Jeśli adres jest prawidłowy, obraz zostanie załadowany poniżej</span>
-                          </div>
-                        </div>
+                          <!--
+                          <label for="author">Autor</label>
+                          <input id="author" name="author" type="text" style="width:300px;" value="<%= @user.name %>"/>
+  												
+  												<label for="author">Email</label>
+                          <input id="author" name="email" type="text" style="width:300px;" value="<%= @user.email %>"/>
+  												
+  												<label for="author">Telefone (opcional)</label>
+                          <input id="author" name="phone_no" type="text" style="width:300px;" value=""/>
+  												
+  												<label for="author">Telefone celular(opcional)</label>
+                          <input id="author" name="cell_phone_no" type="text" style="width:300px;" value=""/>
+                          -->
+                      
+                          <label for="title">Tytuł</label>
+                          <input id="title" name="title" type="text" style="width:463px;float:left;" maxlength="80" />
+                          <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
-                        <div id="vd_add">
-                          <label for="title">YouTube lub Vimeo</label>
-                          <input id="title" name="video_url" type="text" style="width:463px;float:left;" maxlength="80" value="Adres URL wideo" />
                           <div style="clear: both;" />
-                          <span>Jeśli adres jest prawidłowy, obraz zostanie załadowany poniżej</span>
-                          <hr />
-                        </div>
-
-                        <div id="mp_add">
-                          <label for="title">Mapa</label>
-                          <hr />
+                          <div style="float:left; width:50%;">
+                            <label for="title">Zdjęcie, film lub mapa</label>
+                            <div id="imgs">
+                              <a id="ft" alt="false" title="Inserir fotos" href="javascript:;"><div id="img_foto" /></a>
+                              <a id="vd" alt="false" title="Inserir vídeos" href="javascript:;"><div id="img_video" /></a>
+                              <a id="mp" alt="false" title="Inserir mapas" href="javascript:;"><div id="img_mapa" /></a>
+                            </div>
+                          </div>
+                          <div style="float:left; width:50%;">
+                            <label for="title">Linki zewnętrzne</label>
+                            <div id="imgs2">
+                              <a id="www" alt="false" href="javascript:;"><div id="img_www" /></a>
+                              <a id="fb_www" alt="false" href="javascript:;"><div id="img_fb" /></a>
+                              <a id="blank" alt="false" href="javascript:;"><div id="img_blank" /></a>
+                            </div>
+                          </div>
                           <div style="clear: both;" />
-                          <div id="stv_map">
+
+                          <div id="ft_add">
+                            <div id="upload_image">
+                              <label for="image_file">Plik na dysku</label>
+                            <div id="upload_button"></div>
+                                        </div>
+                            <div id="post_image">
+                            <label for="title">URL pliku w sieci</label>
+                            <input id="image_url" name="image_url" type="text" style="width:305px;" maxlength="80" value="Adres URL obrazu" /><br />
+                            <span>Jeśli adres jest prawidłowy, obraz zostanie załadowany poniżej</span>
+                            </div>
                           </div>
-                        </div>
 
-                      	<div style="clear: both;" />
-                          <div id="videos">
-                            <a id="vd_seta_esq" title="Navegar esquerda" href="javascript:;"><div class="setas_esq" /></a>
-                            <a id="vd_seta_dir" title="Navegar direita" href="javascript:;"><div class="setas_dir" /></a>
-                            <table><tr></tr></table>
+                          <div id="vd_add">
+                            <label for="title">YouTube lub Vimeo</label>
+                            <input id="title" name="video_url" type="text" style="width:463px;float:left;" maxlength="80" value="Adres URL wideo" />
+                            <div style="clear: both;" />
+                            <span>Jeśli adres jest prawidłowy, obraz zostanie załadowany poniżej</span>
+                            <hr />
                           </div>
-                          <div id="videos_espaco" style="clear: both; margin-bottom:90px" />
-                        <label for="abstract">Opis</label>
 
-                        <!--
-                        <textarea id="abstract" name="abstract" style="width:463px;height:110px;float:left;" onkeyup="limitTextArea(this, 525, '#abstractLimit')" onblur="limitTextArea(this, 525, '#abstractLimit')"></textarea>
-                        -->
-                        
-                        <div style="width: 483px; height: 280px">
-                          <textarea id="abstract" name="abstract"></textarea>
+                          <div id="mp_add">
+                            <label for="title">Mapa</label>
+                            <hr />
+                            <div style="clear: both;" />
+                            <div id="stv_map">
+                            </div>
+                          </div>
+
+                          <div id="www_add">
+                            <label for="title">Adres strony projektu</label>
+                            <input id="www_url" name="www_url" type="text" style="width:305px;" maxlength="80" value="" />
+                          </div>
+
+                          <div id="fb_www_add">
+                            <label for="title">Adres strony na facebook'u</label>
+                            <input id="fb_url" name="fb_url" type="text" style="width:305px;" maxlength="80" value="" />    
+                          </div>
+
+                        	<div style="clear: both;" />
+                            <div id="videos">
+                              <a id="vd_seta_esq" title="Navegar esquerda" href="javascript:;"><div class="setas_esq" /></a>
+                              <a id="vd_seta_dir" title="Navegar direita" href="javascript:;"><div class="setas_dir" /></a>
+                              <table><tr></tr></table>
+                            </div>
+                            <div id="videos_espaco" style="clear: both; margin-bottom:90px" />
+                          <label for="abstract">Opis</label>
+
+                          <!--
+                          <textarea id="abstract" name="abstract" style="width:463px;height:110px;float:left;" onkeyup="limitTextArea(this, 525, '#abstractLimit')" onblur="limitTextArea(this, 525, '#abstractLimit')"></textarea>
+                          -->
+                          
+                          <div style="width: 483px; height: 280px">
+                            <textarea id="abstract" name="abstract"></textarea>
+                          </div>
+
+                          <label for="full_description">Długi opis</label>
+
+                          <div style="width: 483px; height: 280px">
+                            <textarea id="full_description" name="full_description"></textarea>
+                          </div>
+
+                          <label for="substantiation">Uzasadnienie</label>
+
+                          <div style="width: 483px; height: 280px">
+                            <textarea id="substantiation" name="substantiation"></textarea>
+                          </div>
+
+                          <div class="local">
+                              <label for="local">Adres (kod pocztowy lub ulica)</label>
+                              <input id="local" name="local" type="text" style="width:245px;" value="<%= params[:local] %>" />
+                          </div>
+                          
+                          <div class="category">
+                            <label>Kategoria</label>
+                            <%= select :cause, :category_id, Category.all.map { |c| [c.name, c.id]} %>
+                          </div>
+
+                          <span class="break"><!-- --></span>
+
+                          <div class="local">
+                          <label for="tags">Tagi</label>
+                          <input id="tags" name="tags" type="text" style="width:245px;" class="tc-lightgray" value="Przykład: sport; zdrowie; biznes" onfocus="if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Przykład: sport; zdrowie; biznes'; this.className = 'tc-lightgray';}" />
                         </div>
 
-                        <div class="local">
-                            <label for="local">Adres (kod pocztowy lub ulica)</label>
-                            <input id="local" name="local" type="text" style="width:245px;" value="<%= params[:local] %>" />
-                        </div>
-                        
-                        <div class="category">
-                          <label>Kategoria</label>
-                          <%= select :cause, :category_id, Category.all.map { |c| [c.name, c.id]} %>
+
+                        <div class="budget">
+                          <label>Budżet</label>
+                          <%= budgets_select(Budget.all, get_filter_budget) %>
                         </div>
 
                         <span class="break"><!-- --></span>
-
-                        <div class="local">
-                        <label for="tags">Tagi</label>
-                        <input id="tags" name="tags" type="text" style="width:245px;" class="tc-lightgray" value="Przykład: sport; zdrowie; biznes" onfocus="if ($(this).hasClass('tc-lightgray')) { this.value = ''; this.className = '';}" onblur="if (this.value == '') { this.value = 'Przykład: sport; zdrowie; biznes'; this.className = 'tc-lightgray';}" />
+                        
+                        <div class="mt15">
+                            <input id="termos" class="fl" name="termos" type="checkbox" value="yes" checked="checked" />
+                            <label for="termos" class="label-checkbox">Przeczytałem i akceptuje <a href="javascript:;" onclick="openModal('termos_de_uso');">regulamin.</a></label>
+                        </div>
+                        <span class="break"><!-- --></span>
+                      </fieldset>
+                    </div>
+                    <div id="tabs-2">
+                      <div class="preselection_vote_count half-col">
+                        <label for="preselection_vote_count">Liczba głosów w preselekcji</label>
+                        <input id="preselection_vote_count" name="preselection_vote_count" type="text" style="width:220px;" value="<%= params[:preselection_vote_count] %>" />
+                      </div>
+                      <div class="vote_count half-col">
+                        <label for="vote_count">Liczba głosów w głosowaniu</label>
+                        <input id="vote_count" name="vote_count" type="text" style="width:220px;" value="<%= params[:vote_count] %>" />
                       </div>
 
-
-                      <div class="budget">
-                        <label>Budżet</label>
-                        <%= budgets_select(Budget.all, get_filter_budget) %>
+                      <div class="office">
+                        <label for="office">Urząd realizujący</label>
+                        <input id="office" name="office" type="text" style="width:420px;" value="<%= params[:office] %>" />
                       </div>
 
-                      <span class="break"><!-- --></span>
-                      
-                      <div class="mt15">
-                          <input id="termos" class="fl" name="termos" type="checkbox" value="yes" checked="checked" />
-                          <label for="termos" class="label-checkbox">Przeczytałem i akceptuje <a href="javascript:;" onclick="openModal('termos_de_uso');">regulamin.</a></label>
+                      <div class="department">
+                        <label for="department">Wydział realizujący</label>
+                        <input id="department" name="department" type="text" style="width:420px;" value="<%= params[:department] %>" />
                       </div>
-                      <span class="break"><!-- --></span>
-                    </fieldset>
+
+                      <label for="note">Uwagi miasta do projektu</label>
+                      <div style="width: 483px; height: 280px">
+                            <textarea id="note" name="note"></textarea>
+                          </div>
+                    </div>
                 
                     <div class="boxBottom">
                         <a href="javascript:;" class="btn fl postar">Utwórz</a>
@@ -267,9 +331,10 @@
     var id = $(this).attr('id');
     var div = "#" + id + "_add";
     var clicked = $(this).attr('alt');
-    if (id == "ft") { unclick($('#imgs #vd')); unclick($('#imgs #mp')); }
-    if (id == "vd") { unclick($('#imgs #ft')); unclick($('#imgs #mp')); }
-    if (id == "mp") { unclick($('#imgs #ft')); unclick($('#imgs #vd')); }
+    if (id == "ft") { unclick($('#imgs #vd')); unclick($('#imgs #mp')); unclick($('#imgs2 #www')); unclick($('#imgs2 #fb_www')); }
+    if (id == "vd") { unclick($('#imgs #ft')); unclick($('#imgs #mp')); unclick($('#imgs2 #www')); unclick($('#imgs2 #fb_www')); }
+    if (id == "mp") { unclick($('#imgs #ft')); unclick($('#imgs #vd')); unclick($('#imgs2 #www')); unclick($('#imgs2 #fb_www')); }
+
     if (clicked == "true") {
       $(this).find('div').css('background-position','');
       $(this).attr('alt', "false");
@@ -278,6 +343,34 @@
       $(this).find('div').css('background-position','-140px 0'); 
       $(this).attr('alt', "true");
       $(div).show();
+    }
+  });
+
+  $('#imgs2 a').bind('click', function() {
+    var unclick = function(link){
+      link.find('div').css('background-position','');
+      link.attr('alt', "false");
+      var div = "#" + link.attr('id') + "_add";
+      $(div).hide();
+    }
+    
+    var id = $(this).attr('id');
+    if(id != "blank"){
+      var div = "#" + id + "_add";
+      var clicked = $(this).attr('alt');
+      if (id == "www") { unclick($('#imgs #vd')); unclick($('#imgs #mp')); unclick($('#imgs #ft')); unclick($('#imgs2 #fb_www')); }
+      if (id == "fb_www") { unclick($('#imgs #ft')); unclick($('#imgs #mp')); unclick($('#imgs #vd')); unclick($('#imgs2 #www')); }
+
+
+      if (clicked == "true") {
+        $(this).find('div').css('background-position','');
+        $(this).attr('alt', "false");
+        $(div).hide();
+      } else {
+        $(this).find('div').css('background-position','-140px 0'); 
+        $(this).attr('alt', "true");
+        $(div).show();
+      }
     }
   });
 
@@ -397,6 +490,26 @@
   $('#mdlEscrever input[name=video_url]').blur(function(){
     if ($(this).val() == "") $(this).val("URL do vídeo");
   });
+
+  $('#tabs-2').hide();
+  $('#show-tabs-1').addClass('active');
+
+  $('#show-tabs-1').click(function(){
+    $(this).addClass('active');
+    $('#show-tabs-2').removeClass('active');
+
+    $('#tabs-1').show();
+    $('#tabs-2').hide();
+  });
+
+  $('#show-tabs-2').click(function(){
+    $(this).addClass('active');
+    $('#show-tabs-1').removeClass('active');
+
+    $('#tabs-2').show();
+    $('#tabs-1').hide();
+  });
+
 	  
 </script>
 <script type="text/javascript">
