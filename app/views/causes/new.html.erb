@@ -245,7 +245,7 @@
     	
     if (!error) {
     	var data = {
-        budget_id: $('#newCauseForm .budget a.selected').attr('id').replace('budget_', ''),
+        budget_id: $('#newCauseForm #cause_budget_id').val(),
         id: $('#newCauseForm input[name=id]').val(),
     		author: $('#newCauseForm input[name=author]').val(),
   			email: $('#newCauseForm input[name=email]').val(),
@@ -253,11 +253,11 @@
 	 	 		cell_phone_no: $('#newCauseForm input[name=cell_phone_no]').val(),
         title: title.val(),
         abstract: $('#newCauseForm textarea[name=abstract]').val(),
-        category: $('#newCauseForm .categoria a.selected').attr('id').replace('category_', ''),
+        category: $('#newCauseForm #cause_category_id').val(),
         latLng: [<%= params[:lat] %>, <%= params[:lng] %>],
         district: '<%= params[:district] %>',
         local: $('#newCauseForm input[name=local]').val(),
-        tags: $('#newCauseForm input[name=tags]').val() == 'Exemplo: esporte; saúde; exercícios' ? '' : $('#newCauseForm input[name=tags]').val()
+        tags: $('#newCauseForm input[name=tags]').val() == 'Przykład: sport, zdrowie, ćwiczenia' ? '' : $('#newCauseForm input[name=tags]').val()
       	};
         
      	$.ajax({
@@ -267,9 +267,10 @@
        	success: function(result) {
      			if (result.success) {
        			data.url = result.data.url;
+            data.category_marker = result.data.category_marker;
            	$.closePopupLayer();
            	map.createMarker(data);
-            map.loadData();
+            //map.loadData();
             GA.track('/site/cadastro/nova_causa/concluido/' + $('#newCauseForm .categoria a.selected').text());
             // openFalapoaOptin(result.data.id);
      			}

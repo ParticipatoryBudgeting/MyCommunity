@@ -499,3 +499,42 @@ a#project_export{
 	text-align:center;
 	margin-top:5px;
 }
+
+a#budget_details {
+	padding: 5px 0 5px 0;
+	background-color: #C7E1FF;
+	color: #3795FF;
+	font-size: 12px;
+	font-weight: normal;
+	display: inline-block;
+	width: 100%;
+	margin-right: 5px;
+	text-align: center;
+	margin-top: 5px;
+}
+
+ul#side_causes {
+	margin-top:30px;
+}
+
+ul#side_causes li {
+	list-style-type: disc;
+	margin-top: 5px;
+}
+
+ul#side_causes li a {
+	font-weight: normal;
+	color:#000;
+}
+
+ul#side_causes li a:hover {
+	color: #7dbd00;
+}
+
+.mdlPinMrk {
+	position: absolute;
+	top: 0;
+	margin: 60px 0 0 34px;
+	width: 59px;
+	height: 75px;
+}

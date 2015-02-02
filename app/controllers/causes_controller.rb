@@ -112,8 +112,8 @@ class CausesController < ApplicationController
         :submited => 1
     )
     #@cause.save
-    Admin.get_cause('')
-    @result = { :status => :ok, :success => true, :data => { :url => @cause.url, :id => @cause.id }}
+    Admin.get_causes('')
+    @result = { :status => :ok, :success => true, :data => { :url => @cause.url, :id => @cause.id, :category_marker => @cause.category.marker.url }}
     respond_to do |format|
       format.json { render :json => @result.to_json }
     end

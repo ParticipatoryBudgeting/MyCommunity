@@ -85,8 +85,8 @@
 			</div>
 			<div class="content">
 				<div class="ctm">
-					<div class="mdlPin">
-						<!-- -->
+					<div>
+						<%= image_tag(@cause.category.marker.url, :class => 'mdlPinMrk') %>
 					</div>
 					<h2><%= @cause.category.name %></h2>
 					<div class="ctl">
@@ -278,7 +278,7 @@
 								<div class="right-tab">
 									<!-- <span class="title-bar tit-oferecimento">OFERTA</span> -->
 									<div class="right-tab-item-content mt10 mb10">
-										<a href="http://budzet-partycypacyjny.pl" class="budget-info-button" target="_blank">Informacje o budżecie</a>
+										<%= link_to 'Informacje o budżecie', budget_path(@cause.budget), :class => 'budget-info-button', :target => '_blank' %>
 										<span class="w180 dotted-line"></span>
 									</div>
 

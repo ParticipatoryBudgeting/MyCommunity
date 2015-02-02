@@ -42,6 +42,7 @@ class BudgetsController < ApplicationController
     @locations = Cause.all(:group => 'city, district').group_by { |cause| cause.city }
     @action = "Utwórz"
     @user = session[:user]
+    @causes = @budget.causes.paginate(:all, :page => params[:page], :per_page => 10)
   end
 
   def api_index
