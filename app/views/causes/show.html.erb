@@ -85,8 +85,8 @@
 			</div>
 			<div class="content">
 				<div class="ctm">
-					<div class="mdlPin">
-						<!-- -->
+					<div>
+						<%= image_tag(@cause.category.marker.url, :class => 'mdlPinMrk') %>
 					</div>
 					<h2><%= @cause.category.name %></h2>
 					<div class="ctl">
