@@ -52,7 +52,7 @@ module ApplicationHelper
     disabled_ids = budgets.reduce([]) { |m, b| b.locked ? m << b.id : m }
     selected_budget_id = '' if disabled_ids.include?(selected_budget_id)
     highlight_blocked = lambda { |b| [(b.locked ? b.name + ' [Zablokowany]' : b.name), b.id] }
-    select :cause, :category_id, budgets.map(&highlight_blocked), :disabled => disabled_ids, :selected => selected_budget_id.to_i
+    select :cause, :budget_id, budgets.map(&highlight_blocked), :disabled => disabled_ids, :selected => selected_budget_id.to_i
   end
 
   def budgets_filter_select(budgets, selected)
