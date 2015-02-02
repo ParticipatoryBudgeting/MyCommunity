@@ -75,7 +75,7 @@ class AdminController < ApplicationController
   def delete_cause
     @cause = Cause.find(params[:id])
     @cause.destroy
-    Admin.get_cause('')
+    Admin.get_causes('')
     redirect_to request.referer
   end
   
@@ -141,7 +141,7 @@ class AdminController < ApplicationController
    @cause = Cause.find(params[:id])
 
     if @cause.update_attributes(params[:cause])
-      Admin.get_cause('')
+      Admin.get_causes('')
       flash[:notice] = 'Projekt został zaktualizowany.'
       redirect_to show_causes_url
     else
