@@ -495,9 +495,7 @@ var Map = Class.extend({
 		});
 		
 		this.createCauseButton.bind('click', function() {
-			var budget_id = $("#budget_budget_id").val();
-			var budget_locked = parseInt($("#budget_budget_id option[value='" + budget_id + "']").attr('data-locked'));
-			if (budget_locked)
+			if (is_selected_budget_locked())
 				return false;
 
 			$.cookie('waitingToAddMarker', 'true');

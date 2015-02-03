@@ -1,6 +1,6 @@
 <h2>Lista projektów (<%=h @causes.empty? ? "Brak projektów" : @causes.size %>)</h2>
 
-<%= link_to 'Utwórz projekt', new_cause_path %>
+<a href="javascript:;" id="createCauseButton" class="lnkEscrever">Utwórz projekt</a>
 
 <% form_tag show_causes_path, :method => :get do %>
 	<%= label_tag "Autor" %>

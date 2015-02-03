@@ -17,6 +17,12 @@
       setTimeout("cicloImagens()", 3 * 1000);
   }
 
+  function is_selected_budget_locked(){
+    var budget_id = $("#budget_budget_id").val();
+    var budget_locked = parseInt($("#budget_budget_id option[value='" + budget_id + "']").attr('data-locked'));
+    return budget_locked || budget_id == 0;    
+  }
+
   function filter_by_budget_change() {
     var budget_id = $("#budget_budget_id").val();
     var budget_locked = parseInt($("#budget_budget_id option[value='" + budget_id + "']").attr('data-locked'));
