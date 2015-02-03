@@ -14,8 +14,10 @@
                     <p>Pomoc przekształcić nasze miasto. Zarejestruj się i podziel się miejscami.</p>
 
                     <ul class="tabs-container">
-                      <li id="show-tabs-1">Projekt</li>
-                      <li id="show-tabs-2">Administracja</li>
+                      <% if admin_request? %>
+                        <li id="show-tabs-1">Projekt</li>
+                        <li id="show-tabs-2">Administracja</li>
+                      <% end %>
                     </ul>
                     <fieldset id="newCauseForm" class="mb15">
                       <div id="tabs-1">
@@ -161,6 +163,8 @@
                         </div>
                         <span class="break"><!-- --></span>
                       </div>
+
+                      <% if admin_request? %>
                       <div id="tabs-2">
                         <div class="preselection_vote_count half-col">
                           <label for="preselection_vote_count">Liczba głosów w preselekcji</label>
@@ -186,6 +190,7 @@
                               <textarea style="width: 483px; height: 140px" id="note" name="note"></textarea>
                             </div>
                       </div>
+                      <% end %>
                     </fieldset>
                 
                     <div class="boxBottom">

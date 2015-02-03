@@ -109,7 +109,16 @@ class CausesController < ApplicationController
         :tag_list => params[:tags].gsub(/;/, ','),
         :latitude => params['latLng'][0],
         :longitude => params['latLng'][1],
-        :submited => 1
+        :note => params[:note],
+        :department => params[:department],
+        :office => params[:office],
+        :vote_count => params[:vote_count],
+        :preselection_vote_count => params[:nopreselection_vote_countte],
+        :substantiation => params[:substantiation],
+        :full_description => params[:full_description],
+        :facebook_profile => params[:facebook_profile],
+        :website_url => params[:website_url],
+        :submited => true
     )
     #@cause.save
     Admin.get_causes('')

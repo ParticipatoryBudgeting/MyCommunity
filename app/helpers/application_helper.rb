@@ -100,4 +100,8 @@ module ApplicationHelper
     end
     html_attributes.join
   end
+
+  def admin_request?
+    admin_panel_source
+  end
 end

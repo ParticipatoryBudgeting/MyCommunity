@@ -45,7 +45,6 @@ class AdminController < ApplicationController
     where << " and (causes.abstract like '%#{params[:abstract]}%')" unless params[:abstract].blank?
     where << " and (causes.category_id = '#{params[:category]}')" unless params[:category] == "0"
     where << " and (causes.budget_id = '#{params[:budget]}')" unless params[:budget] == "0"
-    @causes2 = Admin.get_causes(where)
     @causes = Cause.paginate :all, :conditions => where, :joins => :category, :page => params[:page], :per_page => 10, :order => "#{cause_sort_column} #{sort_direction}"
     basic_object = Struct.new(nil, :name, :id).new('Wszystkie', 0)
     @categories = [basic_object] + Category.find(:all)
@@ -146,6 +145,22 @@ class AdminController < ApplicationController
       redirect_to show_causes_url
     else
       render :action => "edit_cause"
+    end
+  end
+
+  def new_cause
+    @cause = Cause.new
+  end
+
+  def create_cause
+    @cause = Cause.new(params[:cause])
+    @cause.author = current_user.name
+    if @cause.save
+      Admin.get_causes('')
+      flash[:notice] = 'Projekt został utworzony.'
+      redirect_to show_causes_url
+    else
+      render :action => 'new_cause'
     end
   end
 

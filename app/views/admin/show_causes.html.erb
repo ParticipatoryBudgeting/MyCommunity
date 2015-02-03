@@ -1,4 +1,6 @@
-<h2>Lista projektów (<%=h @causes2.empty? ? "Brak projektów" : @causes2.size %>)</h2>
+<h2>Lista projektów (<%=h @causes.empty? ? "Brak projektów" : @causes.size %>)</h2>
+
+<%= link_to 'Utwórz projekt', new_cause_path %>
 
 <% form_tag show_causes_path, :method => :get do %>
 	<%= label_tag "Autor" %>
@@ -24,3 +26,27 @@
 <br/>
 
 <%= render :partial => 'causes_table' %>
+
+<script>
+
+var createCause = function(){
+  $.openPopupLayer({
+    name: 'mdlBudget',
+    width: 710,
+    url: '/causes/new',
+    success: function() {
+      $('#newCauseForm input[name=name]').focus();
+      $("#left").height("1500px");
+      $("#inner").height("1500px");
+      $(window).resize();
+    }
+  });
+}
+
+$(document).ready(function()
+{
+  $('#createCauseButton').bind('click', function() {
+    createCause();
+  });
+});
+</script>

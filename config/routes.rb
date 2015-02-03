@@ -73,6 +73,8 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_cause '/admin/cause/edit/:id', :controller => 'admin', :action => 'edit_cause'
   map.update_cause '/admin/cause/update/:id', :controller => 'admin', :action => 'update_cause', :conditions => { :method => :put }
   map.import_cause '/admin/import_cause', :controller => 'admin', :action => 'import_cause', :conditions => { :method => :post }
+  map.new_cause '/admin/cause/new', :controller => 'admin', :action => 'new_cause', :conditions => { :method => :get }
+  map.create_cause '/admin/cause/create', :controller => 'admin', :action => 'create_cause', :conditions => { :method => :post }
 
   # api
   map.api_budgets '/api/budgets', :controller => 'budgets', :action => 'api_index', :via => :get

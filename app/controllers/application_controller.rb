@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  helper_method :get_filter_budget
+  helper_method :get_filter_budget, :admin_panel_source
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
@@ -98,6 +98,10 @@ class ApplicationController < ActionController::Base
 
   def reset_filter_event
     params.has_key? :component and params[:component] == "reset_filter"
+  end
+
+  def admin_panel_source
+    URI(request.referer).path.include?('/admin')
   end
 
 end
