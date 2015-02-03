@@ -104,26 +104,31 @@
                               <table><tr></tr></table>
                             </div>
                             <div id="videos_espaco" style="clear: both; margin-bottom:90px" />
-                          <label for="abstract">Opis</label>
 
                           <!--
                           <textarea id="abstract" name="abstract" style="width:463px;height:110px;float:left;" onkeyup="limitTextArea(this, 525, '#abstractLimit')" onblur="limitTextArea(this, 525, '#abstractLimit')"></textarea>
                           -->
-                          
-                          <div style="width: 483px; height: 280px">
-                            <textarea id="abstract" name="abstract"></textarea>
-                          </div>
+                          <div class="accordion">
+                            <div>
+                              <label for="abstract" class="accordion_btn">Opis<span class="arrow">⟀</span></label>
+                              <div style="width: 483px; height: 280px" class="accordion_fulltext">
+                                <textarea id="abstract" name="abstract"></textarea>
+                              </div>
+                            </div>
 
-                          <label for="full_description">Długi opis</label>
+                            <div>
+                              <label for="full_description" class="accordion_btn">Długi opis<span class="arrow">⟀</span></label>
+                              <div style="width: 483px; height: 160px" class="accordion_fulltext">
+                                <textarea style="width: 483px; height: 140px" id="full_description" name="full_description"></textarea>
+                              </div>
+                            </div>
 
-                          <div style="width: 483px; height: 280px">
-                            <textarea id="full_description" name="full_description"></textarea>
-                          </div>
-
-                          <label for="substantiation">Uzasadnienie</label>
-
-                          <div style="width: 483px; height: 280px">
-                            <textarea id="substantiation" name="substantiation"></textarea>
+                            <div>
+                              <label for="substantiation" class="accordion_btn">Uzasadnienie<span class="arrow">⟀</span></label>
+                              <div style="width: 483px; height: 160px" class="accordion_fulltext">
+                                <textarea style="width: 483px; height: 140px" id="substantiation" name="substantiation"></textarea>
+                              </div>
+                            </div>
                           </div>
 
                           <div class="local">
@@ -179,8 +184,8 @@
                       </div>
 
                       <label for="note">Uwagi miasta do projektu</label>
-                      <div style="width: 483px; height: 280px">
-                            <textarea id="note" name="note"></textarea>
+                      <div style="width: 483px; height: 160px">
+                            <textarea style="width: 483px; height: 140px" id="note" name="note"></textarea>
                           </div>
                     </div>
                 
@@ -510,6 +515,13 @@
     $('#tabs-2').show();
     $('#tabs-1').hide();
   });
+
+  $(".accordion .accordion_fulltext").hide();
+
+  $(".accordion .accordion_btn").click(function(){
+    $(".accordion .accordion_fulltext").hide();
+    $(this).next().show();
+  })
 
 	  
 </script>
