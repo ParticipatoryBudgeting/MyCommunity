@@ -27,9 +27,10 @@
 
     // update project creation button
     var $addproject = $('#createCauseButton');
-    if (budget_locked) {
+    if (budget_locked || budget_id == 0) {
       $addproject.addClass('locked');
-      $('#boxLeft .content').append("<div class='hint'>Tworzenie projektów dla wybranego budżetu zostało zablokowane.</div>")
+      if ($('#boxLeft .content .hint').size() == 0)
+        $('#boxLeft .content').append("<div class='hint'>Tworzenie projektów dla wybranego budżetu zostało zablokowane.</div>")
     }
     else {
       $addproject.removeClass('locked');
