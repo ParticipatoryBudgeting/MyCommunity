@@ -289,7 +289,7 @@
            	$.closePopupLayer();
            	map.createMarker(data);
             //map.loadData();
-            GA.track('/site/cadastro/nova_causa/concluido/' + $('#newCauseForm .categoria a.selected').text());
+            //GA.track('/site/cadastro/nova_causa/concluido/' + $('#newCauseForm .categoria a.selected').text());
             // openFalapoaOptin(result.data.id);
      			}
        	} 
@@ -612,7 +612,7 @@ CKEDITOR.on( 'dialogDefinition', function( ev )
     }
   }
 
-  GA.track('/site/cadastro/nova_causa/tela_de_dados');
+  //GA.track('/site/cadastro/nova_causa/tela_de_dados');
 </script>
 <script>
 	var showPhoto = function(id, fileName, responseJSON){
@@ -670,7 +670,7 @@ CKEDITOR.on( 'dialogDefinition', function( ev )
   }
 
   var sv = new google.maps.StreetViewService();
-  var ll= new google.maps.LatLng(<%= params[:lat] %>, <%= params[:lng] %>);
+  var ll= new google.maps.LatLng(<%= params.has_key?(:lat) ? params[:lat] : 0  %>, <%= params.key?(:lng) ? params[:lng] : 0 %>);
   sv.getPanoramaByLocation(ll, 50, processSVData);
 
   var ajustar = function() {
