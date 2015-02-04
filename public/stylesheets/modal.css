@@ -170,7 +170,7 @@
 .mdlIn .boxAutor .ttls {float:left; margin-bottom: 15px;}
 .mdlIn .boxAutor .ttls span {display:inline-block;color:#999;font-size:11px;margin-bottom:5px;}
 .mdlIn .boxAutor .ttls h3 {color:#F48F00;font-size:20px;position:relative;top:0;left:0;width:497px;}
-.mdlIn label {display:block; margin:5px 0 2px;color:#7DBD00;font-size:20px;}
+.mdlIn label {display:block; margin:5px 0 2px;color:#7DBD00;font-size:19px;}
 .mdlIn input[type=text] {background:#F9F9F9;border:1px solid #D5D5D5;height:19px;padding:5px 10px;font-size:11px;color:#5F616E;}
 .mdlIn textarea {background:#F9F9F9;border:1px solid #D5D5D5;padding:5px 10px;font-size:11px;color:#5F616E;}
 /*mdlSobreProjeto*/
@@ -360,8 +360,7 @@ div#post_image{
 #mdlEscrever .categoria .comboLst li a:hover {color:#7DBD00;}
 #mdlEscrever .categoria .on {display:block;}
 
-#mdlEscrever .budget {float:left;margin:0 0 0 20px;}
-#mdlEscrever .budget label {color:#415157;}
+#mdlEscrever .budget {margin:0 0 0 20px;}
 #mdlEscrever .budget .combo {display:block;background:url(../img/bg-combo.gif) no-repeat;color:#FFF;width:185px;height:24px;padding:6px 0 0 15px;text-decoration:none;}
 #mdlEscrever .budget .combo span {display:block;width:145px;font-size:15px;font-weight:bold;overflow:hidden;white-space:nowrap;}
 #mdlEscrever .budget .comboLst {background:#415157;width:184px;padding:5px 0 5px 15px;margin:1px 0 0 0;position:absolute;z-index:10;}

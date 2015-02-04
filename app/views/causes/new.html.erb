@@ -112,8 +112,8 @@
                           <div class="accordion">
                             <div>
                               <label for="abstract" class="accordion_btn">Opis<span class="arrow">⟀</span></label>
-                              <div style="width: 483px; height: 280px" class="accordion_fulltext">
-                                <textarea id="abstract" name="abstract"></textarea>
+                              <div style="width: 483px; height: 160px" class="accordion_fulltext">
+                                <textarea style="width: 483px; height: 140px" id="abstract" name="abstract"></textarea>
                               </div>
                             </div>
 
@@ -205,7 +205,6 @@
 </div>
 <script type="text/javascript">
   $('.boxBottom .postar').bind('click', function() {
-    $('#newCauseForm textarea[name=abstract]').val(CKEDITOR.instances.abstract.getData());
   	var error = false;
     var title = $('#newCauseForm input[name=title]');
     title.removeClass('error');
@@ -236,9 +235,9 @@
         
     var abstract = $('#newCauseForm textarea[name=abstract]');
     abstract.removeClass('error');
-    if ((abstract.val() == '')||(abstract.val() == 'Digite o resumo da causa')) {
+    if ((abstract.val() == '') || (abstract.val() == 'Wprowadź opis')) {
     	$(abstract).addClass('error');
-     	$(abstract).val('Digite o resumo da causa');
+     	$(abstract).val('Wprowadź opis');
      	$(abstract).focus(function() {
      		$(this).removeClass('error');
      		$(this).val('');
@@ -539,47 +538,6 @@
 	  
 </script>
 <script type="text/javascript">
-  var instance = CKEDITOR.instances['abstract'];
-  if(instance) {
-    CKEDITOR.remove(instance);
-  }
-
-  CKEDITOR.replace('abstract',
-  {
-    language: 'pt-br',
-    resize_enabled: false,
-    toolbar :
-    [
-      { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike' ] },
-      { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
-      { name: 'links', items : [ 'Link','Unlink' ] },
-    ]
-  });
-
-CKEDITOR.on( 'dialogDefinition', function( ev )
-	{
-		// Take the dialog name and its definition from the event data.
-		var dialogName = ev.data.name;
-		var dialogDefinition = ev.data.definition;
- 
-		// Check if the definition is from the dialog we're
-		// interested on (the Link dialog).
-		if ( dialogName == 'link' )
-		{
-			// FCKConfig.LinkDlgHideAdvanced = true
-			dialogDefinition.removeContents( 'advanced' );
- 
-			// FCKConfig.LinkDlgHideTarget = true
-			dialogDefinition.removeContents( 'target' );
-/*
-			var targetTab = dialogDefinition.getContents( 'target' );
-			var targetField = targetTab.get( 'linkTargetType' );
-			targetField[ 'default' ] = '_blank';
-*/
-		}
- 
- 
-	});
   video_inicial = 0;
   qtd_videos = 0;
 
