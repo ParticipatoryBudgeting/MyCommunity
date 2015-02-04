@@ -31,12 +31,20 @@
       <h2 class="tit-explore">LOKALIZACJA</h2>
       <div class="details">
         <ul>
+        <% if @cause.city != nil and @cause.city != "" %>
         <li class="label">Miasto</li>
         <li ><%= @cause.city %></li>
+        <% end %>
+
+        <% if @cause.district != nil and @cause.district != "" %>
         <li class="label">Dzielnica</li>
         <li><%= @cause.district %></li>
+        <% end %>
+
+        <% if @cause.local != nil and @cause.local != "" %>
         <li class="label">Ulica</li>
         <li><%= @cause.local %></li>
+        <% end %>
         </ul>
       </div>
       <div id="small_map" style="width:186px; height:168px;"></div>
@@ -47,14 +55,25 @@
       <h2 class="tit-explore small">DANE KONTAKTOWE</h2>
       <div class="details">
         <ul>
+        <% if @cause.author != nil and @cause.author != "" %>
         <li class="label">Autor</li>
         <li ><%= @cause.author %></li>
+        <% end %>
+
+        <% if @cause.email != nil and @cause.email != "" %>
         <li class="label">Email</li>
         <li><%= @cause.email %></li>
+        <% end %>
+
+        <% if @cause.phone_no != nil and @cause.phone_no != "" %>
         <li class="label">Telefon</li>
         <li><%= @cause.phone_no %></li>
+        <% end %>
+        
+        <% if @cause.cell_phone_no != nil and @cause.cell_phone_no != "" %>
         <li class="label">Telefon komórkowy</li>
         <li><%= @cause.cell_phone_no %></li>
+        <% end %>
         </ul>
       </div>
       <span class="break"><!--  --></span>

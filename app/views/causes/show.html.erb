@@ -179,18 +179,35 @@
 										<div class="fl w220">
 											<div class="cause_details">
 								        <ul>
+								        	<% if @cause.total_cost != nil and @cause.total_cost != "" %>
 									        <li class="label">Koszt realizacji</li>
 									        <li ><%= @cause.total_cost %></li>
+									        <% end %>
+
+									        <% if @cause.upkeep_cost != nil and @cause.upkeep_cost != "" %>
 									        <li class="label">Koszt utrzymania</li>
 									        <li><%= @cause.upkeep_cost %></li>
+									        <% end %>
+
+									        <% if @cause.preselection_vote_count != nil and @cause.preselection_vote_count != "" %>
 									        <li class="label">Liczba głosów w preselekcji</li>
 									        <li><%= @cause.preselection_vote_count %></li>
+									        <% end %>
+
+									        <% if @cause.vote_count != nil and @cause.vote_count != "" %>
 									        <li class="label">Liczba głosów</li>
 									        <li><%= @cause.vote_count %></li>
+									        <% end %>
+
+									        <% if @cause.office != nil and @cause.office != "" %>
 									        <li class="label">Urząd realizujący</li>
 									        <li><%= @cause.office %></li>
+									        <% end %>
+
+									        <% if @cause.department != nil and @cause.department != "" %>
 									        <li class="label">Wydział realizujący</li>
 									        <li><%= @cause.department %></li>
+									        <% end %>
 								        </ul>
 									     </div>
 
@@ -231,17 +248,25 @@
 										</div>
 									</div>
 									<div class="w500 more-details">
+
+										<% if @cause.full_description != nil and @cause.full_description != "" %>
 										<span class="w500 dotted-line"></span>
 										<div class="details_label">Pełny opis</div>
 										<p><%= @cause.full_description %></p>
+										<% end %>
+
+										<% if @cause.note != nil and @cause.note != "" %>
 										<span class="w500 dotted-line"></span>
 										<div class="details_label">Uwagi miasta do projektu</div>
 										<p><%= @cause.note %></p>
+										<% end %>
+
+										<% if @cause.substantiation != nil and @cause.substantiation != "" %>
 										<span class="w500 dotted-line"></span>
 										<div class="details_label">Uwagi mieszkańców</div>
 										<p><%= @cause.substantiation %></p>
-										<span class="w500 dotted-line"></span>
-										<div class="details_label">Udostępnij</div>
+										<% end %>
+
 									</div>
 									<% if @falapoa %>									
 										<%#= render :partial => 'falapoa' %>
