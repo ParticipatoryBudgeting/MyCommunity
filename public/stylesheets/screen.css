@@ -539,3 +539,7 @@ ul#side_causes li a:hover {
 	width: 59px;
 	height: 75px;
 }
+
+#footer .nav li a.license {
+	display:inline;
+}

@@ -3,32 +3,30 @@
 </div>	
 <table class="table-list" id="table-causes">
 	<tr>
-		<th style="width:100px;"><%= cause_sortable 'categories.name', "Kategoria" %></th>
 		<th style="width:100px;"><%= cause_sortable 'title', "Tytuł" %></th>
-		<th style="width:100px;"><%= cause_sortable 'author', "Autor" %></th>
-		<th><%= cause_sortable 'abstract', "Opis" %></th>
 		<th style="width:100px;"><%= cause_sortable 'city', "Miasto" %></th>
-		<th style="width:100px;"><%= cause_sortable 'local', "Adres" %></th>
 		<th style="width:100px;"><%= cause_sortable 'district', "Dzielnica" %></th>
-		<th style="width:100px;"><%= cause_sortable 'created_at', "Data" %></th>
-		<th style="width:50px;"><%= cause_sortable 'views', "Wyświetleń" %></th>
-		<th style="width:50px;"><%= cause_sortable 'likes', "Polubień "%></th>
-		<th style="width:50px;">Protokół FalaPoa</th>
+		<th style="width:100px;"><%= cause_sortable 'local', "Adres" %></th>
+		<th style="width:100px;">Budżet</th>
+		<th style="width:100px;"><%= cause_sortable 'categories.name', "Kategoria" %></th>
+		<th style="width:100px;"><%= cause_sortable 'total_cost', "Kategoria" %>Koszt wdrożenia</th>
+		<th style="width:100px;"><%= cause_sortable 'upkeep_cost', "Kategoria" %>Koszt utrzymania</th>
+		<th style="width:100px;">Odrzucony</th>
+		<th style="width:100px;">Użytkownik</th>
 		<th style="width:90px;">Akcje</th>
 	</tr>
 	<% @causes.each do |cause| %>
 		<tr id="cause-<%= cause.id %>">
-			<td><%=h cause.category.name %></td>
-			<td><%=h cause.title %></td>							
-			<td><%=h cause.author %></td>
-			<td><%= cause.abstract %></td>																									
+			<td><%=h cause.title %></td>
 			<td><%=h cause.city %></td>
+			<td><%=h cause.district %></td>
 			<td><%=h cause.local %></td>
-			<td><%=h cause.district %></td>							
-			<td><%=h cause.updated_at %></td>
-			<td><%=h cause.views %></td>
-			<td><%=h cause.likes %></td>		
-			<td><%=h cause.protocol %>																							
+			<td><%=h cause.budget.name %></td>
+			<td><%=h cause.category.name %></td>
+			<td><%= cause.total_cost %></td>
+			<td><%= cause.upkeep_cost %></td>
+			<td><%= cause.is_rejected ? 'Tak' : 'Nie' %></td>
+			<td><%=h cause.user.name %></td>
 			<td>
 				<%= link_to "<span>Zobacz na mapie</span>", cause.url, :class => "button button-normal", :target => "_blank" %>
 			

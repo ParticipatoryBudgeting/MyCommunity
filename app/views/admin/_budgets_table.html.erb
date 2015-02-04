@@ -4,23 +4,27 @@
 <table class="table-list" id="table-causes">
 	<tr>
 		<th style="width:100px;"><%= budget_sortable 'name', "Nazwa" %></th>
+		<th style="width:100px;"><%= budget_sortable 'city', "Miasto" %></th>
 		<th style="width:100px;"><%= budget_sortable 'type', "Typ" %></th>
 		<th style="width:100px;"><%= budget_sortable 'from', "Od" %></th>
 		<th style="width:100px;"><%= budget_sortable 'to', "Do" %></th>
-		<th style="width:100px;"><%= budget_sortable 'participants_count', "Liczba uczestników" %></th>
 		<th style="width:100px;"><%= budget_sortable 'value', "Kwota" %></th>
-		<th style="width:100px;"><%= budget_sortable 'author', "Autor" %></th>
+		<th style="width:100px;"><%= budget_sortable 'participants_count', "Liczba uczestników" %></th>
+		<th style="width:100px;">Liczba projektów</th>
+		<th style="width:100px;">Zablokowany</th>
 		<th style="width:90px;">Akcje</th>
 	</tr>
 	<% @budgets.each do |budget| %>
 		<tr id="budget-<%= budget.id %>">
-			<td class="name"><%=h budget.name %></td>							
-			<td class="type"><%=h budget.type %></td>							
-			<td class="from"><%=h budget.from %></td>							
-			<td class="to"><%=h budget.to %></td>							
-			<td class="participants_count"><%=h budget.participants_count %></td>							
-			<td class="value"><%=h budget.value %></td>							
-			<td class="author"><%=h budget.author %></td>																							
+			<td class="name"><%=h budget.name %></td>
+			<td class="city"><%=h budget.city %></td>
+			<td class="type"><%=h budget.type %></td>
+			<td class="from"><%=h budget.from %></td>
+			<td class="to"><%=h budget.to %></td>
+			<td class="value"><%=h budget.value %></td>
+			<td class="participants_count"><%=h budget.participants_count %></td>
+			<td class="participants_count"><%= budget.num_causes %></td>
+			<td class="author"><%=h budget.locked ? 'Tak' : 'Nie' %></td>
 			<td>
 				<a href="javascript:;" id="createBudgetButton" onclick="editBudget(<%= budget.id %>)"><span>Edytuj</span></a>
 				<%= link_to "Usuń", admin_destroy_budget_path(budget), :method => :delete %>

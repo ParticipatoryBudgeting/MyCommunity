@@ -33,7 +33,14 @@ class AdminController < ApplicationController
     where << " and (budgets.name like '%#{params[:name]}%')" unless params[:name].blank?
     where << " and (budgets.type like '%#{params[:type]}%')" unless params[:type].blank?
     @budgets2 = Admin.get_budgets(where)
-    @budgets = Budget.paginate :all, :conditions => where, :page => params[:page], :per_page => 10, :order => "`#{budget_sort_column}` #{sort_direction}"
+    @budgets = Budget.paginate :all, 
+      :select => 'budgets.*, COUNT(*) AS num_causes', 
+      :conditions => where, 
+      :page => params[:page], 
+      :per_page => 10, 
+      :order => "`#{budget_sort_column}` #{sort_direction}", 
+      :joins => :causes, 
+      :group => 'causes.budget_id'
   end
 
   def show_causes
@@ -205,11 +212,11 @@ class AdminController < ApplicationController
   end
   
   def cause_sort_column
-    %w[categories.name  title abstract local district author created_at views likes updated_at created_at].include?(params[:sort]) ? params[:sort] : "created_at"
+    %w[categories.name  title abstract local district author created_at views likes total_cost upkeep_cost city updated_at created_at].include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def budget_sort_column
-    %w[created_at name type from to participants_count value user_id].include?(params[:sort]) ? params[:sort] : "created_at"
+    %w[created_at name city type from to participants_count value user_id].include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def user_sort_column
