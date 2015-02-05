@@ -31,6 +31,8 @@ module Import
 		"budget_id" => true,
 		"votes_count" => false,
 		"project_id" => false,
+		"target_group" => false,
+		"status" => false
 	}
 
 	def self.start(filename, start=1, stop=-1)
@@ -227,6 +229,8 @@ module Import
 			:submited => true,
 			:category => category,
 			:user => @user,
+			:target_group => get_field(row, 'target_group'),
+			:status => get_field(row, 'status')
 			#:project_id => get_field(row, 'project_id'),
 		}
 		cause = Cause.create cause_hash

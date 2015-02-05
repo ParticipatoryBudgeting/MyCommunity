@@ -38,7 +38,7 @@
                           -->
                       
                           <label for="title">Tytuł</label>
-                          <input id="title" name="title" type="text" style="width:463px;float:left;" maxlength="80" />
+                          <input id="title" name="title" type="text" style="width:486px;float:left;" maxlength="80" />
                           <span class="ctdor"><strong id="titleLimit">80</strong></span>
 
                           <div style="clear: both;" />
@@ -155,6 +155,9 @@
                           <%= budgets_select(Budget.all, get_filter_budget) %>
                         </div>
 
+                        <label for="target_group">Grupa docelowa</label>
+                        <input id="target_group" name="target_group" type="text" style="width:245px;float:left;" maxlength="80" />
+
                         <span class="break"><!-- --></span>
                         
                         <div class="mt15">
@@ -188,7 +191,13 @@
                         <label for="note">Uwagi miasta do projektu</label>
                         <div style="width: 483px; height: 160px">
                               <textarea style="width: 483px; height: 140px" id="note" name="note"></textarea>
-                            </div>
+                        </div>
+
+                        <div class="status half-col">
+                          <label for="status">Status</label>
+                          <input id="status" name="status" type="text" style="width:220px;" value="<%= params[:vote_count] %>" />
+                        </div>
+
                       </div>
                       <% end %>
                     </fieldset>

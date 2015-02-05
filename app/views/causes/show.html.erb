@@ -208,6 +208,12 @@
 									        <li class="label">Wydział realizujący</li>
 									        <li><%= @cause.department %></li>
 									        <% end %>
+
+									        <% if @cause.target_group != nil and @cause.target_group != "" %>
+									        <li class="label">Grupa docelowa</li>
+									        <li><%= @cause.target_group %></li>
+									        <% end %>
+
 								        </ul>
 									     </div>
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150122144745) do
+ActiveRecord::Schema.define(:version => 20150205233012) do
 
   create_table "budgets", :force => true do |t|
     t.string   "name"
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20150122144745) do
     t.string   "office"
     t.string   "department"
     t.text     "note"
+    t.string   "target_group"
+    t.string   "status"
   end
 
   create_table "rich_contents", :force => true do |t|
