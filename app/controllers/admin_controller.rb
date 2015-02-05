@@ -39,8 +39,8 @@ class AdminController < ApplicationController
       :page => params[:page], 
       :per_page => 10, 
       :order => "`#{budget_sort_column}` #{sort_direction}", 
-      :joins => :causes, 
-      :group => 'causes.budget_id'
+      :joins => 'LEFT JOIN `causes` ON causes.budget_id = budgets.id',
+      :group => 'budgets.id'
   end
 
   def show_causes
