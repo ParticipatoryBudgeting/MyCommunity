@@ -186,8 +186,8 @@ module Import
 		return false if not valid_row?(row)
 
 		# set default values for 'semi-required' fields ...
-		category = field_set?(row, 'category') ? get_category(get_field(row, 'category')) : ''
-		budget = {:id => nil}
+		category = field_set?(row, 'category') ? get_category(get_field(row, 'category')) : nil
+		budget = field_set?(row, 'budget_id') ? get_budget(get_field(row, 'budget_id')) : nil
 		cuntry = field_set?(row, 'country') ? get_field(row, 'country') : default_country
 		is_rejected = if field_set?(row, 'is_rejected')
 			!!get_field(row, 'is_rejected')
@@ -233,6 +233,7 @@ module Import
 			:status => get_field(row, 'status')
 			#:project_id => get_field(row, 'project_id'),
 		}
+
 		cause = Cause.create cause_hash
 		if not cause.valid?
 			p cause.errors.full_messages
@@ -312,7 +313,7 @@ module Import
 
 	def self.get_missing_fields(rows)
 		header = get_header(rows)
-		FIELDS.select { |_,v| v }.find_all { |k,_| not header.include?(k) }
+		FIELDS.reduce([]) { |m, (k,v)| v ? m.push(k) : m }.find_all { |k,_| not header.include?(k) }
 	end
 
 	def self.get_header(rows)
@@ -323,7 +324,7 @@ module Import
 		lat = 52.13
 		lng = 21.00
 		location_precission = "3"
-
+		return [lat, lng, location_precission]
 
 		geo_result = get_location(city + ", " + local)
 		if geo_result.present? && @local.present?
@@ -352,4 +353,13 @@ module Import
 			default_category
 		end
 	end
+
+	def self.get_budget(name)
+		if @budgets.has_key? name and not @budgets[name].nil?
+			@budgets[name]
+		else
+			nil
+		end
+	end
+
 end

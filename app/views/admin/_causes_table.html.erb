@@ -21,8 +21,8 @@
 			<td><%=h cause.city %></td>
 			<td><%=h cause.district %></td>
 			<td><%=h cause.local %></td>
-			<td><%=h cause.budget.name %></td>
-			<td><%=h cause.category.name %></td>
+			<td><%=h cause.budget ? cause.budget.name : 'brak' %></td>
+			<td><%=h cause.category ? cause.category.name : 'brak' %></td>
 			<td><%= cause.total_cost %></td>
 			<td><%= cause.upkeep_cost %></td>
 			<td><%= cause.is_rejected ? 'Tak' : 'Nie' %></td>
