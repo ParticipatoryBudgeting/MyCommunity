@@ -324,7 +324,6 @@ module Import
 		lat = 52.13
 		lng = 21.00
 		location_precission = "3"
-		return [lat, lng, location_precission]
 
 		geo_result = get_location(city + ", " + local)
 		if geo_result.present? && @local.present?
