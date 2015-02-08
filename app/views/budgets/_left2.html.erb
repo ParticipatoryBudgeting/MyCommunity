@@ -9,7 +9,7 @@
       <h2>Lista projektów</h2>
       <ul id="side_causes" style="font-size:12px;font-weight:normal;">
         <% @causes.each do |cause| %>
-          <li><%= link_to cause.title, show_cause_path(cause.category, cause.title, cause.id) %></li>
+          <li><%= link_to cause.title, show_cause_path(cause.category, cause.title.parameterize, cause.id) %></li>
         <% end %>
       </ul>
       <%= will_paginate @causes, :prev_label => "Poprzednia", :next_label => "Następna" %>

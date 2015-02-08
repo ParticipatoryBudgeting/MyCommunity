@@ -46,7 +46,7 @@ class AdminController < ApplicationController
   def show_causes
     params[:category] = "0" if params[:category].blank?
     params[:budget] = "0" if params[:budget].blank?
-    where = '(causes.id > 0) and (causes.submited = 1)'
+    where = '(causes.id > 0) and (causes.submited = 1) and (causes.is_rejected = 0)'
     where << " and (causes.author like '%#{params[:author]}%')" unless params[:author].blank? 
     where << " and (causes.title like '%#{params[:title]}%')" unless params[:title].blank?
     where << " and (causes.abstract like '%#{params[:abstract]}%')" unless params[:abstract].blank?
@@ -68,12 +68,11 @@ class AdminController < ApplicationController
   
   def show_rejected_causes
     params[:category] = "0" if params[:category].blank?
-    where = '(causes.is_rejected = 1) and (causes.submited = 1)'
+    where = '(causes.is_rejected = 1) or (causes.submited = 0)'
     where << " and (causes.author like '%#{params[:author]}%')" unless params[:author].blank? 
     where << " and (causes.title like '%#{params[:title]}%')" unless params[:title].blank?
     where << " and (causes.abstract like '%#{params[:abstract]}%')" unless params[:abstract].blank?
     where << " and (causes.category_id = '#{params[:category]}')" unless params[:category] == "0"
-    @causes2 = Admin.get_rejected_causes(where)
     @causes = Cause.paginate :all, :joins => :category, :conditions => where, :page => params[:page], :per_page => 10, :order => "#{cause_sort_column} #{sort_direction}"
     @categories = [Category.new(:id => 0, :name => 'Todos')] + Category.find(:all)
   end

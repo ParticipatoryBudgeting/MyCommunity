@@ -1,4 +1,4 @@
-<h2>Odrzucone projekty (<%=h @causes2.empty? ? "Brak projektów" : @causes2.size %>)</h2>				
+<h2>Odrzucone projekty (<%=h @causes.empty? ? "Brak projektów" : @causes.total_entries %>)</h2>				
 
 <% form_tag show_rejected_causes_path do %>
 	<%= label_tag "Autor" %>
@@ -13,6 +13,6 @@
 <% end %>
 <br/>
 
-<% unless @causes2.empty? %><span class="break"><a href= "/reports/rejected_causes.csv">(Eksport do Excela)</a></span><% end %>				
+<% unless @causes.empty? %><span class="break"><a href= "/reports/rejected_causes.csv">(Eksport do Excela)</a></span><% end %>				
 
 <%= render :partial => 'causes_table' %>
