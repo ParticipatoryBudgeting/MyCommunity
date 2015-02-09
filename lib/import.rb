@@ -186,7 +186,7 @@ module Import
 		return false if not valid_row?(row)
 
 		# set default values for 'semi-required' fields ...
-		category = field_set?(row, 'category') ? get_category(get_field(row, 'category')) : nil
+		category = field_set?(row, 'category') ? get_category(get_field(row, 'category')) : default_category
 		budget = field_set?(row, 'budget_id') ? get_budget(get_field(row, 'budget_id')) : nil
 		cuntry = field_set?(row, 'country') ? get_field(row, 'country') : default_country
 		is_rejected = if field_set?(row, 'is_rejected')
@@ -245,6 +245,7 @@ module Import
 	def self.init
 		init_api_client
 		init_user
+		init_category
 		@is_inited = true
 	end
 
@@ -283,8 +284,8 @@ module Import
 
 	def self.init_category
 		category = Category.first
-		category = unless category
-			Category.create(:name => "Zwykła")
+		unless category
+			category = Category.create(:name => "Zwykła")
 		end
 		@category = category
 	end
