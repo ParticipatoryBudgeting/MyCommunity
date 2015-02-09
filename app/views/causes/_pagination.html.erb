@@ -7,7 +7,7 @@
 <% @causes.each do |cause| %>
 	<div class='cause-entry'>
 		<span class='searchPin'>
-		  <img src='/img/pin_<%= cause.category_id %>.png' />
+		  <img src='<%= cause.category.marker.url %>' />
 		</span>
 		<span class='cause-title'><%= link_to cause.title, cause.url %></span>&nbsp;&nbsp;&nbsp;
 		<span style='color: #7a7a7a; font-size: 13px;'><%= cause.district %></span>

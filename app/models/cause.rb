@@ -61,7 +61,7 @@ class Cause < ActiveRecord::Base
       :joins => :budget,
       :conditions => ["is_rejected = 0 and
         submited = 1 and
-        (title like :phrase or author like :phrase or abstract like :phrase or local like :phrase or district like :phrase or city like :phrase or budgets.name like :phrase)
+        (title like :phrase or author like :phrase or abstract like :phrase or local like :phrase or district like :phrase or causes.city like :phrase or budgets.name like :phrase)
         #{filter_category}",
       {:phrase => phrase}],
     :order => "updated_at DESC")
@@ -122,7 +122,7 @@ class Cause < ActiveRecord::Base
     end
 
     if not city.empty?
-      causes = causes.where(["city LIKE ?", city])
+      causes = causes.where(["causes.city LIKE ?", city])
     end
 
     if not district.empty?
