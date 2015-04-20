@@ -60,10 +60,11 @@
 	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
-				appId : '777568638980959',
-				status : true,
-				cookie : true,
-				xfbml : true
+				appId: '<%= @fb_id %>',
+				status: true,
+				cookie: true,
+				xfbml: true,
+				version: 'v2.0'
 			});
 		};
 
@@ -282,10 +283,11 @@
 										<script>
 											window.fbAsyncInit = function() {
 												FB.init({
-													appId : '895835653762209',
+													appId : '<%= @fb_id %>',
 													status : true,
 													cookie : true,
-													xfbml : true
+													xfbml : true,
+													version: 'v2.0'
 												});
 
 												FB.Event.subscribe('xfbml.render', function(response) {

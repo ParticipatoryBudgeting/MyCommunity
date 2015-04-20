@@ -20,7 +20,6 @@ config/s3.yml
 # Configuration of smtp mail service.
 config/initializers/mail.rb
 # Configuration of social integration.
-config/initializers/omniauth.rb
 config/initializers/session_store.rb
 
 # Make fake data (Optional).
