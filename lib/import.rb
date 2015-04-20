@@ -41,6 +41,7 @@ module Import
 
 		@filename = filename
 		@csv = CSV.read @filename
+		@errors = []
 
 		validate_file(@csv)
 		@fields = map_fields(@csv)
@@ -100,6 +101,7 @@ module Import
 		# summary
 		puts "błędnych wierszy: #{results[:invalid_rows].size}"
 		puts "błędne wiersze: #{results[:invalid_rows].join(", ")}" if results[:invalid_rows].size > 0
+		@errors
 	end
 
 	def self.each_row(file, start, stop)
@@ -214,7 +216,7 @@ module Import
 		cause_hash = {
 			:city => city, 
 			:district => get_field(row, 'district'), 
-			:title => get_field(row, 'title'),
+			:title => get_field(row, 'title')[0..255],
 			:local => local, 
 			:abstract => get_field(row, 'description'),
 			:total_cost => get_field(row, 'total_cost'),
@@ -236,7 +238,7 @@ module Import
 
 		cause = Cause.create cause_hash
 		if not cause.valid?
-			p cause.errors.full_messages
+			@errors << i
 		end
 
 		cause
@@ -285,7 +287,7 @@ module Import
 	def self.init_category
 		category = Category.first
 		unless category
-			category = Category.create(:name => "Zwykła")
+			category = Category.create(:name => "Domyślna")
 		end
 		@category = category
 	end
@@ -321,10 +323,12 @@ module Import
 		rows[0].map(&:downcase)
 	end
 
-	def self.get_geo_data(city, local)
+	def self.get_geo_data(city, local, skip=false)
 		lat = 52.13
 		lng = 21.00
 		location_precission = "3"
+
+		return [lat, lng, location_precission] if skip
 
 		geo_result = get_location(city + ", " + local)
 		if geo_result.present? && @local.present?

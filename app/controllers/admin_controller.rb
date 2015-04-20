@@ -179,7 +179,11 @@ class AdminController < ApplicationController
 
     result = Import.start(local_file.path)
 
-    flash[:notice] = 'Plik z projektami został zaimportowany'
+    if result.empty?
+      flash[:notice] = 'Plik z projektami został zaimportowany'
+    else
+      flash[:notice] = "Plik z projektami został zaimportowany. Wiersze pominięte z powodu braku wymaganych kolumn: %s" % result.join(', ')
+    end
     redirect_to show_causes_url
   end
 

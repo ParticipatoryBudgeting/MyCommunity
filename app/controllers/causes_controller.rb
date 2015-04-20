@@ -26,7 +26,8 @@ class CausesController < ApplicationController
     @cause = Cause.find(params[:id])
     @locations = Cause.all(:group => 'city, district').group_by { |cause| cause.city }
     @cause.update_attribute(:views, @cause.views += 1)
-    # @falapoa = @cause.get_falapoa_data unless @cause.protocol == '-1'
+    @fb_id = FACEBOOK_SETTINGS['app_id']
+
     respond_to do |format|
       if (!@cause.is_rejected) and (@cause.submited)
         format.html 

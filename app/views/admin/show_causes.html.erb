@@ -4,11 +4,11 @@
 
 <% form_tag show_causes_path, :method => :get do %>
 	<%= label_tag "Autor" %>
-	<%= text_field_tag (:author, params[:author], :size => 18) %>
+	<%= text_field_tag(:author, params[:author], :size => 18) %>
 	<%= label_tag "Tytuł" %>
-	<%= text_field_tag (:title, params[:title], :size => 18) %>
+	<%= text_field_tag(:title, params[:title], :size => 18) %>
 	<%= label_tag "Opis" %>
-	<%= text_field_tag (:abstract, params[:abstract], :size => 18) %>
+	<%= text_field_tag(:abstract, params[:abstract], :size => 18) %>
 	<%= label_tag "Kategoria" %>
 	<%= select_tag :category, options_from_collection_for_select(@categories, 'id', 'name', params[:category].to_i) %>
 	<%= label_tag "Budżet" %>
