@@ -883,7 +883,8 @@ var Marker = Class.extend({
 		if (typeof(markerOptions) == 'string') {
 			markerImage = markerOptions;
 		} else {
-			markerImage = new google.maps.MarkerImage(markerOptions[0], markerOptions[1], markerOptions[2], markerOptions[3]);
+      if (markerOptions != null)
+			 markerImage = new google.maps.MarkerImage(markerOptions[0], markerOptions[1], markerOptions[2], markerOptions[3]);
 		}
 		
 		this.marker = new google.maps.Marker({
